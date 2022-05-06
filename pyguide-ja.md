@@ -635,7 +635,8 @@ Exceptions must follow certain conditions:
 <a id="global-variables"></a>
 ### 2.5 Global variables (グローバル変数)
 
-Avoid global variables.
+Avoid global variables.  
+グローバル変数の使用は避けてください．
 
 <a id="s2.5.1-definition"></a>
 <a id="251-definition"></a>
@@ -643,7 +644,8 @@ Avoid global variables.
 <a id="global-variables-definition"></a>
 #### 2.5.1 定義
 
-Variables that are declared at the module level or as class attributes.
+Variables that are declared at the module level or as class attributes.  
+グローバル変数とは，モジュールレベルで宣言した変数やクラス属性として宣言した変数を指します．
 
 <a id="s2.5.2-pros"></a>
 <a id="252-pros"></a>
@@ -651,7 +653,8 @@ Variables that are declared at the module level or as class attributes.
 <a id="global-variables-pros"></a>
 #### 2.5.2 利点
 
-Occasionally useful.
+Occasionally useful.  
+有用なこともあります．
 
 <a id="s2.5.3-cons"></a>
 <a id="253-cons"></a>
@@ -660,7 +663,9 @@ Occasionally useful.
 #### 2.5.3 欠点
 
 Has the potential to change module behavior during the import, because
-assignments to global variables are done when the module is first imported.
+assignments to global variables are done when the module is first imported.  
+importのタイミングでモジュールの挙動を変えてしまう可能性があります．
+なぜなら，グローバル変数への割当はモジュールが最初にimportされる時に実行されるからです．
 
 <a id="s2.5.4-decision"></a>
 <a id="254-decision"></a>
@@ -668,16 +673,24 @@ assignments to global variables are done when the module is first imported.
 <a id="global-variables-decision"></a>
 #### 2.5.4 決定
 
-Avoid global variables.
+Avoid global variables.  
+グローバル変数の使用は避けてください．
 
 If needed, global variables should be declared at the module level and made
 internal to the module by prepending an `_` to the name. External access to
 global variables must be done through public module-level functions. See
-[Naming](#s3.16-naming) below.
+[Naming](#s3.16-naming) below.  
+必要な場合は，モジュールレベルで宣言し，変数名に `_` をつけてモジュール内でのみ使用することを明らかにするべきです．
+モジュール外からグローバル変数にアクセスする方法はpublicなモジュールレベルの関数を介して行わうようにしなければいけません．
+変数名の詳細は[Naming](#s3.16-naming)を参照してください．
 
 While module-level constants are technically variables, they are permitted and
 encouraged. For example: `MAX_HOLY_HANDGRENADE_COUNT = 3`. Constants must be
 named using all caps with underscores. See [Naming](#s3.16-naming) below.
+モジュールレベルの定数は変数として宣言することになりますが，この方法は推奨されています．
+例えば， `MAX_HOLY_HANDGRENADE_COUNT = 3`などとします．
+定数名は大文字とアンダースコアのみで構成します．
+変数名の詳細は[Naming](#s3.16-naming)を参照してください．
 
 <a id="s2.6-nested"></a>
 <a id="26-nested"></a>
