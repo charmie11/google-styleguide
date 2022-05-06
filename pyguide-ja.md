@@ -22,7 +22,7 @@ See README.md for details.
       - [2.1.1 定義](#211-定義)
       - [2.1.2 利点](#212-利点)
       - [2.1.3 欠点](#213-欠点)
-      - [2.1.4 Decision](#214-decision)
+      - [2.1.4 決定](#214-決定)
     - [2.2 Imports](#22-imports)
       - [2.2.1 定義](#221-定義)
       - [2.2.2 利点](#222-利点)
@@ -174,10 +174,12 @@ See README.md for details.
 ## 1 背景
 
 Python is the main dynamic language used at Google. This style guide is a list of dos and don'ts for Python programs.  
-PythonはGoogleで使われている主要な動的言語です．このスタイルガイドはPythonでプログラミングをする際の *べき集・べからず集* のリストです．
+PythonはGoogleで使われている主要な動的言語です．
+このスタイルガイドはPythonでプログラミングをする際の *べき集・べからず集* のリストです．
 
 To help you format code correctly, we've created a [settings file for Vim](google_python_style.vim). For Emacs, the default settings should be fine.  
-Pythonで書いたプログラムを正しく整形するために，[Vim用の設定ファイル](google_python_style.vim)を作成しました．Emacsはデフォルトの設定で問題ありません．
+Pythonで書いたプログラムを正しく整形するために，[Vim用の設定ファイル](google_python_style.vim)を作成しました．
+Emacsはデフォルトの設定で問題ありません．
 
 Many teams use the [yapf](https://github.com/google/yapf/) auto-formatter to avoid arguing over formatting.  
 多くのチームが自動整形に[yapf](https://github.com/google/yapf/)を使い，過剰な整形を避けるようにしています．
@@ -194,7 +196,8 @@ Many teams use the [yapf](https://github.com/google/yapf/) auto-formatter to avo
 <a id="lint"></a>
 ### 2.1 Lint
 
-Run `pylint` over your code using this [pylintrc](https://google.github.io/styleguide/pylintrc).
+Run `pylint` over your code using this [pylintrc](https://google.github.io/styleguide/pylintrc).  
+自分が書いたプログラムを `pylint` で確認する (pylintの設定ファイルは，この [pylintrc](https://google.github.io/styleguide/pylintrc) を使う).
 
 <a id="s2.1.1-definition"></a>
 <a id="211-definition"></a>
@@ -202,12 +205,12 @@ Run `pylint` over your code using this [pylintrc](https://google.github.io/style
 <a id="lint-definition"></a>
 #### 2.1.1 定義
 
-`pylint`
-is a tool for finding bugs and style problems in Python source code. It finds
-problems that are typically caught by a compiler for less dynamic languages like
-C and C++. Because of the dynamic nature of Python, some
-warnings may be incorrect; however, spurious warnings should be fairly
-infrequent.
+`pylint` is a tool for finding bugs and style problems in Python source code. It finds problems that are typically caught by a compiler for less dynamic languages like C and C++. Because of the dynamic nature of Python, some warnings may be incorrect; however, spurious warnings should be fairly
+infrequent.  
+`pylint` はPythonのソースコード中のバグや書き方の問題を発見するためのツールです．
+CやC++のようなあまり動的ではない言語のコンパイラによって発見される問題を見つけます．
+Pythonの動的性質により一部の警告が正しくないこともあります．
+ただし，誤った警告が発生することはかなりまれです．
 
 <a id="s2.1.2-pros"></a>
 <a id="212-pros"></a>
@@ -215,7 +218,8 @@ infrequent.
 <a id="lint-pros"></a>
 #### 2.1.2 利点
 
-Catches easy-to-miss errors like typos, using-vars-before-assignment, etc.
+Catches easy-to-miss errors like typos, using-vars-before-assignment, etc.  
+やりがちなミス(例: タイプミスや未定義変数の使用)を見つけてくれます．
 
 <a id="s2.1.3-cons"></a>
 <a id="213-cons"></a>
@@ -223,57 +227,69 @@ Catches easy-to-miss errors like typos, using-vars-before-assignment, etc.
 <a id="lint-cons"></a>
 #### 2.1.3 欠点
 
-`pylint`
-isn't perfect. To take advantage of it, sometimes we'll need to write around it,
-suppress its warnings or fix it.
+`pylint` isn't perfect. To take advantage of it, sometimes we'll need to write around it, suppress its warnings or fix it.  
+`pylint` は完璧ではありません．
+`pylint`の利点を享受するためには，警告の抑制や修正，書き留めることが必要になるときがあります．
 
 <a id="s2.1.4-decision"></a>
 <a id="214-decision"></a>
 
 <a id="lint-decision"></a>
-#### 2.1.4 Decision
+#### 2.1.4 決定
 
 Make sure you run
 `pylint`
-on your code.
-
+on your code.  
+自分が書いたコードに対して必ず `pylint` を実行してください．
 
 Suppress warnings if they are inappropriate so that other issues are not hidden.
-To suppress warnings, you can set a line-level comment:
+To suppress warnings, you can set a line-level comment:  
+不適切な警告は抑制し，その他の問題が隠れないようにしてください．
+警告の抑制には，以下のように行レベルのコメント(`pylint: disable=`)を設定します．
 
 ```python
 dict = 'something awful'  # Bad Idea... pylint: disable=redefined-builtin
 ```
 
-`pylint`
-warnings are each identified by symbolic name (`empty-docstring`)
-Google-specific warnings start with `g-`.
+`pylint` warnings are each identified by symbolic name (`empty-docstring`)
+Google-specific warnings start with `g-`.  
+`pylint` の警告はそれぞれ記号名で識別されます(例: `empty-docstring`)．
+Google特有の警告は，接頭語として `g-` がついています.
 
 If the reason for the suppression is not clear from the symbolic name, add an
-explanation.
+explanation.  
+記号名から抑制の理由が不明瞭な場合は，説明を追加してください．
 
 Suppressing in this way has the advantage that we can easily search for
-suppressions and revisit them.
+suppressions and revisit them.  
+このような方法で抑制することで抑制の検索・再検討を容易にできます．
 
 You can get a list of
 `pylint`
-warnings by doing:
+warnings by doing:  
+以下のコマンドを実行すると `pylint` の警告一覧を取得できます．
 
 ```shell
 pylint --list-msgs
 ```
 
-To get more information on a particular message, use:
+To get more information on a particular message, use:  
+特定のメッセージに関する詳細を知りたい場合は，以下のコマンドを実行します．
 
 ```shell
 pylint --help-msg=C6409
 ```
 
-Prefer `pylint: disable` to the deprecated older form `pylint: disable-msg`.
+Prefer `pylint: disable` to the deprecated older form `pylint: disable-msg`.  
+警告の抑制をする際，非推奨の古い `pylint: disable-msg` ではなく `pylint: disable` を使うようにしてください．
 
 Unused argument warnings can be suppressed by deleting the variables at the
 beginning of the function. Always include a comment explaining why you are
-deleting it. "Unused." is sufficient. For example:
+deleting it. "Unused." is sufficient. For example:  
+未使用の変数に関する警告に関しては，関数の最初で変数を削除する抑制方法が挙げられます．
+この抑制を実施する際は，必ず変数を削除する理由をコメントとして書くようにしてください．
+単に "Unused." と書くだけでは不十分です．ｔ
+例えば:
 
 ```python
 def viking_cafe_order(spam: str, beans: str, eggs: Optional[str] = None) -> str:
@@ -285,7 +301,10 @@ Other common forms of suppressing this warning include using '`_`' as the
 identifier for the unused argument or prefixing the argument name with
 '`unused_`', or assigning them to '`_`'. These forms are allowed but no longer
 encouraged. These break callers that pass arguments by name and do not enforce
-that the arguments are actually unused.
+that the arguments are actually unused.  
+上記の方法以外でこの警告を抑制する一般的な方法は，未使用の変数に識別子として '`_`' を含める，'`unused_`' という接頭語を追加する， '`_`' という変数に割り当てるといった方法が挙げられます．
+これらの方法は許可されていますが，推奨されなくなりました．
+なぜなら，これらの方法は関数の呼び出し元を名前によって破壊し，その引数が実際に未使用であることを強制しないためです．
 
 <a id="s2.2-imports"></a>
 <a id="22-imports"></a>
@@ -305,6 +324,7 @@ are exempt from this rule.
 <a id="221-definition"></a>
 
 <a id="imports-definition"></a>
+
 #### 2.2.1 定義
 
 Reusability mechanism for sharing code from one module to another.
