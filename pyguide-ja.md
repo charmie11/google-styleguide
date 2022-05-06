@@ -15,77 +15,155 @@ See README.md for details.
 <details markdown="1">
   <summary>Table of Contents</summary>
 
--   [1 Background](#s1-background)
--   [2 Python Language Rules](#s2-python-language-rules)
-    *   [2.1 Lint](#s2.1-lint)
-    *   [2.2 Imports](#s2.2-imports)
-    *   [2.3 Packages](#s2.3-packages)
-    *   [2.4 Exceptions](#s2.4-exceptions)
-    *   [2.5 Global variables](#s2.5-global-variables)
-    *   [2.6 Nested/Local/Inner Classes and Functions](#s2.6-nested)
-    *   [2.7 Comprehensions & Generator Expressions](#s2.7-comprehensions)
-    *   [2.8 Default Iterators and Operators](#s2.8-default-iterators-and-operators)
-    *   [2.9 Generators](#s2.9-generators)
-    *   [2.10 Lambda Functions](#s2.10-lambda-functions)
-    *   [2.11 Conditional Expressions](#s2.11-conditional-expressions)
-    *   [2.12 Default Argument Values](#s2.12-default-argument-values)
-    *   [2.13 Properties](#s2.13-properties)
-    *   [2.14 True/False Evaluations](#s2.14-truefalse-evaluations)
-    *   [2.16 Lexical Scoping](#s2.16-lexical-scoping)
-    *   [2.17 Function and Method Decorators](#s2.17-function-and-method-decorators)
-    *   [2.18 Threading](#s2.18-threading)
-    *   [2.19 Power Features](#s2.19-power-features)
-    *   [2.20 Modern Python: from \_\_future\_\_ imports](#s2.20-modern-python)
-    *   [2.21 Type Annotated Code](#s2.21-type-annotated-code)
--   [3 Python Style Rules](#s3-python-style-rules)
-    *   [3.1 Semicolons](#s3.1-semicolons)
-    *   [3.2 Line length](#s3.2-line-length)
-    *   [3.3 Parentheses](#s3.3-parentheses)
-    *   [3.4 Indentation](#s3.4-indentation)
-        +   [3.4.1 Trailing commas in sequences of items?](#s3.4.1-trailing-commas)
-    *   [3.5 Blank Lines](#s3.5-blank-lines)
-    *   [3.6 Whitespace](#s3.6-whitespace)
-    *   [3.7 Shebang Line](#s3.7-shebang-line)
-    *   [3.8 Comments and Docstrings](#s3.8-comments-and-docstrings)
-        +   [3.8.1 Docstrings](#s3.8.1-comments-in-doc-strings)
-        +   [3.8.2 Modules](#s3.8.2-comments-in-modules)
-        +   [3.8.3 Functions and Methods](#s3.8.3-functions-and-methods)
-        +   [3.8.4 Classes](#s3.8.4-comments-in-classes)
-        +   [3.8.5 Block and Inline Comments](#s3.8.5-block-and-inline-comments)
-        +   [3.8.6 Punctuation, Spelling, and Grammar](#s3.8.6-punctuation-spelling-and-grammar)
-    *   [3.10 Strings](#s3.10-strings)
-        +   [3.10.1 Logging](#s3.10.1-logging)
-        +   [3.10.2 Error Messages](#s3.10.2-error-messages)
-    *   [3.11 Files, Sockets, and similar Stateful Resources](#s3.11-files-sockets-closeables)
-    *   [3.12 TODO Comments](#s3.12-todo-comments)
-    *   [3.13 Imports formatting](#s3.13-imports-formatting)
-    *   [3.14 Statements](#s3.14-statements)
-    *   [3.15 Accessors](#s3.15-accessors)
-    *   [3.16 Naming](#s3.16-naming)
-        +   [3.16.1 Names to Avoid](#s3.16.1-names-to-avoid)
-        +   [3.16.2 Naming Conventions](#s3.16.2-naming-conventions)
-        +   [3.16.3 File Naming](#s3.16.3-file-naming)
-        +   [3.16.4 Guidelines derived from Guido's Recommendations](#s3.16.4-guidelines-derived-from-guidos-recommendations)
-    *   [3.17 Main](#s3.17-main)
-    *   [3.18 Function length](#s3.18-function-length)
-    *   [3.19 Type Annotations](#s3.19-type-annotations)
-        +   [3.19.1 General Rules](#s3.19.1-general-rules)
-        +   [3.19.2 Line Breaking](#s3.19.2-line-breaking)
-        +   [3.19.3 Forward Declarations](#s3.19.3-forward-declarations)
-        +   [3.19.4 Default Values](#s3.19.4-default-values)
-        +   [3.19.5 NoneType](#s3.19.5-nonetype)
-        +   [3.19.6 Type Aliases](#s3.19.6-type-aliases)
-        +   [3.19.7 Ignoring Types](#s3.19.7-ignoring-types)
-        +   [3.19.8 Typing Variables](#s3.19.8-typing-variables)
-        +   [3.19.9 Tuples vs Lists](#s3.19.9-tuples-vs-lists)
-        +   [3.19.10 TypeVars](#s3.19.10-typevars)
-        +   [3.19.11 String types](#s3.19.11-string-types)
-        +   [3.19.12 Imports For Typing](#s3.19.12-imports-for-typing)
-        +   [3.19.13 Conditional Imports](#s3.19.13-conditional-imports)
-        +   [3.19.14 Circular Dependencies](#s3.19.14-circular-dependencies)
-        +   [3.19.15 Generics](#s3.19.15-generics)
-        +   [3.19.16 Build Dependencies](#s3.19.16-build-dependencies)
--   [4 Parting Words](#4-parting-words)
+- [Google Python Style Guide 和訳](#google-python-style-guide-和訳)
+  - [1 背景](#1-背景)
+  - [2 Pythonの言語に関する規約](#2-pythonの言語に関する規約)
+    - [2.1 Lint](#21-lint)
+      - [2.1.1 定義](#211-定義)
+      - [2.1.2 利点](#212-利点)
+      - [2.1.3 欠点](#213-欠点)
+      - [2.1.4 Decision](#214-decision)
+    - [2.2 Imports](#22-imports)
+      - [2.2.1 定義](#221-定義)
+      - [2.2.2 利点](#222-利点)
+      - [2.2.3 欠点](#223-欠点)
+      - [2.2.4 決定](#224-決定)
+    - [2.3 Packages](#23-packages)
+      - [2.3.1 利点](#231-利点)
+      - [2.3.2 欠点](#232-欠点)
+      - [2.3.3 決定](#233-決定)
+    - [2.4 Exception (例外)](#24-exception-例外)
+      - [2.4.1 定義](#241-定義)
+      - [2.4.2 利点](#242-利点)
+      - [2.4.3 欠点](#243-欠点)
+      - [2.4.4 決定](#244-決定)
+    - [2.5 Global variables (グローバル変数)](#25-global-variables-グローバル変数)
+      - [2.5.1 定義](#251-定義)
+      - [2.5.2 利点](#252-利点)
+      - [2.5.3 欠点](#253-欠点)
+      - [2.5.4 決定](#254-決定)
+    - [2.6 Nested/Local/Inner Classes and Functions (ネストされたローカル/内部クラスと関数)](#26-nestedlocalinner-classes-and-functions-ネストされたローカル内部クラスと関数)
+      - [2.6.1 定義](#261-定義)
+      - [2.6.2 利点](#262-利点)
+      - [2.6.3 欠点](#263-欠点)
+      - [2.6.4 決定](#264-決定)
+    - [2.7 Comprehensions & Generator Expressions (内包表記とジェネレータ式)](#27-comprehensions--generator-expressions-内包表記とジェネレータ式)
+      - [2.7.1 定義](#271-定義)
+      - [2.7.2 利点](#272-利点)
+      - [2.7.3 欠点](#273-欠点)
+      - [2.7.4 決定](#274-決定)
+    - [2.8 Default Iterators and Operators (デフォルトのイテレータとオペレータ)](#28-default-iterators-and-operators-デフォルトのイテレータとオペレータ)
+      - [2.8.1 定義](#281-定義)
+      - [2.8.2 利点](#282-利点)
+      - [2.8.3 欠点](#283-欠点)
+      - [2.8.4 決定](#284-決定)
+    - [2.9 Generators (ジェネレータ)](#29-generators-ジェネレータ)
+      - [2.9.1 定義](#291-定義)
+      - [2.9.2 利点](#292-利点)
+      - [2.9.3 欠点](#293-欠点)
+      - [2.9.4 決定](#294-決定)
+    - [2.10 Lambda Functions (ラムダ関数)](#210-lambda-functions-ラムダ関数)
+      - [2.10.1 定義](#2101-定義)
+      - [2.10.2 利点](#2102-利点)
+      - [2.10.3 欠点](#2103-欠点)
+      - [2.10.4 決定](#2104-決定)
+    - [2.11 Conditional Expressions (条件式)](#211-conditional-expressions-条件式)
+      - [2.11.1 定義](#2111-定義)
+      - [2.11.2 利点](#2112-利点)
+      - [2.11.3 欠点](#2113-欠点)
+      - [2.11.4 決定](#2114-決定)
+    - [2.12 Default Argument Values (引数のデフォルト値)](#212-default-argument-values-引数のデフォルト値)
+      - [2.12.1 定義](#2121-定義)
+      - [2.12.2 利点](#2122-利点)
+      - [2.12.3 欠点](#2123-欠点)
+      - [2.12.4 決定](#2124-決定)
+    - [2.13 Properties (プロパティ)](#213-properties-プロパティ)
+      - [2.13.1 定義](#2131-定義)
+      - [2.13.2 利点](#2132-利点)
+      - [2.13.3 欠点](#2133-欠点)
+      - [2.13.4 決定](#2134-決定)
+    - [2.14 True/False Evaluations (真偽の評価)](#214-truefalse-evaluations-真偽の評価)
+      - [2.14.1 定義](#2141-定義)
+      - [2.14.2 利点](#2142-利点)
+      - [2.14.3 欠点](#2143-欠点)
+      - [2.14.4 決定](#2144-決定)
+    - [2.16 Lexical Scoping (レキシカルスコープ)](#216-lexical-scoping-レキシカルスコープ)
+      - [2.16.1 定義](#2161-定義)
+      - [2.16.2 利点](#2162-利点)
+      - [2.16.3 欠点](#2163-欠点)
+      - [2.16.4 決定](#2164-決定)
+    - [2.17 Function and Method Decorators (デコレータ)](#217-function-and-method-decorators-デコレータ)
+      - [2.17.1 定義](#2171-定義)
+      - [2.17.2 利点](#2172-利点)
+      - [2.17.3 欠点](#2173-欠点)
+      - [2.17.4 決定](#2174-決定)
+    - [2.18 Threading (スレッド)](#218-threading-スレッド)
+    - [2.19 Power Features](#219-power-features)
+      - [2.19.1 定義](#2191-定義)
+      - [2.19.2 利点](#2192-利点)
+      - [2.19.3 欠点](#2193-欠点)
+      - [2.19.4 決定](#2194-決定)
+    - [2.20 Modern Python: from \_\_future\_\_ imports (\_\_future\_\_ からimportできるモダンな機能)](#220-modern-python-from-__future__-imports-__future__-からimportできるモダンな機能)
+      - [2.20.1 定義](#2201-定義)
+      - [2.20.2 利点](#2202-利点)
+      - [2.20.3 欠点](#2203-欠点)
+      - [2.20.4 決定](#2204-決定)
+        - [from \_\_future\_\_ imports](#from-__future__-imports)
+        - [The six, future, and past libraries](#the-six-future-and-past-libraries)
+    - [2.21 Type Annotated Code (型ヒント)](#221-type-annotated-code-型ヒント)
+      - [2.21.1 定義](#2211-定義)
+      - [2.21.2 利点](#2212-利点)
+      - [2.21.3 欠点](#2213-欠点)
+      - [2.21.4 決定](#2214-決定)
+  - [3 書き方に関する規約](#3-書き方に関する規約)
+    - [3.1 Semicolons (セミコロン)](#31-semicolons-セミコロン)
+    - [3.2 Line length (1行の長さ)](#32-line-length-1行の長さ)
+    - [3.3 Parentheses (丸括弧)](#33-parentheses-丸括弧)
+    - [3.4 Indentation (インデント)](#34-indentation-インデント)
+      - [3.4.1 Trailing commas in sequences of items? (末尾のカンマ)](#341-trailing-commas-in-sequences-of-items-末尾のカンマ)
+    - [3.5 Blank Lines (空行)](#35-blank-lines-空行)
+    - [3.6 Whitespace (スペース)](#36-whitespace-スペース)
+    - [3.7 Shebang Line (先頭行のシバン)](#37-shebang-line-先頭行のシバン)
+    - [3.8 Comments and Docstrings (コメントとDocstring)](#38-comments-and-docstrings-コメントとdocstring)
+      - [3.8.1 Docstrings](#381-docstrings)
+      - [3.8.2 Modules (モジュール)](#382-modules-モジュール)
+      - [3.8.3 Functions and Methods (関数とメソッド)](#383-functions-and-methods-関数とメソッド)
+      - [3.8.4 Classes (クラス)](#384-classes-クラス)
+      - [3.8.5 Block and Inline Comments (ブロックとインラインのコメント)](#385-block-and-inline-comments-ブロックとインラインのコメント)
+      - [3.8.6 Punctuation, Spelling, and Grammar (カンマ，ピリオド，スペル，文法)](#386-punctuation-spelling-and-grammar-カンマピリオドスペル文法)
+    - [3.10 Strings (文字列)](#310-strings-文字列)
+      - [3.10.1 Logging (ログ)](#3101-logging-ログ)
+      - [3.10.2 Error Messages (エラーメッセージ)](#3102-error-messages-エラーメッセージ)
+    - [3.11 Files, Sockets, and similar Stateful Resources (ファイル，ソケット等のステートフルなリソース)](#311-files-sockets-and-similar-stateful-resources-ファイルソケット等のステートフルなリソース)
+    - [3.12 TODO Comments (TODOコメント)](#312-todo-comments-todoコメント)
+    - [3.13 Imports formatting (import文の書き方)](#313-imports-formatting-import文の書き方)
+    - [3.14 Statements (ブロックを構成する最小単位)](#314-statements-ブロックを構成する最小単位)
+    - [3.15 Getters and Setters (getterとsetter)](#315-getters-and-setters-getterとsetter)
+    - [3.16 Naming (命名規則)](#316-naming-命名規則)
+      - [3.16.1 Names to Avoid (割けるべき名前)](#3161-names-to-avoid-割けるべき名前)
+      - [3.16.2 Naming Conventions](#3162-naming-conventions)
+      - [3.16.3 File Naming (ファイル名)](#3163-file-naming-ファイル名)
+      - [3.16.4 Guidelines derived from Guido's Recommendations ([Guido](https://en.wikipedia.org/wiki/Guido_van_Rossum)の推奨を基にしたガイドライン)](#3164-guidelines-derived-from-guidos-recommendations-guidoの推奨を基にしたガイドライン)
+      - [3.16.5 Mathematical Notation (数学表記)](#3165-mathematical-notation-数学表記)
+    - [3.17 Main (main文)](#317-main-main文)
+    - [3.18 Function length (関数の長さ)](#318-function-length-関数の長さ)
+    - [3.19 Type Annotations (型ヒント)](#319-type-annotations-型ヒント)
+      - [3.19.1 General Rules (一般的なルール)](#3191-general-rules-一般的なルール)
+      - [3.19.2 Line Breaking (改行)](#3192-line-breaking-改行)
+      - [3.19.3 Forward Declarations (前方宣言)](#3193-forward-declarations-前方宣言)
+      - [3.19.4 Default Values (デフォルト値)](#3194-default-values-デフォルト値)
+      - [3.19.5 NoneType (`NoneType`)](#3195-nonetype-nonetype)
+      - [3.19.6 Type Aliases (型エイリアス)](#3196-type-aliases-型エイリアス)
+      - [3.19.7 Ignoring Types (型の無視)](#3197-ignoring-types-型の無視)
+      - [3.19.8 Typing Variables (変数の型付け)](#3198-typing-variables-変数の型付け)
+      - [3.19.9 Tuples vs Lists (tupleとlist)](#3199-tuples-vs-lists-tupleとlist)
+      - [3.19.10 TypeVars (`TypeVar`)](#31910-typevars-typevar)
+      - [3.19.11 String types (文字列型)](#31911-string-types-文字列型)
+      - [3.19.12 Imports For Typing (型付けのためのimport)](#31912-imports-for-typing-型付けのためのimport)
+      - [3.19.13 Conditional Imports (条件付きimport)](#31913-conditional-imports-条件付きimport)
+      - [3.19.14 Circular Dependencies (循環import依存)](#31914-circular-dependencies-循環import依存)
+      - [3.19.15 Generics (ジェネリクス？)](#31915-generics-ジェネリクス)
+  - [4 おわりに](#4-おわりに)
 
 </details>
 
@@ -93,7 +171,7 @@ See README.md for details.
 <a id="1-background"></a>
 
 <a id="background"></a>
-## 1 Background 
+## 1 背景 
 
 Python is the main dynamic language used at Google. This style guide is a list
 of *dos and don'ts* for Python programs.
@@ -108,13 +186,13 @@ auto-formatter to avoid arguing over formatting.
 <a id="2-python-language-rules"></a>
 
 <a id="python-language-rules"></a>
-## 2 Python Language Rules 
+## 2 Pythonの言語に関する規約
 
 <a id="s2.1-lint"></a>
 <a id="21-lint"></a>
 
 <a id="lint"></a>
-### 2.1 Lint 
+### 2.1 Lint
 
 Run `pylint` over your code using this [pylintrc](https://google.github.io/styleguide/pylintrc).
 
@@ -122,7 +200,7 @@ Run `pylint` over your code using this [pylintrc](https://google.github.io/style
 <a id="211-definition"></a>
 
 <a id="lint-definition"></a>
-#### 2.1.1 Definition 
+#### 2.1.1 定義
 
 `pylint`
 is a tool for finding bugs and style problems in Python source code. It finds
@@ -135,7 +213,7 @@ infrequent.
 <a id="212-pros"></a>
 
 <a id="lint-pros"></a>
-#### 2.1.2 Pros 
+#### 2.1.2 利点
 
 Catches easy-to-miss errors like typos, using-vars-before-assignment, etc.
 
@@ -143,7 +221,7 @@ Catches easy-to-miss errors like typos, using-vars-before-assignment, etc.
 <a id="213-cons"></a>
 
 <a id="lint-cons"></a>
-#### 2.1.3 Cons 
+#### 2.1.3 欠点
 
 `pylint`
 isn't perfect. To take advantage of it, sometimes we'll need to write around it,
@@ -153,7 +231,7 @@ suppress its warnings or fix it.
 <a id="214-decision"></a>
 
 <a id="lint-decision"></a>
-#### 2.1.4 Decision 
+#### 2.1.4 Decision
 
 Make sure you run
 `pylint`
@@ -213,7 +291,7 @@ that the arguments are actually unused.
 <a id="22-imports"></a>
 
 <a id="imports"></a>
-### 2.2 Imports 
+### 2.2 Imports
 
 Use `import` statements for packages and modules only, not for individual
 classes or functions. Classes imported from the
@@ -227,7 +305,7 @@ are exempt from this rule.
 <a id="221-definition"></a>
 
 <a id="imports-definition"></a>
-#### 2.2.1 Definition 
+#### 2.2.1 定義
 
 Reusability mechanism for sharing code from one module to another.
 
@@ -235,7 +313,7 @@ Reusability mechanism for sharing code from one module to another.
 <a id="222-pros"></a>
 
 <a id="imports-pros"></a>
-#### 2.2.2 Pros 
+#### 2.2.2 利点
 
 The namespace management convention is simple. The source of each identifier is
 indicated in a consistent way; `x.Obj` says that object `Obj` is defined in
@@ -245,7 +323,7 @@ module `x`.
 <a id="223-cons"></a>
 
 <a id="imports-cons"></a>
-#### 2.2.3 Cons 
+#### 2.2.3 欠点
 
 Module names can still collide. Some module names are inconveniently long.
 
@@ -253,7 +331,7 @@ Module names can still collide. Some module names are inconveniently long.
 <a id="224-decision"></a>
 
 <a id="imports-decision"></a>
-#### 2.2.4 Decision 
+#### 2.2.4 決定
 
 *   Use `import x` for importing packages and modules.
 *   Use `from x import y` where `x` is the package prefix and `y` is the module
@@ -280,7 +358,7 @@ package twice.
 <a id="23-packages"></a>
 
 <a id="packages"></a>
-### 2.3 Packages 
+### 2.3 Packages
 
 Import each module using the full pathname location of the module.
 
@@ -288,7 +366,7 @@ Import each module using the full pathname location of the module.
 <a id="231-pros"></a>
 
 <a id="packages-pros"></a>
-#### 2.3.1 Pros 
+#### 2.3.1 利点
 
 Avoids conflicts in module names or incorrect imports due to the module search
 path not being what the author expected. Makes it easier to find modules.
@@ -297,7 +375,7 @@ path not being what the author expected. Makes it easier to find modules.
 <a id="232-cons"></a>
 
 <a id="packages-cons"></a>
-#### 2.3.2 Cons 
+#### 2.3.2 欠点
 
 Makes it harder to deploy code because you have to replicate the package
 hierarchy. Not really a problem with modern deployment mechanisms.
@@ -306,7 +384,7 @@ hierarchy. Not really a problem with modern deployment mechanisms.
 <a id="233-decision"></a>
 
 <a id="packages-decision"></a>
-#### 2.3.3 Decision 
+#### 2.3.3 決定
 
 All new code should import each module by its full package name.
 
@@ -350,7 +428,7 @@ package named `jodie`, not a local `jodie.py`.
 <a id="24-exceptions"></a>
 
 <a id="exceptions"></a>
-### 2.4 Exceptions 
+### 2.4 Exception (例外)
 
 Exceptions are allowed but must be used carefully.
 
@@ -358,7 +436,7 @@ Exceptions are allowed but must be used carefully.
 <a id="241-definition"></a>
 
 <a id="exceptions-definition"></a>
-#### 2.4.1 Definition 
+#### 2.4.1 定義
 
 Exceptions are a means of breaking out of normal control flow to handle errors
 or other exceptional conditions.
@@ -367,7 +445,7 @@ or other exceptional conditions.
 <a id="242-pros"></a>
 
 <a id="exceptions-pros"></a>
-#### 2.4.2 Pros 
+#### 2.4.2 利点
 
 The control flow of normal operation code is not cluttered by error-handling
 code. It also allows the control flow to skip multiple frames when a certain
@@ -378,7 +456,7 @@ having to plumb error codes through.
 <a id="243-cons"></a>
 
 <a id="exceptions-cons"></a>
-#### 2.4.3 Cons 
+#### 2.4.3 欠点
 
 May cause the control flow to be confusing. Easy to miss error cases when making
 library calls.
@@ -387,7 +465,7 @@ library calls.
 <a id="244-decision"></a>
 
 <a id="exceptions-decision"></a>
-#### 2.4.4 Decision 
+#### 2.4.4 決定
 
 Exceptions must follow certain conditions:
 
@@ -477,7 +555,7 @@ Exceptions must follow certain conditions:
 <a id="25-global-variables"></a>
 
 <a id="global-variables"></a>
-### 2.5 Global variables 
+### 2.5 Global variables (グローバル変数)
 
 Avoid global variables.
 
@@ -485,7 +563,7 @@ Avoid global variables.
 <a id="251-definition"></a>
 
 <a id="global-variables-definition"></a>
-#### 2.5.1 Definition 
+#### 2.5.1 定義
 
 Variables that are declared at the module level or as class attributes.
 
@@ -493,7 +571,7 @@ Variables that are declared at the module level or as class attributes.
 <a id="252-pros"></a>
 
 <a id="global-variables-pros"></a>
-#### 2.5.2 Pros 
+#### 2.5.2 利点
 
 Occasionally useful.
 
@@ -501,7 +579,7 @@ Occasionally useful.
 <a id="253-cons"></a>
 
 <a id="global-variables-cons"></a>
-#### 2.5.3 Cons 
+#### 2.5.3 欠点
 
 Has the potential to change module behavior during the import, because
 assignments to global variables are done when the module is first imported.
@@ -510,7 +588,7 @@ assignments to global variables are done when the module is first imported.
 <a id="254-decision"></a>
 
 <a id="global-variables-decision"></a>
-#### 2.5.4 Decision 
+#### 2.5.4 決定
 
 Avoid global variables.
 
@@ -527,7 +605,7 @@ named using all caps with underscores. See [Naming](#s3.16-naming) below.
 <a id="26-nested"></a>
 
 <a id="nested-classes-functions"></a>
-### 2.6 Nested/Local/Inner Classes and Functions 
+### 2.6 Nested/Local/Inner Classes and Functions (ネストされたローカル/内部クラスと関数)
 
 Nested local functions or classes are fine when used to close over a local
 variable. Inner classes are fine.
@@ -536,7 +614,7 @@ variable. Inner classes are fine.
 <a id="261-definition"></a>
 
 <a id="nested-classes-functions-definition"></a>
-#### 2.6.1 Definition 
+#### 2.6.1 定義
 
 A class can be defined inside of a method, function, or class. A function can be
 defined inside a method or function. Nested functions have read-only access to
@@ -546,7 +624,7 @@ variables defined in enclosing scopes.
 <a id="262-pros"></a>
 
 <a id="nested-classes-functions-pros"></a>
-#### 2.6.2 Pros 
+#### 2.6.2 利点
 
 Allows definition of utility classes and functions that are only used inside of
 a very limited scope. Very
@@ -557,7 +635,7 @@ Commonly used for implementing decorators.
 <a id="263-cons"></a>
 
 <a id="nested-classes-functions-cons"></a>
-#### 2.6.3 Cons 
+#### 2.6.3 欠点
 
 Nested functions and classes cannot be directly tested. Nesting can make the
 outer function longer and less readable.
@@ -566,7 +644,7 @@ outer function longer and less readable.
 <a id="264-decision"></a>
 
 <a id="nested-classes-functions-decision"></a>
-#### 2.6.4 Decision 
+#### 2.6.4 決定
 
 They are fine with some caveats. Avoid nested functions or classes except when
 closing over a local value other than `self` or `cls`. Do not nest a function
@@ -580,7 +658,7 @@ the module level so that it can still be accessed by tests.
 <a id="list-comprehensions"></a>
 
 <a id="comprehensions"></a>
-### 2.7 Comprehensions & Generator Expressions 
+### 2.7 Comprehensions & Generator Expressions (内包表記とジェネレータ式)
 
 Okay to use for simple cases.
 
@@ -588,7 +666,7 @@ Okay to use for simple cases.
 <a id="271-definition"></a>
 
 <a id="comprehensions-definition"></a>
-#### 2.7.1 Definition 
+#### 2.7.1 定義
 
 List, Dict, and Set comprehensions as well as generator expressions provide a
 concise and efficient way to create container types and iterators without
@@ -598,7 +676,7 @@ resorting to the use of traditional loops, `map()`, `filter()`, or `lambda`.
 <a id="272-pros"></a>
 
 <a id="comprehensions-pros"></a>
-#### 2.7.2 Pros 
+#### 2.7.2 利点
 
 Simple comprehensions can be clearer and simpler than other dict, list, or set
 creation techniques. Generator expressions can be very efficient, since they
@@ -608,7 +686,7 @@ avoid the creation of a list entirely.
 <a id="273-cons"></a>
 
 <a id="comprehensions-cons"></a>
-#### 2.7.3 Cons 
+#### 2.7.3 欠点
 
 Complicated comprehensions or generator expressions can be hard to read.
 
@@ -616,7 +694,7 @@ Complicated comprehensions or generator expressions can be hard to read.
 <a id="274-decision"></a>
 
 <a id="comprehensions-decision"></a>
-#### 2.7.4 Decision 
+#### 2.7.4 決定
 
 Okay to use for simple cases. Each portion must fit on one line: mapping
 expression, `for` clause, filter expression. Multiple `for` clauses or filter
@@ -676,7 +754,7 @@ No:
 <a id="s2.8-default-iterators-and-operators"></a>
 
 <a id="default-iterators-operators"></a>
-### 2.8 Default Iterators and Operators 
+### 2.8 Default Iterators and Operators (デフォルトのイテレータとオペレータ)
 
 Use default iterators and operators for types that support them, like lists,
 dictionaries, and files.
@@ -685,7 +763,7 @@ dictionaries, and files.
 <a id="281-definition"></a>
 
 <a id="default-iterators-operators-definition"></a>
-#### 2.8.1 Definition 
+#### 2.8.1 定義
 
 Container types, like dictionaries and lists, define default iterators and
 membership test operators ("in" and "not in").
@@ -694,7 +772,7 @@ membership test operators ("in" and "not in").
 <a id="282-pros"></a>
 
 <a id="default-iterators-operators-pros"></a>
-#### 2.8.2 Pros 
+#### 2.8.2 利点
 
 The default iterators and operators are simple and efficient. They express the
 operation directly, without extra method calls. A function that uses default
@@ -704,7 +782,7 @@ operators is generic. It can be used with any type that supports the operation.
 <a id="283-cons"></a>
 
 <a id="default-iterators-operators-cons"></a>
-#### 2.8.3 Cons 
+#### 2.8.3 欠点
 
 You can't tell the type of objects by reading the method names (e.g. `has_key()`
 means a dictionary). This is also an advantage.
@@ -713,7 +791,7 @@ means a dictionary). This is also an advantage.
 <a id="284-decision"></a>
 
 <a id="default-iterators-operators-decision"></a>
-#### 2.8.4 Decision 
+#### 2.8.4 決定
 
 Use default iterators and operators for types that support them, like lists,
 dictionaries, and files. The built-in types define iterator methods, too. Prefer
@@ -740,7 +818,7 @@ No:   for key in adict.keys(): ...
 <a id="29-generators"></a>
 
 <a id="generators"></a>
-### 2.9 Generators 
+### 2.9 Generators (ジェネレータ)
 
 Use generators as needed.
 
@@ -748,7 +826,7 @@ Use generators as needed.
 <a id="291-definition"></a>
 
 <a id="generators-definition"></a>
-#### 2.9 Definition 
+#### 2.9.1 定義
 
 A generator function returns an iterator that yields a value each time it
 executes a yield statement. After it yields a value, the runtime state of the
@@ -758,7 +836,7 @@ generator function is suspended until the next value is needed.
 <a id="292-pros"></a>
 
 <a id="generators-pros"></a>
-#### 2.9.2 Pros 
+#### 2.9.2 利点
 
 Simpler code, because the state of local variables and control flow are
 preserved for each call. A generator uses less memory than a function that
@@ -768,7 +846,7 @@ creates an entire list of values at once.
 <a id="293-cons"></a>
 
 <a id="generators-cons"></a>
-#### 2.9.3 Cons 
+#### 2.9.3 欠点
 
 None.
 
@@ -776,7 +854,7 @@ None.
 <a id="294-decision"></a>
 
 <a id="generators-decision"></a>
-#### 2.9.4 Decision 
+#### 2.9.4 決定
 
 Fine. Use "Yields:" rather than "Returns:" in the docstring for generator
 functions.
@@ -785,7 +863,7 @@ functions.
 <a id="210-lambda-functions"></a>
 
 <a id="lambdas"></a>
-### 2.10 Lambda Functions 
+### 2.10 Lambda Functions (ラムダ関数)
 
 Okay for one-liners. Prefer generator expressions over `map()` or `filter()`
 with a `lambda`.
@@ -794,7 +872,7 @@ with a `lambda`.
 <a id="2101-definition"></a>
 
 <a id="lambdas-definition"></a>
-#### 2.10.1 Definition 
+#### 2.10.1 定義
 
 Lambdas define anonymous functions in an expression, as opposed to a statement.
 
@@ -802,7 +880,7 @@ Lambdas define anonymous functions in an expression, as opposed to a statement.
 <a id="2102-pros"></a>
 
 <a id="lambdas-pros"></a>
-#### 2.10.2 Pros 
+#### 2.10.2 利点
 
 Convenient.
 
@@ -810,7 +888,7 @@ Convenient.
 <a id="2103-cons"></a>
 
 <a id="lambdas-cons"></a>
-#### 2.10.3 Cons 
+#### 2.10.3 欠点
 
 Harder to read and debug than local functions. The lack of names means stack
 traces are more difficult to understand. Expressiveness is limited because the
@@ -820,7 +898,7 @@ function may only contain an expression.
 <a id="2104-decision"></a>
 
 <a id="lambdas-decision"></a>
-#### 2.10.4 Decision 
+#### 2.10.4 決定
 
 Okay to use them for one-liners. If the code inside the lambda function is
 longer than 60-80 chars, it's probably better to define it as a regular
@@ -834,7 +912,7 @@ module instead of lambda functions. For example, prefer `operator.mul` to
 <a id="211-conditional-expressions"></a>
 
 <a id="conditional-expressions"></a>
-### 2.11 Conditional Expressions 
+### 2.11 Conditional Expressions (条件式)
 
 Okay for simple cases.
 
@@ -842,7 +920,7 @@ Okay for simple cases.
 <a id="2111-definition"></a>
 
 <a id="conditional-expressions-definition"></a>
-#### 2.11.1 Definition 
+#### 2.11.1 定義
 
 Conditional expressions (sometimes called a “ternary operator”) are mechanisms
 that provide a shorter syntax for if statements. For example: `x = 1 if cond
@@ -852,7 +930,7 @@ else 2`.
 <a id="2112-pros"></a>
 
 <a id="conditional-expressions-pros"></a>
-#### 2.11.2 Pros 
+#### 2.11.2 利点
 
 Shorter and more convenient than an if statement.
 
@@ -860,7 +938,7 @@ Shorter and more convenient than an if statement.
 <a id="2113-cons"></a>
 
 <a id="conditional-expressions-cons"></a>
-#### 2.11.3 Cons 
+#### 2.11.3 欠点
 
 May be harder to read than an if statement. The condition may be difficult to
 locate if the expression is long.
@@ -869,7 +947,7 @@ locate if the expression is long.
 <a id="2114-decision"></a>
 
 <a id="conditional-expressions-decision"></a>
-#### 2.11.4 Decision 
+#### 2.11.4 決定
 
 Okay to use for simple cases. Each portion must fit on one line:
 true-expression, if-expression, else-expression. Use a complete if statement
@@ -900,7 +978,7 @@ No:
 <a id="212-default-argument-values"></a>
 
 <a id="default-arguments"></a>
-### 2.12 Default Argument Values 
+### 2.12 Default Argument Values (引数のデフォルト値)
 
 Okay in most cases.
 
@@ -908,7 +986,7 @@ Okay in most cases.
 <a id="2121-definition"></a>
 
 <a id="default-arguments-definition"></a>
-#### 2.12.1 Definition 
+#### 2.12.1 定義
 
 You can specify values for variables at the end of a function's parameter list,
 e.g., `def foo(a, b=0):`. If `foo` is called with only one argument, `b` is set
@@ -919,7 +997,7 @@ argument.
 <a id="2122-pros"></a>
 
 <a id="default-arguments-pros"></a>
-#### 2.12.2 Pros 
+#### 2.12.2 利点
 
 Often you have a function that uses lots of default values, but on rare
 occasions you want to override the defaults. Default argument values provide an
@@ -931,7 +1009,7 @@ arguments are an easy way of "faking" the overloading behavior.
 <a id="2123-cons"></a>
 
 <a id="default-arguments-cons"></a>
-#### 2.12.3 Cons 
+#### 2.12.3 欠点
 
 Default arguments are evaluated once at module load time. This may cause
 problems if the argument is a mutable object such as a list or a dictionary. If
@@ -942,7 +1020,7 @@ default value is modified.
 <a id="2124-decision"></a>
 
 <a id="default-arguments-decision"></a>
-#### 2.12.4 Decision 
+#### 2.12.4 決定
 
 Okay to use with the following caveat:
 
@@ -978,7 +1056,7 @@ No:  def foo(a, b: Mapping = {}):  # Could still get passed to unchecked code
 <a id="213-properties"></a>
 
 <a id="properties"></a>
-### 2.13 Properties 
+### 2.13 Properties (プロパティ)
 
 Properties may be used to control getting or setting attributes that require
 trivial computations or logic. Property implementations must match the general
@@ -989,7 +1067,7 @@ and unsurprising.
 <a id="2131-definition"></a>
 
 <a id="properties-definition"></a>
-#### 2.13.1 Definition 
+#### 2.13.1 定義
 
 A way to wrap method calls for getting and setting an attribute as a standard
 attribute access.
@@ -998,7 +1076,7 @@ attribute access.
 <a id="2132-pros"></a>
 
 <a id="properties-pros"></a>
-#### 2.13.2 Pros 
+#### 2.13.2 利点
 
 *   Allows for an attribute access and assignment API rather than
     [getter and setter](#getters-and-setters) method calls.
@@ -1011,7 +1089,7 @@ attribute access.
 <a id="2133-cons"></a>
 
 <a id="properties-cons"></a>
-#### 2.13.3 Cons 
+#### 2.13.3 欠点
 
 *   Can hide side-effects much like operator overloading.
 *   Can be confusing for subclasses.
@@ -1020,7 +1098,7 @@ attribute access.
 <a id="2134-decision"></a>
 
 <a id="properties-decision"></a>
-#### 2.13.4 Decision 
+#### 2.13.4 決定
 
 Properties are allowed, but, like operator overloading, should only be used when
 necessary and match the expectations of typical attribute access; follow the
@@ -1043,7 +1121,7 @@ implement computations a subclass may ever want to override and extend.
 <a id="214-truefalse-evaluations"></a>
 
 <a id="truefalse-evaluations"></a>
-### 2.14 True/False Evaluations 
+### 2.14 True/False Evaluations (真偽の評価)
 
 Use the "implicit" false if at all possible.
 
@@ -1051,7 +1129,7 @@ Use the "implicit" false if at all possible.
 <a id="2141-definition"></a>
 
 <a id="truefalse-evaluations-definition"></a>
-#### 2.14.1 Definition 
+#### 2.14.1 定義
 
 Python evaluates certain values as `False` when in a boolean context. A quick
 "rule of thumb" is that all "empty" values are considered false, so `0, None,
@@ -1061,7 +1139,7 @@ Python evaluates certain values as `False` when in a boolean context. A quick
 <a id="2142-pros"></a>
 
 <a id="truefalse-evaluations-pros"></a>
-#### 2.14.2 Pros 
+#### 2.14.2 利点
 
 Conditions using Python booleans are easier to read and less error-prone. In
 most cases, they're also faster.
@@ -1070,7 +1148,7 @@ most cases, they're also faster.
 <a id="2143-cons"></a>
 
 <a id="truefalse-evaluations-cons"></a>
-#### 2.14.3 Cons 
+#### 2.14.3 欠点
 
 May look strange to C/C++ developers.
 
@@ -1078,7 +1156,7 @@ May look strange to C/C++ developers.
 <a id="2144-decision"></a>
 
 <a id="truefalse-evaluations-decision"></a>
-#### 2.14.4 Decision 
+#### 2.14.4 決定
 
 Use the "implicit" false if possible, e.g., `if foo:` rather than `if foo !=
 []:`. There are a few caveats that you should keep in mind though:
@@ -1134,7 +1212,7 @@ Use the "implicit" false if possible, e.g., `if foo:` rather than `if foo !=
 <a id="216-lexical-scoping"></a>
 
 <a id="lexical-scoping"></a>
-### 2.16 Lexical Scoping 
+### 2.16 Lexical Scoping (レキシカルスコープ)
 
 Okay to use.
 
@@ -1142,7 +1220,7 @@ Okay to use.
 <a id="2161-definition"></a>
 
 <a id="lexical-scoping-definition"></a>
-#### 2.16.1 Definition 
+#### 2.16.1 定義
 
 A nested Python function can refer to variables defined in enclosing functions,
 but cannot assign to them. Variable bindings are resolved using lexical scoping,
@@ -1166,7 +1244,7 @@ def get_adder(summand1: float) -> Callable[[float], float]:
 <a id="2162-pros"></a>
 
 <a id="lexical-scoping-pros"></a>
-#### 2.16.2 Pros 
+#### 2.16.2 利点
 
 Often results in clearer, more elegant code. Especially comforting to
 experienced Lisp and Scheme (and Haskell and ML and ...) programmers.
@@ -1175,7 +1253,7 @@ experienced Lisp and Scheme (and Haskell and ML and ...) programmers.
 <a id="2163-cons"></a>
 
 <a id="lexical-scoping-cons"></a>
-#### 2.16.3 Cons 
+#### 2.16.3 欠点
 
 Can lead to confusing bugs. Such as this example based on
 [PEP-0227](http://www.google.com/url?sa=D&q=http://www.python.org/dev/peps/pep-0227/):
@@ -1200,7 +1278,7 @@ not `1 2 3 4`.
 <a id="2164-decision"></a>
 
 <a id="lexical-scoping-decision"></a>
-#### 2.16.4 Decision 
+#### 2.16.4 決定
 
 Okay to use.
 
@@ -1209,7 +1287,7 @@ Okay to use.
 <a id="function-and-method-decorators"></a>
 
 <a id="decorators"></a>
-### 2.17 Function and Method Decorators 
+### 2.17 Function and Method Decorators (デコレータ)
 
 Use decorators judiciously when there is a clear advantage. Avoid `staticmethod`
 and limit use of `classmethod`.
@@ -1218,7 +1296,7 @@ and limit use of `classmethod`.
 <a id="2171-definition"></a>
 
 <a id="decorators-definition"></a>
-#### 2.17.1 Definition 
+#### 2.17.1 定義
 
 [Decorators for Functions and Methods](https://docs.python.org/3/glossary.html#term-decorator)
 (a.k.a "the `@` notation"). One common decorator is `@property`, used for
@@ -1246,7 +1324,7 @@ class C:
 <a id="2172-pros"></a>
 
 <a id="decorators-pros"></a>
-#### 2.17.2 Pros 
+#### 2.17.2 利点
 
 Elegantly specifies some transformation on a method; the transformation might
 eliminate some repetitive code, enforce invariants, etc.
@@ -1255,7 +1333,7 @@ eliminate some repetitive code, enforce invariants, etc.
 <a id="2173-cons"></a>
 
 <a id="decorators-cons"></a>
-#### 2.17.3 Cons 
+#### 2.17.3 欠点
 
 Decorators can perform arbitrary operations on a function's arguments or return
 values, resulting in surprising implicit behavior. Additionally, decorators
@@ -1267,7 +1345,7 @@ pretty much impossible to recover from.
 <a id="2174-decision"></a>
 
 <a id="decorators-decision"></a>
-#### 2.17.4 Decision 
+#### 2.17.4 決定
 
 Use decorators judiciously when there is a clear advantage. Decorators should
 follow the same import and naming guidelines as functions. Decorator pydoc
@@ -1293,7 +1371,7 @@ routine that modifies necessary global state such as a process-wide cache.
 <a id="218-threading"></a>
 
 <a id="threading"></a>
-### 2.18 Threading 
+### 2.18 Threading (スレッド)
 
 Do not rely on the atomicity of built-in types.
 
@@ -1320,7 +1398,7 @@ Avoid these features.
 <a id="2191-definition"></a>
 
 <a id="power-features-definition"></a>
-#### 2.19.1 Definition 
+#### 2.19.1 定義
 
 Python is an extremely flexible language and gives you many fancy features such
 as custom metaclasses, access to bytecode, on-the-fly compilation, dynamic
@@ -1332,7 +1410,7 @@ customized cleanup, etc.
 <a id="2192-pros"></a>
 
 <a id="power-features-pros"></a>
-#### 2.19.2 Pros 
+#### 2.19.2 利点
 
 These are powerful language features. They can make your code more compact.
 
@@ -1340,7 +1418,7 @@ These are powerful language features. They can make your code more compact.
 <a id="2193-cons"></a>
 
 <a id="power-features-cons"></a>
-#### 2.19.3 Cons 
+#### 2.19.3 欠点
 
 It's very tempting to use these "cool" features when they're not absolutely
 necessary. It's harder to read, understand, and debug code that's using unusual
@@ -1352,7 +1430,7 @@ longer but is straightforward.
 <a id="2194-decision"></a>
 
 <a id="power-features-decision"></a>
-#### 2.19.4 Decision 
+#### 2.19.4 決定
 
 Avoid these features in your code.
 
@@ -1363,7 +1441,7 @@ to use (for example, `abc.ABCMeta`, `dataclasses`, and `enum`).
 <a id="220-modern-python"></a>
 
 <a id="modern-python"></a>
-### 2.20 Modern Python: from \_\_future\_\_ imports 
+### 2.20 Modern Python: from \_\_future\_\_ imports (\_\_future\_\_ からimportできるモダンな機能)
 
 New language version semantic changes may be gated behind a special future
 import to enable them on a per-file basis within earlier runtimes.
@@ -1372,7 +1450,7 @@ import to enable them on a per-file basis within earlier runtimes.
 <a id="2201-definition"></a>
 
 <a id="modern-python-definition"></a>
-#### 2.20.1 Definition 
+#### 2.20.1 定義
 
 Being able to turn on some of the more modern features via `from __future__
 import` statements allows early use of features from expected future Python
@@ -1382,7 +1460,7 @@ versions.
 <a id="2202-pros"></a>
 
 <a id="modern-python-pros"></a>
-#### 2.20.2 Pros 
+#### 2.20.2 利点
 
 This has proven to make runtime version upgrades smoother as changes can be made
 on a per-file basis while declaring compatibility and preventing regressions
@@ -1394,7 +1472,7 @@ upgrades.
 <a id="2203-cons"></a>
 
 <a id="modern-python-cons"></a>
-#### 2.20.3 Cons 
+#### 2.20.3 欠点
 
 Such code may not work on very old interpreter versions prior to the
 introduction of the needed future statement. The need for this is more common in
@@ -1404,7 +1482,7 @@ projects supporting an extremely wide variety of environments.
 <a id="2204-decision"></a>
 
 <a id="modern-python-decision"></a>
-#### 2.20.4 Decision 
+#### 2.20.4 決定
 
 ##### from \_\_future\_\_ imports
 
@@ -1457,7 +1535,7 @@ make your code cleaner and life easier.
 <a id="typed-code"></a>
 
 <a id="typed-code"></a>
-### 2.21 Type Annotated Code 
+### 2.21 Type Annotated Code (型ヒント)
 
 You can annotate Python 3 code with type hints according to
 [PEP-484](https://www.python.org/dev/peps/pep-0484/), and type-check the code at
@@ -1474,7 +1552,7 @@ extension modules.
 <a id="2211-definition"></a>
 
 <a id="typed-code-definition"></a>
-#### 2.21.1 Definition 
+#### 2.21.1 定義
 
 Type annotations (or "type hints") are for function or method arguments and
 return values:
@@ -1494,7 +1572,7 @@ a: SomeType = some_func()
 <a id="2212-pros"></a>
 
 <a id="typed-code-pros"></a>
-#### 2.21.2 Pros 
+#### 2.21.2 利点
 
 Type annotations improve the readability and maintainability of your code. The
 type checker will convert many runtime errors to build-time errors, and reduce
@@ -1504,7 +1582,7 @@ your ability to use [Power Features](#power-features).
 <a id="2213-cons"></a>
 
 <a id="typed-code-cons"></a>
-#### 2.21.3 Cons 
+#### 2.21.3 欠点
 
 You will have to keep the type declarations up to date.
 You might see type errors that you think are
@@ -1516,7 +1594,7 @@ may reduce your ability to use [Power Features](#power-features).
 <a id="2214-decision"></a>
 
 <a id="typed-code-decision"></a>
-#### 2.21.4 Decision 
+#### 2.21.4 決定
 
 You are strongly encouraged to enable Python type analysis when updating code.
 When adding or modifying public APIs, include type annotations and enable
@@ -1532,13 +1610,13 @@ in the code itself as appropriate.
 <a id="3-python-style-rules"></a>
 
 <a id="python-style-rules"></a>
-## 3 Python Style Rules 
+## 3 書き方に関する規約
 
 <a id="s3.1-semicolons"></a>
 <a id="31-semicolons"></a>
 
 <a id="semicolons"></a>
-### 3.1 Semicolons 
+### 3.1 Semicolons (セミコロン)
 
 Do not terminate your lines with semicolons, and do not use semicolons to put
 two statements on the same line.
@@ -1547,7 +1625,7 @@ two statements on the same line.
 <a id="32-line-length"></a>
 
 <a id="line-length"></a>
-### 3.2 Line length 
+### 3.2 Line length (1行の長さ)
 
 Maximum line length is *80 characters*.
 
@@ -1631,7 +1709,7 @@ the notes above when it is sensible.
 <a id="33-parentheses"></a>
 
 <a id="parentheses"></a>
-### 3.3 Parentheses 
+### 3.3 Parentheses (丸括弧)
 
 Use parentheses sparingly.
 
@@ -1668,7 +1746,7 @@ No:  if (x):
 <a id="34-indentation"></a>
 
 <a id="indentation"></a>
-### 3.4 Indentation 
+### 3.4 Indentation (インデント)
 
 Indent your code blocks with *4 spaces*.
 
@@ -1738,7 +1816,7 @@ No:    # Stuff on first line forbidden
 <a id="trailing_commas"></a>
 
 <a id="trailing-comma"></a>
-#### 3.4.1 Trailing commas in sequences of items? 
+#### 3.4.1 Trailing commas in sequences of items? (末尾のカンマ)
 
 Trailing commas in sequences of items are recommended only when the closing
 container token `]`, `)`, or `}` does not appear on the same line as the final
@@ -1769,7 +1847,7 @@ No:    golomb4 = [
 <a id="35-blank-lines"></a>
 
 <a id="blank-lines"></a>
-### 3.5 Blank Lines 
+### 3.5 Blank Lines (空行)
 
 Two blank lines between top-level definitions, be they function or class
 definitions. One blank line between method definitions and between the `class`
@@ -1784,7 +1862,7 @@ sense. Consider if your comment might be more useful as part of the docstring.
 <a id="36-whitespace"></a>
 
 <a id="whitespace"></a>
-### 3.6 Whitespace 
+### 3.6 Whitespace (スペース)
 
 Follow standard typographic rules for the use of spaces around punctuation.
 
@@ -1893,7 +1971,7 @@ No:
 <a id="37-shebang-line"></a>
 
 <a id="shebang-line"></a>
-### 3.7 Shebang Line 
+### 3.7 Shebang Line (先頭行のシバン)
 
 Most `.py` files do not need to start with a `#!` line. Start the main file of a
 program with
@@ -1907,7 +1985,7 @@ This line is used by the kernel to find the Python interpreter, but is ignored b
 <a id="38-comments-and-docstrings"></a>
 
 <a id="documentation"></a>
-### 3.8 Comments and Docstrings 
+### 3.8 Comments and Docstrings (コメントとDocstring)
 
 Be sure to use the right style for module, function, method docstrings and
 inline comments.
@@ -1917,7 +1995,7 @@ inline comments.
 <a id="comments-in-doc-strings"></a>
 
 <a id="docstrings"></a>
-#### 3.8.1 Docstrings 
+#### 3.8.1 Docstrings
 
 Python uses *docstrings* to document code. A docstring is a string that is the
 first statement in a package, module, class or function. These strings can be
@@ -1938,7 +2016,7 @@ docstrings below.
 <a id="comments-in-modules"></a>
 
 <a id="module-docs"></a>
-#### 3.8.2 Modules 
+#### 3.8.2 Modules (モジュール)
 
 Every file should contain license boilerplate. Choose the appropriate boilerplate for the license used by the project (for example, Apache 2.0, BSD, LGPL, GPL)
 
@@ -1965,7 +2043,7 @@ examples.
 <a id="functions-and-methods"></a>
 
 <a id="function-docs"></a>
-#### 3.8.3 Functions and Methods 
+#### 3.8.3 Functions and Methods (関数とメソッド)
 
 In this section, "function" means a method, function, or generator.
 
@@ -2122,7 +2200,7 @@ def fetch_smalltable_rows(table_handle: smalltable.Table,
 <a id="comments-in-classes"></a>
 
 <a id="class-docs"></a>
-#### 3.8.4 Classes 
+#### 3.8.4 Classes (クラス)
 
 Classes should have a docstring below the class definition describing the class.
 If your class has public attributes, they should be documented here in an
@@ -2156,7 +2234,7 @@ class SampleClass:
 <a id="385-block-and-inline-comments"></a>
 
 <a id="comments"></a>
-#### 3.8.5 Block and Inline Comments 
+#### 3.8.5 Block and Inline Comments (ブロックとインラインのコメント)
 
 The final place to have comments is in tricky parts of the code. If you're going
 to have to explain it at the next [code review](http://en.wikipedia.org/wiki/Code_review),
@@ -2194,7 +2272,7 @@ knows Python (though not what you're trying to do) better than you do.
 <a id="grammar"></a>
 
 <a id="punctuation-spelling-grammar"></a>
-#### 3.8.6 Punctuation, Spelling, and Grammar 
+#### 3.8.6 Punctuation, Spelling, and Grammar (カンマ，ピリオド，スペル，文法)
 
 Pay attention to punctuation, spelling, and grammar; it is easier to read
 well-written comments than badly written ones.
@@ -2213,7 +2291,7 @@ punctuation, spelling, and grammar help with that goal.
 <a id="310-strings"></a>
 
 <a id="strings"></a>
-### 3.10 Strings 
+### 3.10 Strings (文字列)
 
 Use an
 [f-string](https://docs.python.org/3/reference/lexical_analysis.html#f-strings),
@@ -2326,7 +2404,7 @@ Don't do this.
 <a id="logging"></a>
 
 <a id="logging"></a>
-#### 3.10.1 Logging 
+#### 3.10.1 Logging (ログ)
 
 For logging functions that expect a pattern-string (with %-placeholders) as
 their first argument: Always call them with a string literal (not an f-string!)
@@ -2372,7 +2450,7 @@ configured to output.
 <a id="error-messages"></a>
 
 <a id="error-messages"></a>
-#### 3.10.2 Error Messages 
+#### 3.10.2 Error Messages (エラーメッセージ)
 
 Error messages (such as: message strings on exceptions like `ValueError`, or
 messages shown to the user) should follow three guidelines:
@@ -2425,7 +2503,7 @@ messages shown to the user) should follow three guidelines:
 <a id="files-and-sockets"></a>
 
 <a id="files"></a>
-### 3.11 Files, Sockets, and similar Stateful Resources 
+### 3.11 Files, Sockets, and similar Stateful Resources (ファイル，ソケット等のステートフルなリソース)
 
 Explicitly close files and sockets when done with them. This rule naturally
 extends to closeable resources that internally use sockets, such as database
@@ -2492,7 +2570,7 @@ documentation must explain clearly how resource lifetime is managed.
 <a id="312-todo-comments"></a>
 
 <a id="todo"></a>
-### 3.12 TODO Comments 
+### 3.12 TODO Comments (TODOコメント)
 
 Use `TODO` comments for code that is temporary, a short-term solution, or
 good-enough but not perfect.
@@ -2521,7 +2599,7 @@ event ("Remove this code when all clients can handle XML responses.").
 <a id="313-imports-formatting"></a>
 
 <a id="imports-formatting"></a>
-### 3.13 Imports formatting 
+### 3.13 Imports formatting (import文の書き方)
 
 Imports should be on separate lines; there are
 [exceptions for `typing` and `collections.abc` imports](#typing-imports).
@@ -2623,7 +2701,7 @@ from otherproject.ai import soul
 <a id="314-statements"></a>
 
 <a id="statements"></a>
-### 3.14 Statements 
+### 3.14 Statements (ブロックを構成する最小単位)
 
 Generally only one statement per line.
 
@@ -2659,7 +2737,7 @@ No:
 <a id="accessors"></a>
 
 <a id="getters-and-setters"></a>
-### 3.15 Getters and Setters 
+### 3.15 Getters and Setters (getterとsetter)
 
 Getter and setter functions (also called accessors and mutators) should be used
 when they provide a meaningful role or behavior for getting or setting a
@@ -2688,7 +2766,7 @@ change in complexity.
 <a id="316-naming"></a>
 
 <a id="naming"></a>
-### 3.16 Naming 
+### 3.16 Naming (命名規則)
 
 `module_name`, `package_name`, `ClassName`, `method_name`, `ExceptionName`,
 `function_name`, `GLOBAL_CONSTANT_NAME`, `global_var_name`, `instance_var_name`,
@@ -2707,7 +2785,7 @@ Always use a `.py` filename extension. Never use dashes.
 <a id="3161-names-to-avoid"></a>
 
 <a id="names-to-avoid"></a>
-#### 3.16.1 Names to Avoid 
+#### 3.16.1 Names to Avoid (割けるべき名前)
 
 -   single character names, except for specifically allowed cases:
 
@@ -2735,7 +2813,7 @@ Always use a `.py` filename extension. Never use dashes.
 <a id="3162-naming-convention"></a>
 
 <a id="naming-conventions"></a>
-#### 3.16.2 Naming Conventions 
+#### 3.16.2 Naming Conventions
 
 -   "Internal" means internal to a module, or protected or private within a
     class.
@@ -2768,7 +2846,7 @@ Always use a `.py` filename extension. Never use dashes.
 <a id="3163-file-naming"></a>
 
 <a id="file-naming"></a>
-#### 3.16.3 File Naming 
+#### 3.16.3 File Naming (ファイル名)
 
 Python filenames must have a `.py` extension and must not contain dashes (`-`).
 This allows them to be imported and unittested. If you want an executable to be
@@ -2779,7 +2857,7 @@ containing `exec "$0.py" "$@"`.
 <a id="3164-guidelines-derived-from-guidos-recommendations"></a>
 
 <a id="guidelines-derived-from-guidos-recommendations"></a>
-#### 3.16.4 Guidelines derived from [Guido](https://en.wikipedia.org/wiki/Guido_van_Rossum)'s Recommendations 
+#### 3.16.4 Guidelines derived from [Guido](https://en.wikipedia.org/wiki/Guido_van_Rossum)'s Recommendations ([Guido](https://en.wikipedia.org/wiki/Guido_van_Rossum)の推奨を基にしたガイドライン)
 
 <table rules="all" border="1" summary="Guidelines from Guido's Recommendations"
        cellspacing="2" cellpadding="2">
@@ -2863,7 +2941,7 @@ containing `exec "$0.py" "$@"`.
 <a id="317-main"></a>
 
 <a id="math-notation"></a>
-#### 3.16.5 Mathematical Notation 
+#### 3.16.5 Mathematical Notation (数学表記)
 
 For mathematically heavy code, short variable names that would otherwise violate
 the style guide are preferred when they match established notation in a
@@ -2874,7 +2952,7 @@ clearly document the naming conventions. Prefer PEP8-compliant
 encountered out of context.
 
 <a id="main"></a>
-### 3.17 Main 
+### 3.17 Main (main文)
 
 In Python, `pydoc` as well as unit tests require modules to be importable. If a
 file is meant to be used as an executable, its main functionality should be in a
@@ -2914,7 +2992,7 @@ should not be executed when the file is being `pydoc`ed.
 <a id="318-function-length"></a>
 
 <a id="function-length"></a>
-### 3.18 Function length 
+### 3.18 Function length (関数の長さ)
 
 Prefer small and focused functions.
 
@@ -2938,14 +3016,14 @@ the function into smaller and more manageable pieces.
 <a id="319-type-annotations"></a>
 
 <a id="type-annotations"></a>
-### 3.19 Type Annotations 
+### 3.19 Type Annotations (型ヒント)
 
 <a id="s3.19.1-general-rules"></a>
 <a id="s3.19.1-general"></a>
 <a id="3191-general-rules"></a>
 
 <a id="typing-general"></a>
-#### 3.19.1 General Rules 
+#### 3.19.1 General Rules (一般的なルール)
 
 *   Familiarize yourself with
     [PEP-484](https://www.python.org/dev/peps/pep-0484/).
@@ -2970,7 +3048,7 @@ the function into smaller and more manageable pieces.
 <a id="3192-line-breaking"></a>
 
 <a id="typing-line-breaking"></a>
-#### 3.19.2 Line Breaking 
+#### 3.19.2 Line Breaking (改行)
 
 Try to follow the existing [indentation](#indentation) rules.
 
@@ -3065,7 +3143,7 @@ def my_function(
 <a id="3193-forward-declarations"></a>
 
 <a id="forward-declarations"></a>
-#### 3.19.3 Forward Declarations 
+#### 3.19.3 Forward Declarations (前方宣言)
 
 If you need to use a class name from the same module that is not yet defined --
 for example, if you need the class inside the class declaration, or if you use a
@@ -3084,7 +3162,7 @@ class MyClass:
 <a id="3194-default-values"></a>
 
 <a id="typing-default-values"></a>
-#### 3.19.4 Default Values 
+#### 3.19.4 Default Values (デフォルト値)
 
 As per
 [PEP-008](https://www.python.org/dev/peps/pep-0008/#other-recommendations), use
@@ -3108,7 +3186,7 @@ def func(a:int=0) -> int:
 <a id="3195-nonetype"></a>
 
 <a id="none-type"></a>
-#### 3.19.5 NoneType 
+#### 3.19.5 NoneType (`NoneType`)
 
 In the Python type system, `NoneType` is a "first class" type, and for typing
 purposes, `None` is an alias for `NoneType`. If an argument can be `None`, it
@@ -3141,7 +3219,7 @@ def implicit_optional(a: str = None) -> str:
 <a id="typing-aliases"></a>
 
 <a id="type-aliases"></a>
-#### 3.19.6 Type Aliases 
+#### 3.19.6 Type Aliases (型エイリアス)
 
 You can declare aliases of complex types. The name of an alias should be
 CapWorded. If the alias is used only in this module, it should be \_Private.
@@ -3162,7 +3240,7 @@ function (as a tuple).
 <a id="3197-ignoring-types"></a>
 
 <a id="typing-ignore"></a>
-#### 3.19.7 Ignoring Types 
+#### 3.19.7 Ignoring Types (型の無視)
 
 You can disable type checking on a line with the special comment `# type:
 ignore`.
@@ -3178,7 +3256,7 @@ ignore`.
 <a id="3198-typing-internal-variables"></a>
 
 <a id="typing-variables"></a>
-#### 3.19.8 Typing Variables 
+#### 3.19.8 Typing Variables (変数の型付け)
 
 <a id="annotated-assignments"></a>
 [*Annotated Assignments*](#annotated-assignments)
@@ -3206,7 +3284,7 @@ ignore`.
 <a id="3199-tuples-vs-lists"></a>
 
 <a id="typing-tuples"></a>
-#### 3.19.9 Tuples vs Lists 
+#### 3.19.9 Tuples vs Lists (tupleとlist)
 
 Typed lists can only contain objects of a single type. Typed tuples can either
 have a single repeated type or a set number of elements with different types.
@@ -3224,7 +3302,7 @@ c: tuple[int, str, float] = (1, "2", 3.5)
 <a id="typing-type-var"></a>
 
 <a id="typevars"></a>
-#### 3.19.10 TypeVars 
+#### 3.19.10 TypeVars (`TypeVar`)
 
 The Python type system has
 [generics](https://www.python.org/dev/peps/pep-0484/#generics). The factory
@@ -3285,7 +3363,7 @@ No:
 <a id="31911-string-types"></a>
 
 <a id="typing-strings"></a>
-#### 3.19.11 String types 
+#### 3.19.11 String types (文字列型)
 
 The proper type for annotating strings depends on what versions of Python the
 code is intended for.
@@ -3338,7 +3416,7 @@ return type is the same as the argument type in the code above, use
 <a id="31912-imports-for-typing"></a>
 
 <a id="typing-imports"></a>
-#### 3.19.12 Imports For Typing 
+#### 3.19.12 Imports For Typing (型付けのためのimport)
 
 For classes from the `typing` and `collections.abc` modules for use in
 annotations, always import the class itself. This keeps common annotations more
@@ -3364,7 +3442,7 @@ from typing import Any as AnyType
 <a id="31913-conditional-imports"></a>
 
 <a id="typing-conditional-imports"></a>
-#### 3.19.13 Conditional Imports 
+#### 3.19.13 Conditional Imports (条件付きimport)
 
 Use conditional imports only in exceptional cases where the additional imports
 needed for type checking must be avoided at runtime. This pattern is
@@ -3395,7 +3473,7 @@ def f(x: "sketch.Sketch"): ...
 <a id="31914-circular-dependencies"></a>
 
 <a id="typing-circular-deps"></a>
-#### 3.19.14 Circular Dependencies 
+#### 3.19.14 Circular Dependencies (循環import依存)
 
 Circular dependencies that are caused by typing are code smells. Such code is a
 good candidate for refactoring. Although technically it is possible to keep
@@ -3422,7 +3500,7 @@ def my_method(self, var: "some_mod.SomeType") -> None:
 <a id="31915-generics"></a>
 
 <a id="generics"></a>
-#### 3.19.15 Generics 
+#### 3.19.15 Generics (ジェネリクス？)
 
 When annotating, prefer to specify type parameters for generic types; otherwise,
 [the generics' parameters will be assumed to be `Any`](https://www.python.org/dev/peps/pep-0484/#the-any-type).
@@ -3460,7 +3538,7 @@ def get_names(employee_ids: list[_T]) -> dict[_T, str]:
 <a id="4-parting-words"></a>
 
 <a id="consistency"></a>
-## 4 Parting Words 
+## 4 おわりに
 
 *BE CONSISTENT*.
 
