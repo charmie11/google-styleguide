@@ -481,7 +481,8 @@ package named `jodie`, not a local `jodie.py`.
 <a id="exceptions"></a>
 ### 2.4 Exception (例外)
 
-Exceptions are allowed but must be used carefully.
+Exceptions are allowed but must be used carefully.  
+例外は慎重に使用しなければいけません．
 
 <a id="s2.4.1-definition"></a>
 <a id="241-definition"></a>
@@ -490,7 +491,8 @@ Exceptions are allowed but must be used carefully.
 #### 2.4.1 定義
 
 Exceptions are a means of breaking out of normal control flow to handle errors
-or other exceptional conditions.
+or other exceptional conditions.  
+Exception(例外)は，エラーやその他の例外的な状況を扱うための通常の制御フローから抜け出す方法です．
 
 <a id="s2.4.2-pros"></a>
 <a id="242-pros"></a>
@@ -501,7 +503,11 @@ or other exceptional conditions.
 The control flow of normal operation code is not cluttered by error-handling
 code. It also allows the control flow to skip multiple frames when a certain
 condition occurs, e.g., returning from N nested functions in one step instead of
-having to plumb error codes through.
+having to plumb error codes through.  
+通常の制御フローはエラー処理によって乱雑になることはありません．
+ある特定の状況下で複数のフレームをスキップできるようにします．
+例えば，N個のネストされた関数から抜け出す時に，
+複数のエラーコードを実行する代わりに1つの処理で抜け出すといった例が挙げられます．
 
 <a id="s2.4.3-cons"></a>
 <a id="243-cons"></a>
@@ -510,7 +516,9 @@ having to plumb error codes through.
 #### 2.4.3 欠点
 
 May cause the control flow to be confusing. Easy to miss error cases when making
-library calls.
+library calls.  
+制御フローの混乱を招く可能性があります．
+ライブラリを呼び出すときに生じるエラーケースを見逃しやすくなってしまいます．
 
 <a id="s2.4.4-decision"></a>
 <a id="244-decision"></a>
@@ -519,6 +527,7 @@ library calls.
 #### 2.4.4 決定
 
 Exceptions must follow certain conditions:
+例外を導入するときは特定の条件に従うべきです．
 
 -   Make use of built-in exception classes when it makes sense. For example,
     raise a `ValueError` to indicate a programming mistake like a violated
@@ -528,8 +537,12 @@ Exceptions must follow certain conditions:
     enforce correct usage nor to indicate that some unexpected event occurred.
     If an exception is desired in the latter cases, use a raise statement. For
     example:
+-   必要に応じてbuilt-inの例外クラスを使ってください．例えば，前提条件に違反(負の数を渡したが正の数が必要)していれば `ValueError` を使います．
+    公開APIの引数を検証する目的で `assert` 文を使わないでください．
+    `assert`は内部での正しさを保証するときに使うべきで
+    正しい使い方を強制したり予期せぬイベントの発生の示唆に使うべきではありません．
+    後者のような状況で例外を使いたいのであれば，raise文を使ってください．例えば
 
-    
     ```python
     Yes:
       def connect_to_next_port(self, minimum: int) -> int:
@@ -579,28 +592,42 @@ Exceptions must follow certain conditions:
 -   Libraries or packages may define their own exceptions. When doing so they
     must inherit from an existing exception class. Exception names should end in
     `Error` and should not introduce repetition (`foo.FooError`).
+-   ライブラリやパッケージは独自の例外を定義することがあります．
+    その場合は既存の例外クラスから継承する必要があります．
+    例外名は接尾語として `Error` をつけ，`foo.FooError`のような繰り返しは避けるべきです.
 
 -   Never use catch-all `except:` statements, or catch `Exception` or
-    `StandardError`, unless you are
-
+-   以下の状況を除いて，全ての`except:`文をキャッチすることや`Exception` もしくは `StandardError` をキャッチすることはやめてください．
     -   re-raising the exception, or
+    -   その例外を再び発生させたいとき
     -   creating an isolation point in the program where exceptions are not
         propagated but are recorded and suppressed instead, such as protecting a
         thread from crashing by guarding its outermost block.
+   -    例外が伝搬しないが記録され，代わりに抑制され，プログラム中に孤立点を作るとき
+        スレッドをクラッシュから守るために最も齟齬タワのブロックを保護するようなとき
 
     Python is very tolerant in this regard and `except:` will really catch
     everything including misspelled names, sys.exit() calls, Ctrl+C interrupts,
     unittest failures and all kinds of other exceptions that you simply don't
-    want to catch.
+    want to catch.  
+    Pythonはこの観点でとても柔軟な言語であり，
+    `except:`文は名前のタイプミスやsys.exit()の呼び出し，
+    Ctrl+Cの割り込み，ユニットテストの失敗など，
+    キャッチしたくない全ての例外をキャッチします．
 
 -   Minimize the amount of code in a `try`/`except` block. The larger the body
     of the `try`, the more likely that an exception will be raised by a line of
     code that you didn't expect to raise an exception. In those cases, the
     `try`/`except` block hides a real error.
+-   `try`/`except`ブロック内に書いてある文章を最小化してください．
+     `try`文が巨大になるほど, 例外の発生を期待していない部分で例外が発生してしまいます．
+     このようになってしまうと，`try`/`except`ブロックが実際の問題を隠してしまうことになります．
 
 -   Use the `finally` clause to execute code whether or not an exception is
     raised in the `try` block. This is often useful for cleanup, i.e., closing a
     file.
+-   `try`ブロック内でのraiseの有無に関わらず，`finally`文を使ってください．
+-   クリーンアップのために有効です (例: ファイルを閉じる)．
 
 <a id="s2.5-global-variables"></a>
 <a id="25-global-variables"></a>
