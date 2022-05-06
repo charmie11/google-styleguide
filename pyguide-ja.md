@@ -398,7 +398,8 @@ import文では相対名は使用しないでください．
 <a id="packages"></a>
 ### 2.3 Packages
 
-Import each module using the full pathname location of the module.
+Import each module using the full pathname location of the module.  
+モジュールをimportするときは，各モジュールの絶対パスを使ってください．
 
 <a id="s2.3.1-pros"></a>
 <a id="231-pros"></a>
@@ -407,7 +408,9 @@ Import each module using the full pathname location of the module.
 #### 2.3.1 利点
 
 Avoids conflicts in module names or incorrect imports due to the module search
-path not being what the author expected. Makes it easier to find modules.
+path not being what the author expected. Makes it easier to find modules.  
+モジュール名の衝突やプログラマの期待と異なるモジュールの検索パスによって生じる誤ったimportを防ぐことができます．
+また，絶対パスを書くことでモジュールを見つけやすくなるというメリットもありまｓ．
 
 <a id="s2.3.2-cons"></a>
 <a id="232-cons"></a>
@@ -416,7 +419,8 @@ path not being what the author expected. Makes it easier to find modules.
 #### 2.3.2 欠点
 
 Makes it harder to deploy code because you have to replicate the package
-hierarchy. Not really a problem with modern deployment mechanisms.
+hierarchy. Not really a problem with modern deployment mechanisms.  
+パッケージを階層的に複製する必要があるため，コードのデプロイが難しくなりますが，最新のデプロイ方法を使えば実用的に問題になることはありません．
 
 <a id="s2.3.3-decision"></a>
 <a id="233-decision"></a>
@@ -424,13 +428,16 @@ hierarchy. Not really a problem with modern deployment mechanisms.
 <a id="packages-decision"></a>
 #### 2.3.3 決定
 
-All new code should import each module by its full package name.
+All new code should import each module by its full package name.  
+全ての新しいソースコードで各モジュールを完全なパッケージ名でimportしてください．
 
-Imports should be as follows:
+Imports should be as follows:  
+具体的には，以下のようにimportします．
 
 ```python
 Yes:
   # Reference absl.flags in code with the complete name (verbose).
+  # 完全な名前(absl.flags)を参照
   import absl.flags
   from doctor.who import jodie
 
@@ -440,27 +447,33 @@ Yes:
 ```python
 Yes:
   # Reference flags in code with just the module name (common).
+  # モジュール名(flags)を参照
   from absl import flags
   from doctor.who import jodie
 
   _FOO = flags.DEFINE_string(...)
 ```
 
-*(assume this file lives in `doctor/who/` where `jodie.py` also exists)*
+*(assume this file lives in `doctor/who/` where `jodie.py` also exists)*  
+*(以下のコードが `doctor/who/` というディレクトリ内にあり，同じディレクトリに `jodie.py` というファイルが存在するとき)*
 
 ```python
 No:
   # Unclear what module the author wanted and what will be imported.  The actual
   # import behavior depends on external factors controlling sys.path.
   # Which possible jodie module did the author intend to import?
+  # コードを書いた人がimportしたいモジュールも実際にimportされるモジュールも不明瞭
+  # 実際にimportされるモジュールはsys.pathを制御する外部要因に依存
+  # コードを書いた人がimportしたかったjodieはどのjodieでしょうか？
   import jodie
 ```
 
 The directory the main binary is located in should not be assumed to be in
 `sys.path` despite that happening in some environments. This being the case,
 code should assume that `import jodie` refers to a third party or top level
-package named `jodie`, not a local `jodie.py`.
-
+package named `jodie`, not a local `jodie.py`.  
+`sys.path`の中にコードが保存されていると想定するべきではありません．
+もちろん，そのような状況が生じることもありますが，その場合は `import jodie` と書くと，ローカルな `jodie.py`ではなく，3rd partyもしくはトップレベルのパッケージを参照していると想定されます．
 
 <a id="s2.4-exceptions"></a>
 <a id="24-exceptions"></a>
