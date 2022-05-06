@@ -171,16 +171,17 @@ See README.md for details.
 <a id="1-background"></a>
 
 <a id="background"></a>
-## 1 背景 
+## 1 背景
 
-Python is the main dynamic language used at Google. This style guide is a list
-of *dos and don'ts* for Python programs.
+Python is the main dynamic language used at Google. This style guide is a list of dos and don'ts for Python programs.
+PythonはGoogleで使われている主要な動的言語です．このスタイルガイドはPythonでプログラミングをする際の *べき集・べからず集* のリストです．
 
 To help you format code correctly, we've created a [settings file for Vim](google_python_style.vim). For Emacs, the default settings should be fine.
+Pythonで書いたプログラムを正しく整形するために，[Vim用の設定ファイル](google_python_style.vim)を作成しました．Emacsはデフォルトの設定で問題ありません．
 
 Many teams use the [yapf](https://github.com/google/yapf/)
 auto-formatter to avoid arguing over formatting.
-
+多くのチームが自動整形に[yapf](https://github.com/google/yapf/)を使い，過剰な整形を避けるようにしています．
 
 <a id="s2-python-language-rules"></a>
 <a id="2-python-language-rules"></a>
