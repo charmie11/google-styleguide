@@ -318,7 +318,12 @@ classes or functions. Classes imported from the
 [`typing_extensions` module](https://github.com/python/typing/tree/master/typing_extensions),
 and redirects from the
 [six.moves module](https://six.readthedocs.io/#module-six.moves)
-are exempt from this rule.
+are exempt from this rule.  
+`import`文はパッケージとモジュールのために使い，個別のクラスや関数のために使わないでください．
+ただし，[`typing`モジュール](#typing-imports), [`collections.abc` module](#typing-imports)と
+[`typing_extensions`モジュール](https://github.com/python/typing/tree/master/typing_extensions)からインポートされたクラス・関数及び
+[six.movesモジュール](https://six.readthedocs.io/#module-six.moves)
+からリダイレクトされたクラス・関数はこのルールから除外されます．
 
 <a id="s2.2.1-definition"></a>
 <a id="221-definition"></a>
@@ -327,7 +332,8 @@ are exempt from this rule.
 
 #### 2.2.1 定義
 
-Reusability mechanism for sharing code from one module to another.
+Reusability mechanism for sharing code from one module to another.  
+あるモジュールから別のモジュールへソースコードを共有するための再利用メカニズムです．
 
 <a id="s2.2.2-pros"></a>
 <a id="222-pros"></a>
@@ -337,7 +343,9 @@ Reusability mechanism for sharing code from one module to another.
 
 The namespace management convention is simple. The source of each identifier is
 indicated in a consistent way; `x.Obj` says that object `Obj` is defined in
-module `x`.
+module `x`.  
+名前空間を管理する基準は単純です．
+各識別子のソースは一貫して `x.Obj` という風に示され，これは `Obj` というオブジェクトが `x` というモジュールで定義されていることを意味します．
 
 <a id="s2.2.3-cons"></a>
 <a id="223-cons"></a>
@@ -345,7 +353,8 @@ module `x`.
 <a id="imports-cons"></a>
 #### 2.2.3 欠点
 
-Module names can still collide. Some module names are inconveniently long.
+Module names can still collide. Some module names are inconveniently long.  
+モジュールの名前が衝突したり，不便なほど長いことがあります．
 
 <a id="s2.2.4-decision"></a>
 <a id="224-decision"></a>
@@ -354,15 +363,21 @@ Module names can still collide. Some module names are inconveniently long.
 #### 2.2.4 決定
 
 *   Use `import x` for importing packages and modules.
+*   `import x` を使う: パッケージ・モジュールをimportするとき
 *   Use `from x import y` where `x` is the package prefix and `y` is the module
     name with no prefix.
+*   `from x import y` を使う: `x` はパッケージ名， `y` はパッケージ名なしのモジュール名
 *   Use `from x import y as z` if two modules named `y` are to be imported, if
     `y` conflicts with a top-level name defined in the current module, or if `y`
     is an inconveniently long name.
+*   `from x import y as z` を使う: `y` という名前のモジュールを2つimportするとき，`y` という名前が現在のモジュールで定義されているトップレベルの名前としょうとするとき，`y`が不便なほど長いとき
 *   Use `import y as z` only when `z` is a standard abbreviation (e.g., `np` for
     `numpy`).
+*   `import y as z` を使う: `z`が一般的な省略形であるときのみ使って良い
+    (例: `numpy` を `np` とする).
 
-For example the module `sound.effects.echo` may be imported as follows:
+For example the module `sound.effects.echo` may be imported as follows:  
+例えば， `sound.effects.echo` モジュールは以下のようにimportできます．
 
 ```python
 from sound.effects import echo
@@ -372,7 +387,10 @@ echo.EchoFilter(input, output, delay=0.7, atten=4)
 
 Do not use relative names in imports. Even if the module is in the same package,
 use the full package name. This helps prevent unintentionally importing a
-package twice.
+package twice.  
+import文では相対名は使用しないでください．
+同じパッケージ内のモジュールであったとしても，絶対名を使っtください．
+絶対名を使うことで，意図せずパッケージを二度importする事態を防げます．
 
 <a id="s2.3-packages"></a>
 <a id="23-packages"></a>
