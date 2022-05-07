@@ -1135,7 +1135,8 @@ No:
 <a id="default-arguments"></a>
 ### 2.12 Default Argument Values (引数のデフォルト値)
 
-Okay in most cases.
+Okay in most cases.  
+大抵の場合問題ありません．
 
 <a id="s2.12.1-definition"></a>
 <a id="2121-definition"></a>
@@ -1146,7 +1147,11 @@ Okay in most cases.
 You can specify values for variables at the end of a function's parameter list,
 e.g., `def foo(a, b=0):`. If `foo` is called with only one argument, `b` is set
 to 0. If it is called with two arguments, `b` has the value of the second
-argument.
+argument.  
+関数の引数リストの最後にデフォルト値を設定することができます．
+例えば `def foo(a, b=0):` といった具合です．
+関数`foo`に引数が1つだけ与えられたとき，引数`b`の値は0になります．
+引数が2つ与えられた場合は`b`の値は2つ目に与えられた引数の値になります．
 
 <a id="s2.12.2-pros"></a>
 <a id="2122-pros"></a>
@@ -1158,7 +1163,10 @@ Often you have a function that uses lots of default values, but on rare
 occasions you want to override the defaults. Default argument values provide an
 easy way to do this, without having to define lots of functions for the rare
 exceptions. As Python does not support overloaded methods/functions, default
-arguments are an easy way of "faking" the overloading behavior.
+arguments are an easy way of "faking" the overloading behavior.  
+たくさんのデフォルト値を持つ関数を実装することはよくありますが，デフォルト値を上書きしたいと思うこともまれにあるでしょう．
+引数のデフォルト値を利用すれば，そのようなまれな状況のために何個も関数を実装する必要がなくなります．
+Pythonはメソッド・関数のオーバーロードを提供していないため，オーバーロードのような振る舞いを実現するかんたんな方法がデフォルト値の設定です．
 
 <a id="s2.12.3-cons"></a>
 <a id="2123-cons"></a>
@@ -1169,7 +1177,10 @@ arguments are an easy way of "faking" the overloading behavior.
 Default arguments are evaluated once at module load time. This may cause
 problems if the argument is a mutable object such as a list or a dictionary. If
 the function modifies the object (e.g., by appending an item to a list), the
-default value is modified.
+default value is modified.  
+デフォルト値はモジュールがロードされるときに一度だけ評価されます．
+引数がlistやdictのようにmutableなオブジェクトであれば問題が起きる可能性があります．
+関数がオブジェクトを変更する場合(例えばlistに要素を追加するとき)，デフォルト値が変更されます．
 
 <a id="s2.12.4-decision"></a>
 <a id="2124-decision"></a>
@@ -1177,10 +1188,12 @@ default value is modified.
 <a id="default-arguments-decision"></a>
 #### 2.12.4 決定
 
-Okay to use with the following caveat:
+Okay to use with the following caveat:  
+以下の注意事項を理解した上で使用してください．
 
 Do not use mutable objects as default values in the function or method
-definition.
+definition.  
+mutableなオブジェクトをデフォルト値に設定するのはやめましょう．
 
 ```python
 Yes: def foo(a, b=None):
