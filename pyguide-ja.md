@@ -1311,7 +1311,8 @@ implement computations a subclass may ever want to override and extend.
 <a id="truefalse-evaluations"></a>
 ### 2.14 True/False Evaluations (真偽の評価)
 
-Use the "implicit" false if at all possible.
+Use the "implicit" false if at all possible.  
+可能であれば"暗黙の"falseを使用してください．
 
 <a id="s2.14.1-definition"></a>
 <a id="2141-definition"></a>
@@ -1321,7 +1322,10 @@ Use the "implicit" false if at all possible.
 
 Python evaluates certain values as `False` when in a boolean context. A quick
 "rule of thumb" is that all "empty" values are considered false, so `0, None,
-[], {}, ''` all evaluate as false in a boolean context.
+[], {}, ''` all evaluate as false in a boolean context.  
+Pythonはブール値として扱うときに特定の値を `False` とみなします．
+ざっくりとした経験則で言うと，"empty"な値は全て`False`と判断されます．
+つまり，`0, None, [], {}, ''` をブール値として扱う場合，全て`False`とみなされます．
 
 <a id="s2.14.2-pros"></a>
 <a id="2142-pros"></a>
@@ -1330,7 +1334,9 @@ Python evaluates certain values as `False` when in a boolean context. A quick
 #### 2.14.2 利点
 
 Conditions using Python booleans are easier to read and less error-prone. In
-most cases, they're also faster.
+most cases, they're also faster.  
+Pythonのブール値を使った条件は読みやすくエラーが生じにくいです．
+大半のケースでは高速に動作します．
 
 <a id="s2.14.3-cons"></a>
 <a id="2143-cons"></a>
@@ -1338,7 +1344,8 @@ most cases, they're also faster.
 <a id="truefalse-evaluations-cons"></a>
 #### 2.14.3 欠点
 
-May look strange to C/C++ developers.
+May look strange to C/C++ developers.  
+C/C++のプログラマにとっては奇妙に映るかもしれません．
 
 <a id="s2.14.4-decision"></a>
 <a id="2144-decision"></a>
@@ -1347,25 +1354,40 @@ May look strange to C/C++ developers.
 #### 2.14.4 決定
 
 Use the "implicit" false if possible, e.g., `if foo:` rather than `if foo !=
-[]:`. There are a few caveats that you should keep in mind though:
+[]:`. There are a few caveats that you should keep in mind though:  
+可能であれば"暗黙の"falseを使うようにしてください．
+例えば，`if foo != []:` より `if foo:` といった具合です．
+2,3点，心に留めておく必要があります．
 
 -   Always use `if foo is None:` (or `is not None`) to check for a `None` value.
     E.g., when testing whether a variable or argument that defaults to `None`
     was set to some other value. The other value might be a value that's false
     in a boolean context!
+-   値が`None`であるか確認する場合は，常に `if foo is None:` (もしくは `is not None`)を使ってください．
+    例えば，デフォルト値が`None`の変数・引数に何かしら値が設定されているか確認するときです．
+    それ以外の値はブール値として評価するとfalseになってしまうことがあります．
 
 -   Never compare a boolean variable to `False` using `==`. Use `if not x:`
     instead. If you need to distinguish `False` from `None` then chain the
     expressions, such as `if not x and x is not None:`.
+-   ブール値が`False`と比較するときに`==`を使ってはいけません．
+    代わりに`if not x:`と書きます．
+    `False`と`None`を区別するのであれば，`if not x and x is not None:`と複数の条件をつなげるようにしてください．
 
 -   For sequences (strings, lists, tuples), use the fact that empty sequences
     are false, so `if seq:` and `if not seq:` are preferable to `if len(seq):`
     and `if not len(seq):` respectively.
+-   strings, lists, tuplesのようなシーケンスはシーケンスが空であればfalseとみなされます．
+    そのような場合は，`if seq:` もしくは `if not seq:` と書く方が `if len(seq):` や `if not len(seq):` と書くよりよいです．
 
 -   When handling integers, implicit false may involve more risk than benefit
     (i.e., accidentally handling `None` as 0). You may compare a value which is
     known to be an integer (and is not the result of `len()`) against the
     integer 0.
+-   整数値を扱うときは暗黙のfalseを使うリスクをはらみます．
+    例えば，意図せず `None` を0として扱うといった例が挙げられます．
+    整数値であることが分かっている値と整数値0を比較することができます
+    (これは`len()`の結果とは異なります)．
 
     ```python
     Yes: if not users:
@@ -1391,10 +1413,13 @@ Use the "implicit" false if possible, e.g., `if foo:` rather than `if foo !=
     ```
 
 -   Note that `'0'` (i.e., `0` as string) evaluates to true.
+-   `'0'`(`0`という文字列)はtrueと評価されます．
 
 -   Note that Numpy arrays may raise an exception in an implicit boolean
     context. Prefer the `.size` attribute when testing emptiness of a `np.array`
     (e.g. `if not users.size`).
+-   Numpyの配列は暗黙のブール値として扱おうとすると例外を発生させるかもしれません．
+    `np.array`が空であるか確認するときは，属性の `.size` を使ってください．
 
 <a id="s2.16-lexical-scoping"></a>
 <a id="216-lexical-scoping"></a>
