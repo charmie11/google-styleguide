@@ -1427,7 +1427,8 @@ Use the "implicit" false if possible, e.g., `if foo:` rather than `if foo !=
 <a id="lexical-scoping"></a>
 ### 2.16 Lexical Scoping (レキシカルスコープ)
 
-Okay to use.
+Okay to use.  
+使っても問題ありません．
 
 <a id="s2.16.1-definition"></a>
 <a id="2161-definition"></a>
@@ -1440,9 +1441,14 @@ but cannot assign to them. Variable bindings are resolved using lexical scoping,
 that is, based on the static program text. Any assignment to a name in a block
 will cause Python to treat all references to that name as a local variable, even
 if the use precedes the assignment. If a global declaration occurs, the name is
-treated as a global variable.
+treated as a global variable.  
+ネスト化された関数はネスト内で定義された変数を参照できますが何かしらの値を割り当てることはできません．
+変数バインディングは字句スコープ(lexical scope)を使うことで，すなわち静的プログラムテキストに基づいて解決されます．
+ブロック内である名前に割り当てられると，その使用が割り当ての前にあったとしても，その名前に割り当てられた全ての参照はローカル変数として扱われます．
+グローバルな宣言が行われた場合はグローバル変数として扱われます．
 
-An example of the use of this feature is:
+An example of the use of this feature is:  
+この特徴の例は以下のとおりです．
 
 ```python
 def get_adder(summand1: float) -> Callable[[float], float]:
@@ -1460,7 +1466,9 @@ def get_adder(summand1: float) -> Callable[[float], float]:
 #### 2.16.2 利点
 
 Often results in clearer, more elegant code. Especially comforting to
-experienced Lisp and Scheme (and Haskell and ML and ...) programmers.
+experienced Lisp and Scheme (and Haskell and ML and ...) programmers.  
+大抵の場合はより明確でエレガントなコードになります．
+特にLispやScheme(さらにHaskellとML)といった言語のプログラマに嬉しい機能です．
 
 <a id="s2.16.3-cons"></a>
 <a id="2163-cons"></a>
@@ -1469,7 +1477,9 @@ experienced Lisp and Scheme (and Haskell and ML and ...) programmers.
 #### 2.16.3 欠点
 
 Can lead to confusing bugs. Such as this example based on
-[PEP-0227](http://www.google.com/url?sa=D&q=http://www.python.org/dev/peps/pep-0227/):
+[PEP-0227](http://www.google.com/url?sa=D&q=http://www.python.org/dev/peps/pep-0227/):  
+紛らわしいバグの原因になる可能性があります．
+例えば[PEP-0227](http://www.google.com/url?sa=D&q=http://www.python.org/dev/peps/pep-0227/)に基づく以下の例のように
 
 ```python
 i = 4
@@ -1486,6 +1496,7 @@ def foo(x: Iterable[int]):
 
 So `foo([1, 2, 3])` will print `1 2 3 3`,
 not `1 2 3 4`.
+上記のコードの後に`foo([1, 2, 3])`と書くと`1 2 3 4`ではなく`1 2 3 3`とprintされます．
 
 <a id="s2.16.4-decision"></a>
 <a id="2164-decision"></a>
@@ -1494,6 +1505,7 @@ not `1 2 3 4`.
 #### 2.16.4 決定
 
 Okay to use.
+使っても問題ありません．
 
 <a id="s2.17-function-and-method-decorators"></a>
 <a id="217-function-and-method-decorators"></a>
