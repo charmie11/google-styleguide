@@ -1622,18 +1622,24 @@ routine that modifies necessary global state such as a process-wide cache.
 <a id="threading"></a>
 ### 2.18 Threading (スレッド)
 
-Do not rely on the atomicity of built-in types.
+Do not rely on the atomicity of built-in types.  
+組み込み型の原子性に依存しないでください．
 
 While Python's built-in data types such as dictionaries appear to have atomic
 operations, there are corner cases where they aren't atomic (e.g. if `__hash__`
 or `__eq__` are implemented as Python methods) and their atomicity should not be
 relied upon. Neither should you rely on atomic variable assignment (since this
-in turn depends on dictionaries).
+in turn depends on dictionaries).  
+pythonの組み込みデータ型は不可分な操作を持つように見えますが，atomicではない境界条件があり，そのような不可分性に依存するべきではありません．
+例えば `__hash__`や`__eq__`がpythonのメソッドとして実装されているときです．
 
 Use the Queue module's `Queue` data type as the preferred way to communicate
 data between threads. Otherwise, use the threading module and its locking
 primitives. Prefer condition variables and `threading.Condition` instead of
-using lower-level locks.
+using lower-level locks.  
+スレッド間のデータをやり取りする方法としては，Queueモジュールの`Queue`データ型を使う方法が好ましいです．
+そうでなければ，threadingモジュールのlocking primitivesを使います．
+低レベルのロックを使う代わりに，条件変数と`threading.Condition`を優先してください．
 
 <a id="s2.19-power-features"></a>
 <a id="219-power-features"></a>

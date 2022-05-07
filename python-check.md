@@ -8,6 +8,8 @@
 - 内包表記とジェネレータ
   - map(), filter(), lambda
 - generator expressions
+- lexical scope
+- decorator
 - パッケージとモジュールの違い
 - 例外
 - グローバル変数
