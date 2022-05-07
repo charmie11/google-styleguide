@@ -1229,7 +1229,9 @@ No:  def foo(a, b: Mapping = {}):  # Could still get passed to unchecked code
 Properties may be used to control getting or setting attributes that require
 trivial computations or logic. Property implementations must match the general
 expectations of regular attribute access: that they are cheap, straightforward,
-and unsurprising.
+and unsurprising.  
+プロパティは自明な計算や論理を必要とする要素の取得・設定を制御するときに使います．
+プロパティの実装は通常の属性アクセスの一般的な式(計算コストが低く，単純かつ正攻法)に一致しなければいけません．
 
 <a id="s2.13.1-definition"></a>
 <a id="2131-definition"></a>
@@ -1238,7 +1240,8 @@ and unsurprising.
 #### 2.13.1 定義
 
 A way to wrap method calls for getting and setting an attribute as a standard
-attribute access.
+attribute access.  
+プロパティは属性を取得・設定するために呼び出すメソッドをラップする方法として通常の属性アクセスです．
 
 <a id="s2.13.2-pros"></a>
 <a id="2132-pros"></a>
@@ -1248,10 +1251,15 @@ attribute access.
 
 *   Allows for an attribute access and assignment API rather than
     [getter and setter](#getters-and-setters) method calls.
+*   [getterとsetter](#getters-and-setters)を呼ぶより属性アクセスAPIを許可します．
 *   Can be used to make an attribute read-only.
+*   属性を読み取りのみ可能にします．
 *   Allows calculations to be lazy.
+*   計算を怠惰に行えます．
 *   Provides a way to maintain the public interface of a class when the
     internals evolve independently of class users.
+*   クラス使用者から独立してクラス内部の実装を改良するときに，
+    そのクラスのpublicなアクセス方法を取り扱う方法を提供します．
 
 <a id="s2.13.3-cons"></a>
 <a id="2133-cons"></a>
@@ -1260,7 +1268,9 @@ attribute access.
 #### 2.13.3 欠点
 
 *   Can hide side-effects much like operator overloading.
+*   オペレータのオーバーロードのように，副作用を隠してしまいます．
 *   Can be confusing for subclasses.
+*   サブクラスの混乱を引き起こします．
 
 <a id="s2.13.4-decision"></a>
 <a id="2134-decision"></a>
@@ -1270,20 +1280,30 @@ attribute access.
 
 Properties are allowed, but, like operator overloading, should only be used when
 necessary and match the expectations of typical attribute access; follow the
-[getters and setters](#getters-and-setters) rules otherwise.
+[getters and setters](#getters-and-setters) rules otherwise.  
+プロパティの使用は問題ありませんが，必要なときだけにするべきですし，通常の属性アクセスと同じ振る舞いにならなければいけません．
 
 For example, using a property to simply both get and set an internal attribute
 isn't allowed: there is no computation occurring, so the property is unnecessary
 ([make the attribute public instead](#getters-and-setters)). In comparison,
 using a property to control attribute access or to calculate a *trivially*
-derived value is allowed: the logic is simple and unsurprising.
+derived value is allowed: the logic is simple and unsurprising.  
+例えば，内部の属性を取得・設定するためであればプロパティの使用は認められません．
+何も計算が発生しないためプロパティは不要だからです．
+その場合は([その属性をpublicに](#getters-and-setters))してください．
+一方で，属性アクセスをコントロールしたり属性の値から何かしら自明な計算を行う場合であればプロパティの使用は認められます．
 
 Properties should be created with the `@property`
 [decorator](#s2.17-function-and-method-decorators). Manually implementing a
-property descriptor is considered a [power feature](#power-features).
+property descriptor is considered a [power feature](#power-features).  
+プロパティを使うには `@property`
+[decorator](#s2.17-function-and-method-decorators)を使います．
+自分自身でプロパティ記述を実装する方法は[power feature](#power-features)と考えられます．
 
 Inheritance with properties can be non-obvious. Do not use properties to
-implement computations a subclass may ever want to override and extend.
+implement computations a subclass may ever want to override and extend.  
+プロパティを含む継承は非明瞭です．
+サブクラスがオーバーライドしたり拡張する計算の実装にプロパティを使うのは避けるべきです．
 
 <a id="s2.14-truefalse-evaluations"></a>
 <a id="214-truefalse-evaluations"></a>
