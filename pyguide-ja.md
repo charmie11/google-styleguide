@@ -948,7 +948,8 @@ No:   for key in adict.keys(): ...
 <a id="generators"></a>
 ### 2.9 Generators (ジェネレータ)
 
-Use generators as needed.
+Use generators as needed.  
+必要なときはジェネレータを使ってください．
 
 <a id="s2.9.1-definition"></a>
 <a id="291-definition"></a>
@@ -958,7 +959,9 @@ Use generators as needed.
 
 A generator function returns an iterator that yields a value each time it
 executes a yield statement. After it yields a value, the runtime state of the
-generator function is suspended until the next value is needed.
+generator function is suspended until the next value is needed.  
+ジェネレータ関数はイテレータを返す関数を指し，このイテレータはyield文を実行する度に値をyieldします．
+値をyieldすると，ジェネレータ関数のランタイムの状態は次の値が必要になるまで停止状態になります．
 
 <a id="s2.9.2-pros"></a>
 <a id="292-pros"></a>
@@ -968,7 +971,8 @@ generator function is suspended until the next value is needed.
 
 Simpler code, because the state of local variables and control flow are
 preserved for each call. A generator uses less memory than a function that
-creates an entire list of values at once.
+creates an entire list of values at once.  
+コールされる度にローカル変数の状態とコントロールフローが保持されるため，よりシンプルなコードになります．
 
 <a id="s2.9.3-cons"></a>
 <a id="293-cons"></a>
@@ -976,7 +980,8 @@ creates an entire list of values at once.
 <a id="generators-cons"></a>
 #### 2.9.3 欠点
 
-None.
+None.  
+ありません．
 
 <a id="s2.9.4-decision"></a>
 <a id="294-decision"></a>
@@ -985,7 +990,8 @@ None.
 #### 2.9.4 決定
 
 Fine. Use "Yields:" rather than "Returns:" in the docstring for generator
-functions.
+functions.  
+ジェネレータ関数のdocstring内では "Returns:" より "Yields:" を使うようにしましょう．
 
 <a id="s2.10-lambda-functions"></a>
 <a id="210-lambda-functions"></a>
