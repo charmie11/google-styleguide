@@ -1828,14 +1828,17 @@ python2と3の療法をサポートするプロジェクトであれば，
 
 You can annotate Python 3 code with type hints according to
 [PEP-484](https://www.python.org/dev/peps/pep-0484/), and type-check the code at
-build time with a type checking tool like [pytype](https://github.com/google/pytype).
-
+build time with a type checking tool like [pytype](https://github.com/google/pytype).  
+python 3では[PEP-484](https://www.python.org/dev/peps/pep-0484/)に基づき型ヒントを使えますし，
+[pytype](https://github.com/google/pytype)のような型チェックツールを使うことでビルド時に型チェックができます．
 
 Type annotations can be in the source or in a
 [stub pyi file](https://www.python.org/dev/peps/pep-0484/#stub-files). Whenever
 possible, annotations should be in the source. Use pyi files for third-party or
-extension modules.
-
+extension modules.  
+型のアノテーションはソースコード中もしくは[stub pyi file](https://www.python.org/dev/peps/pep-0484/#stub-files)中に書きます．
+アノテーションができるあらゆる場所に書くべきです．
+pyiファイルは3rd partyもしくは拡張モジュール用です．
 
 <a id="s2.21.1-definition"></a>
 <a id="2211-definition"></a>
@@ -1844,14 +1847,16 @@ extension modules.
 #### 2.21.1 定義
 
 Type annotations (or "type hints") are for function or method arguments and
-return values:
+return values:  
+型アノテーション(型ヒント)は関数やメソッドの引数及び返礼値のための機能です．
 
 ```python
 def func(a: int) -> list[int]:
 ```
 
 You can also declare the type of a variable using similar
-[PEP-526](https://www.python.org/dev/peps/pep-0526/) syntax:
+[PEP-526](https://www.python.org/dev/peps/pep-0526/) syntax:  
+[PEP-526](https://www.python.org/dev/peps/pep-0526/)を使い変数の型を宣言することもできます．
 
 ```python
 a: SomeType = some_func()
@@ -1865,7 +1870,10 @@ a: SomeType = some_func()
 
 Type annotations improve the readability and maintainability of your code. The
 type checker will convert many runtime errors to build-time errors, and reduce
-your ability to use [Power Features](#power-features).
+your ability to use [Power Features](#power-features).  
+型アノテーションは可読性・保守性を改善します．
+型チェッカーは多くの実行時エラーをビルド時に洗い出すことができるため，
+[Power Features](#power-features)の使用能力を低下させます．
 
 <a id="s2.21.3-cons"></a>
 <a id="2213-cons"></a>
@@ -1877,7 +1885,11 @@ You will have to keep the type declarations up to date.
 You might see type errors that you think are
 valid code. Use of a
 [type checker](https://github.com/google/pytype)
-may reduce your ability to use [Power Features](#power-features).
+may reduce your ability to use [Power Features](#power-features).  
+型宣言を最新に保つ必要があります．
+自分自身が有効なコードと考えていてお型エラーが発生することがあります．
+[type checker](https://github.com/google/pytype)
+を使うことで[Power Features](#power-features)を使う能力が下がるかもしれません．
 
 <a id="s2.21.4-decision"></a>
 <a id="2214-decision"></a>
@@ -1893,7 +1905,11 @@ wrongly
 inferred types) may prevent adoption by some projects. In those situations,
 authors are encouraged to add a comment with a TODO or link to a bug describing
 the issue(s) currently preventing type annotation adoption in the BUILD file or
-in the code itself as appropriate.
+in the code itself as appropriate.  
+コードを更新するときはpythonの型解析を有効にするよう強く推奨します．
+公式APIに追加・変更するときは型アノテーションを含めるようにし，ビルドシステム中のpytypeを介してチェックするようにしてください．
+Pythonにとって静的解析は比較的新しい機能であるため，予期せぬ副作用が発生することもあるかもしれません．
+そのような状況であれば，TODOコメントや該当する問題を記述したバグへのリンクを追加するようにしてください．
 
 <a id="s3-python-style-rules"></a>
 <a id="3-python-style-rules"></a>
