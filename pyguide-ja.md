@@ -767,6 +767,7 @@ the module level so that it can still be accessed by tests.
 ### 2.7 Comprehensions & Generator Expressions (内包表記とジェネレータ式)
 
 Okay to use for simple cases.
+単純なケースであれば使っても問題ありません．
 
 <a id="s2.7.1-definition"></a>
 <a id="271-definition"></a>
@@ -776,7 +777,8 @@ Okay to use for simple cases.
 
 List, Dict, and Set comprehensions as well as generator expressions provide a
 concise and efficient way to create container types and iterators without
-resorting to the use of traditional loops, `map()`, `filter()`, or `lambda`.
+resorting to the use of traditional loops, `map()`, `filter()`, or `lambda`.  
+List, Dict, Setの内包表記・ジェネレータ式は，`map()`, `filter()`, や `lambda` といった昔ながらのループを使用せずに簡潔で効率的にコンテナ型やイテレータ型オブジェクトを生成する方法です．
 
 <a id="s2.7.2-pros"></a>
 <a id="272-pros"></a>
@@ -786,7 +788,9 @@ resorting to the use of traditional loops, `map()`, `filter()`, or `lambda`.
 
 Simple comprehensions can be clearer and simpler than other dict, list, or set
 creation techniques. Generator expressions can be very efficient, since they
-avoid the creation of a list entirely.
+avoid the creation of a list entirely.  
+シンプルな内包表記を使うと，明快かつシンプルにdict, list, set型オブジェクトを生成できます．
+ジェネレータ式はリスト全体を生成せずに済むため，とても効率的です．
 
 <a id="s2.7.3-cons"></a>
 <a id="273-cons"></a>
@@ -794,7 +798,8 @@ avoid the creation of a list entirely.
 <a id="comprehensions-cons"></a>
 #### 2.7.3 欠点
 
-Complicated comprehensions or generator expressions can be hard to read.
+Complicated comprehensions or generator expressions can be hard to read.  
+複雑な内包表記やジェネレータ式は可読性が低くなります．
 
 <a id="s2.7.4-decision"></a>
 <a id="274-decision"></a>
@@ -805,7 +810,11 @@ Complicated comprehensions or generator expressions can be hard to read.
 Okay to use for simple cases. Each portion must fit on one line: mapping
 expression, `for` clause, filter expression. Multiple `for` clauses or filter
 expressions are not permitted. Use loops instead when things get more
-complicated.
+complicated.  
+単純なケースであれば使っても問題ありません．
+1行に収まる程度が目安で，`map()`, `for`文, `filter()`などが挙げられます．
+複数の`for`文や `filter()` を内包表記・ジェネレータ式で置き換えることは認められません．
+更に複雑なケースであれば，代わりにループを使ってください．
 
 ```python
 Yes:
