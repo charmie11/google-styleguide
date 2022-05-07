@@ -1647,7 +1647,8 @@ using lower-level locks.
 <a id="power-features"></a>
 ### 2.19 Power Features 
 
-Avoid these features.
+Avoid these features.  
+使用を避けてください．
 
 <a id="s2.19.1-definition"></a>
 <a id="2191-definition"></a>
@@ -1659,7 +1660,8 @@ Python is an extremely flexible language and gives you many fancy features such
 as custom metaclasses, access to bytecode, on-the-fly compilation, dynamic
 inheritance, object reparenting, import hacks, reflection (e.g. some uses of
 `getattr()`), modification of system internals, `__del__` methods implementing
-customized cleanup, etc.
+customized cleanup, etc.  
+Pythonは非常に柔軟な言語であり，魅力的な機能が数多く提供されています．
 
 <a id="s2.19.2-pros"></a>
 <a id="2192-pros"></a>
@@ -1667,7 +1669,8 @@ customized cleanup, etc.
 <a id="power-features-pros"></a>
 #### 2.19.2 利点
 
-These are powerful language features. They can make your code more compact.
+These are powerful language features. They can make your code more compact.  
+これらはとても強力な言語の特徴で，これらの機能を使うことでソースコードをとてもコンパクトにすることができます．
 
 <a id="s2.19.3-cons"></a>
 <a id="2193-cons"></a>
@@ -1679,7 +1682,10 @@ It's very tempting to use these "cool" features when they're not absolutely
 necessary. It's harder to read, understand, and debug code that's using unusual
 features underneath. It doesn't seem that way at first (to the original author),
 but when revisiting the code, it tends to be more difficult than code that is
-longer but is straightforward.
+longer but is straightforward.  
+絶対に必要というわけでもないときにこれらの"cool"な特徴を使うことはとても魅力的です．
+しかしながら，このような一般的ではない機能を含むコードを読み，理解し，デバッグすることは困難です．
+最初は(そのコードを書いた人にとっては)困難には見えませんが，しばらくしてコードを見返すと長くても素直に実装したコードと比較して難しく見えます．
 
 <a id="s2.19.4-decision"></a>
 <a id="2194-decision"></a>
@@ -1687,10 +1693,13 @@ longer but is straightforward.
 <a id="power-features-decision"></a>
 #### 2.19.4 決定
 
-Avoid these features in your code.
+Avoid these features in your code.  
+これらの機能の使用を避けてください．
 
 Standard library modules and classes that internally use these features are okay
-to use (for example, `abc.ABCMeta`, `dataclasses`, and `enum`).
+to use (for example, `abc.ABCMeta`, `dataclasses`, and `enum`).  
+これらの機能を内部で使用している標準ライブラリのモジュールとクラスを使用することは問題ありません．
+例えば，`abc.ABCMeta`, `dataclasses`, `enum`などです．
 
 <a id="s2.20-modern-python"></a>
 <a id="220-modern-python"></a>
