@@ -1515,7 +1515,9 @@ Okay to use.
 ### 2.17 Function and Method Decorators (デコレータ)
 
 Use decorators judiciously when there is a clear advantage. Avoid `staticmethod`
-and limit use of `classmethod`.
+and limit use of `classmethod`.  
+デコレータの使用は明確な利点があるときに慎重に行ってください．
+`staticmethod`の使用は避け，`classmethod`の使用は制限してください．
 
 <a id="s2.17.1-definition"></a>
 <a id="2171-definition"></a>
@@ -1527,7 +1529,11 @@ and limit use of `classmethod`.
 (a.k.a "the `@` notation"). One common decorator is `@property`, used for
 converting ordinary methods into dynamically computed attributes. However, the
 decorator syntax allows for user-defined decorators as well. Specifically, for
-some function `my_decorator`, this:
+some function `my_decorator`, this:  
+[関数とメソッドのためのdecorator](https://docs.python.org/3/glossary.html#term-decorator)は別名"`@` notation"とも言います．
+`@property`は一般的なデコレータの一つで，普通の関数に動的に計算する属性を追加します．
+デコレータ構文はユーザが定義したデコレータの使用も可能にします．
+例えば`my_decorator`という関数に対して
 
 ```python
 class C:
@@ -1537,6 +1543,7 @@ class C:
 ```
 
 is equivalent to:
+というコードは以下のコードと同じ意味になります．
 
 ```python
 class C:
@@ -1552,7 +1559,9 @@ class C:
 #### 2.17.2 利点
 
 Elegantly specifies some transformation on a method; the transformation might
-eliminate some repetitive code, enforce invariants, etc.
+eliminate some repetitive code, enforce invariants, etc.  
+あるメソッドに対して何らかの変換をエレガントに指定します．
+ここで言う変換は，再帰的なコードの削除や不変条件の適用などをさします．
 
 <a id="s2.17.3-cons"></a>
 <a id="2173-cons"></a>
@@ -1564,7 +1573,11 @@ Decorators can perform arbitrary operations on a function's arguments or return
 values, resulting in surprising implicit behavior. Additionally, decorators
 execute at object definition time. For module-level objects (classes, module
 functions, ...) this happens at import time. Failures in decorator code are
-pretty much impossible to recover from.
+pretty much impossible to recover from.  
+デコレータは関数の引数や戻り値に対して任意の操作を実行できるため，驚くべき暗黙の動作を巻き起こします．
+更に，デコレータはオブジェクトを定義する時に実行されます．
+モジュールレベルのオブジェクト(クラスやモジュール関数など)であればimport時に実行されます．
+デコレータに関する失敗から復帰することはほとんど不可能と言っていいでしょう．
 
 <a id="s2.17.4-decision"></a>
 <a id="2174-decision"></a>
@@ -1575,22 +1588,33 @@ pretty much impossible to recover from.
 Use decorators judiciously when there is a clear advantage. Decorators should
 follow the same import and naming guidelines as functions. Decorator pydoc
 should clearly state that the function is a decorator. Write unit tests for
-decorators.
+decorators.  
+デコレータの使用は明確な利点があるときにしてください．
+デコレータについて，関数に関するimport・命名規則のガイドラインに従うようにしてください．
+デコレータのpydocでは，その関数がデコレータであることを明確に言及しなければいけません．
+デコレータのためのユニットテストを書くようにしてください．
 
 Avoid external dependencies in the decorator itself (e.g. don't rely on files,
 sockets, database connections, etc.), since they might not be available when the
 decorator runs (at import time, perhaps from `pydoc` or other tools). A
 decorator that is called with valid parameters should (as much as possible) be
-guaranteed to succeed in all cases.
+guaranteed to succeed in all cases.  
+デコレータの内部から外部依存を避けましょう(ファイル，ソケット，データベースへの接続など)．
+なぜなら，外部依存はデコレータが実行されるときに使用可能とは限らないからです．
+有効なパラメータを使って呼ばれるデコレータは可能な限り全ての条件で正常作動するよう保証するべきです．
 
 Decorators are a special case of "top level code" - see [main](#s3.17-main) for
-more discussion.
+more discussion.  
+デコレータは"最上位のコード"の特殊ケースの一つです．
+詳細な議論については[ここ](#s3.17-main)を参照してください．
 
 Never use `staticmethod` unless forced to in order to integrate with an API
-defined in an existing library. Write a module level function instead.
+defined in an existing library. Write a module level function instead.  
+外部ライブラリで定義されたAPIに統合する必要があるとき以外`staticmethod`は使わないでください．
 
 Use `classmethod` only when writing a named constructor or a class-specific
-routine that modifies necessary global state such as a process-wide cache.
+routine that modifies necessary global state such as a process-wide cache.  
+`classmethod`は(プロセス全体のキャッシュなどのようなグローバルな状態の変更が必要な)名前付きコンストラクタかクラス特定ルーチンを書くときのみ使うようにしてください．
 
 <a id="s2.18-threading"></a>
 <a id="218-threading"></a>
