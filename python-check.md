@@ -1,6 +1,11 @@
 # Pythonで調べること
 
 - lint, pylint
+- docstrings (ドキュメンテーション文字列)
+  - sphyincs
+  - numpy
+  - google
+- 内包表記とジェネレータ
 - パッケージとモジュールの違い
 - 例外
 - グローバル変数

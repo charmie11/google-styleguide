@@ -699,7 +699,9 @@ named using all caps with underscores. See [Naming](#s3.16-naming) below.
 ### 2.6 Nested/Local/Inner Classes and Functions (ネストされたローカル/内部クラスと関数)
 
 Nested local functions or classes are fine when used to close over a local
-variable. Inner classes are fine.
+variable. Inner classes are fine.  
+ネストされたローカル関数やローカルクラスの使用は，ローカル変数に関して閉じているのであれば問題ありません．
+内部クラスの使用も問題ありません．
 
 <a id="s2.6.1-definition"></a>
 <a id="261-definition"></a>
@@ -709,7 +711,10 @@ variable. Inner classes are fine.
 
 A class can be defined inside of a method, function, or class. A function can be
 defined inside a method or function. Nested functions have read-only access to
-variables defined in enclosing scopes.
+variables defined in enclosing scopes.  
+メソッド，関数，クラスの内部でクラスを定義できます．
+メソッド，関数の内部で関数を定義できます．
+ネストされた関数は閉じたスコープの中で定義された変数への読み取り権限のみを持ちます．
 
 <a id="s2.6.2-pros"></a>
 <a id="262-pros"></a>
@@ -720,7 +725,10 @@ variables defined in enclosing scopes.
 Allows definition of utility classes and functions that are only used inside of
 a very limited scope. Very
 [ADT](http://www.google.com/url?sa=D&q=http://en.wikipedia.org/wiki/Abstract_data_type)-y.
-Commonly used for implementing decorators.
+Commonly used for implementing decorators.  
+とても限定されたスコープ内でのみ使用可能な便利クラス・関数を定義することができます．
+とても抽象データ型といえます．
+デコレータを実装するときに一般的に使われます．
 
 <a id="s2.6.3-cons"></a>
 <a id="263-cons"></a>
@@ -729,7 +737,9 @@ Commonly used for implementing decorators.
 #### 2.6.3 欠点
 
 Nested functions and classes cannot be directly tested. Nesting can make the
-outer function longer and less readable.
+outer function longer and less readable.  
+ネストされた関数・クラスは直接テストできません．
+ネストすることで，外部の関数の実装が長くなってしまったり，可読性を失ってしまうことになります．
 
 <a id="s2.6.4-decision"></a>
 <a id="264-decision"></a>
@@ -740,7 +750,12 @@ outer function longer and less readable.
 They are fine with some caveats. Avoid nested functions or classes except when
 closing over a local value other than `self` or `cls`. Do not nest a function
 just to hide it from users of a module. Instead, prefix its name with an \_ at
-the module level so that it can still be accessed by tests.
+the module level so that it can still be accessed by tests.  
+いくつか注意点があります．
+`self` か `cls` が関係するローカル変数で閉じている場合を除いて，ネストされた関数・クラスの使用は避けてください．
+モジュールを使用する人から隠すためだけに使用するべきではありません．
+その場合は，モジュールレベルで接頭語に \_ を追加してください．
+そうすることで，テスト時にアクセスことができます．
 
 <a id="s2.7-comprehensions"></a>
 <a id="s2.7-list_comprehensions"></a>
