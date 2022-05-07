@@ -1060,7 +1060,8 @@ module instead of lambda functions. For example, prefer `operator.mul` to
 <a id="conditional-expressions"></a>
 ### 2.11 Conditional Expressions (条件式)
 
-Okay for simple cases.
+Okay for simple cases.  
+シンプルな場合であれば問題ありません．
 
 <a id="s2.11.1-definition"></a>
 <a id="2111-definition"></a>
@@ -1070,7 +1071,9 @@ Okay for simple cases.
 
 Conditional expressions (sometimes called a “ternary operator”) are mechanisms
 that provide a shorter syntax for if statements. For example: `x = 1 if cond
-else 2`.
+else 2`.  
+条件式(三項演算子，条件演算子とも呼ばれる)はif文をより短く記述する機能です．
+例えば `x = 1 if cond else 2` といった例が挙げられます．
 
 <a id="s2.11.2-pros"></a>
 <a id="2112-pros"></a>
@@ -1078,7 +1081,8 @@ else 2`.
 <a id="conditional-expressions-pros"></a>
 #### 2.11.2 利点
 
-Shorter and more convenient than an if statement.
+Shorter and more convenient than an if statement.  
+if文を書くより短く便利です．
 
 <a id="s2.11.3-cons"></a>
 <a id="2113-cons"></a>
@@ -1087,7 +1091,9 @@ Shorter and more convenient than an if statement.
 #### 2.11.3 欠点
 
 May be harder to read than an if statement. The condition may be difficult to
-locate if the expression is long.
+locate if the expression is long.  
+if文より読みにくいかもしれません．
+式が長いと条件の合致を確認することが難しくなることがあります．
 
 <a id="s2.11.4-decision"></a>
 <a id="2114-decision"></a>
@@ -1097,7 +1103,10 @@ locate if the expression is long.
 
 Okay to use for simple cases. Each portion must fit on one line:
 true-expression, if-expression, else-expression. Use a complete if statement
-when things get more complicated.
+when things get more complicated.  
+シンプルな場合は使っても問題ありません．
+目安は1行で収まる程度です
+それ以上に複雑な内容であればif文として書いてください．
 
 ```python
 Yes:
