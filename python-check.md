@@ -7,6 +7,7 @@
   - google
 - 内包表記とジェネレータ
   - map(), filter(), lambda
+- generator expressions
 - パッケージとモジュールの違い
 - 例外
 - グローバル変数

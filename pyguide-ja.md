@@ -1000,7 +1000,9 @@ functions.
 ### 2.10 Lambda Functions (ラムダ関数)
 
 Okay for one-liners. Prefer generator expressions over `map()` or `filter()`
-with a `lambda`.
+with a `lambda`.  
+1行で済む長さであれば問題ありません．
+`map()` や `filter()` を `lambda` で実装する場合はジェネレータ式が好ましいです．
 
 <a id="s2.10.1-definition"></a>
 <a id="2101-definition"></a>
@@ -1008,7 +1010,8 @@ with a `lambda`.
 <a id="lambdas-definition"></a>
 #### 2.10.1 定義
 
-Lambdas define anonymous functions in an expression, as opposed to a statement.
+Lambdas define anonymous functions in an expression, as opposed to a statement.  
+Lambdaは文(statement)ではなく式(expression)で無名関数を定義します．
 
 <a id="s2.10.2-pros"></a>
 <a id="2102-pros"></a>
@@ -1016,7 +1019,8 @@ Lambdas define anonymous functions in an expression, as opposed to a statement.
 <a id="lambdas-pros"></a>
 #### 2.10.2 利点
 
-Convenient.
+Convenient.  
+便利です．
 
 <a id="s2.10.3-cons"></a>
 <a id="2103-cons"></a>
@@ -1026,7 +1030,10 @@ Convenient.
 
 Harder to read and debug than local functions. The lack of names means stack
 traces are more difficult to understand. Expressiveness is limited because the
-function may only contain an expression.
+function may only contain an expression.  
+ローカル関数以上に可読性が低くデバッグが困難です．
+無名であるためスタックトレースの理解が非常に難しくなります．
+関数が式しか含めないため，関数としての表現能力が限定的です．
 
 <a id="s2.10.4-decision"></a>
 <a id="2104-decision"></a>
@@ -1036,11 +1043,16 @@ function may only contain an expression.
 
 Okay to use them for one-liners. If the code inside the lambda function is
 longer than 60-80 chars, it's probably better to define it as a regular
-[nested function](#lexical-scoping).
+[nested function](#lexical-scoping).  
+1行で済む内容であれば使っても問題ありません．
+ラムダ関数の中身が60-80文字より長くなる場合は
+[ネスト化された関数](#lexical-scoping)として定義した方が良い可能性が高いです．
 
 For common operations like multiplication, use the functions from the `operator`
 module instead of lambda functions. For example, prefer `operator.mul` to
-`lambda x, y: x * y`.
+`lambda x, y: x * y`.  
+掛け算のような一般的な命令であれば，ラムダ関数ではなく `operator` モジュールの関数を使用してください．
+例えば，`lambda x, y: x * y` より `operator.mul` の方が好ましいです．
 
 <a id="s2.11-conditional-expressions"></a>
 <a id="211-conditional-expressions"></a>
