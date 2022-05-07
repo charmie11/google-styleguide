@@ -872,7 +872,9 @@ No:
 ### 2.8 Default Iterators and Operators (デフォルトのイテレータとオペレータ)
 
 Use default iterators and operators for types that support them, like lists,
-dictionaries, and files.
+dictionaries, and files.  
+デフォルトのイテレータ・オペレータが実装されている型であれば，それを使ってください．
+例えばlist型，dict型の変数やファイルです．
 
 <a id="s2.8.1-definition"></a>
 <a id="281-definition"></a>
@@ -881,7 +883,8 @@ dictionaries, and files.
 #### 2.8.1 定義
 
 Container types, like dictionaries and lists, define default iterators and
-membership test operators ("in" and "not in").
+membership test operators ("in" and "not in").  
+listやdictといったコンテナ型はデフォルトのイテレータと要素の確認オペレータ ("in" と "not in")が定義されています．
 
 <a id="s2.8.2-pros"></a>
 <a id="282-pros"></a>
@@ -891,7 +894,10 @@ membership test operators ("in" and "not in").
 
 The default iterators and operators are simple and efficient. They express the
 operation directly, without extra method calls. A function that uses default
-operators is generic. It can be used with any type that supports the operation.
+operators is generic. It can be used with any type that supports the operation.  
+デフォルトのイテレータ・オペレータはシンプルで効率的です．
+余計なメソッドを呼ぶことなく直接処理できる利点があります．
+デフォルトのオペレータを使用する関数はジェネリックであるため，その処理をサポートするあらゆる型を扱うことができます．
 
 <a id="s2.8.3-cons"></a>
 <a id="283-cons"></a>
@@ -900,7 +906,10 @@ operators is generic. It can be used with any type that supports the operation.
 #### 2.8.3 欠点
 
 You can't tell the type of objects by reading the method names (e.g. `has_key()`
-means a dictionary). This is also an advantage.
+means a dictionary). This is also an advantage.  
+メソッド名からオブジェクトの型を読み取るとれない欠点があります．
+例えばdictの `has_key()` です．
+これは利点でもあります．
 
 <a id="s2.8.4-decision"></a>
 <a id="284-decision"></a>
@@ -911,7 +920,11 @@ means a dictionary). This is also an advantage.
 Use default iterators and operators for types that support them, like lists,
 dictionaries, and files. The built-in types define iterator methods, too. Prefer
 these methods to methods that return lists, except that you should not mutate a
-container while iterating over it.
+container while iterating over it.  
+デフォルトのイテレータ・オペレータを使うようにしてください．
+組み込み型はイテレータメソッドも提供しています．
+listを返すメソッドにはイテレータメソッドを使う方が好ましいです．
+ただし，アクセス中にコンテナの要素に変更を加えたくないときは別です．
 
 ```python
 Yes:  for key in adict: ...
