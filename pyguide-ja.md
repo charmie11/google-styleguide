@@ -3044,18 +3044,24 @@ documentation must explain clearly how resource lifetime is managed.
 ### 3.12 TODO Comments (TODOコメント)
 
 Use `TODO` comments for code that is temporary, a short-term solution, or
-good-enough but not perfect.
+good-enough but not perfect.  
+一時的なコード，短期的な解決策，十分だが完璧ではないコードについては`TODO`コメントを使ってください．
 
 A `TODO` comment begins with the string `TODO` in all caps and a parenthesized
 name, e-mail address, or other identifier
 of the person or issue with the best context about the problem. This is followed
-by an explanation of what there is to do.
+by an explanation of what there is to do.  
+`TODO` コメントは全て大文字で`TODO` と書き，担当者の名前や連絡先や問題をよく説明したイシューを丸括弧で囲んで書き足します．
+具体的に何をするべきかについてはそれ以降に書きます．
 
 The purpose is to have a consistent `TODO` format that can be searched to find
 out how to get more details. A `TODO` is not a commitment that the person
 referenced will fix the problem. Thus when you create a
 `TODO`, it is almost always your name
-that is given.
+that is given.  
+このようにする目的は，`TODO`のフォーマットに一貫性をもたせることでサラナル詳細を見つける手助けとするためです．
+`TODO` はその問題を解決する人を参照するわけではありません．
+そのため，`TODO` を作る人の名前が書かれることが大半です．
 
 ```python
 # TODO(kl@gmail.com): Use a "*" here for string repetition.
@@ -3064,7 +3070,8 @@ that is given.
 
 If your `TODO` is of the form "At a future date do something" make sure that you
 either include a very specific date ("Fix by November 2009") or a very specific
-event ("Remove this code when all clients can handle XML responses.").
+event ("Remove this code when all clients can handle XML responses.").  
+`TODO` を "将来何かをする" という形式で書く場合は具体的な日時("2009年11月までに修正")やイベント ("全てのクライアントがXMLを扱えるようになれば削除する.")を含めるようにしてください．
 
 <a id="s3.13-imports-formatting"></a>
 <a id="313-imports-formatting"></a>
