@@ -3281,9 +3281,12 @@ propertyを介してアクセス可能な場合，そのpropertyに新しくgett
 Function names, variable names, and filenames should be descriptive; eschew
 abbreviation. In particular, do not use abbreviations that are ambiguous or
 unfamiliar to readers outside your project, and do not abbreviate by deleting
-letters within a word.
+letters within a word.  
+関数名，変数名，ファイル名は説明的であるべきで，略語は避けてください．
+特に，プロジェクトの外部の人に対して曖昧であったり一般的ではない略語は避けると共に，単語内の文字を削除する略語の使用も避けてください．
 
-Always use a `.py` filename extension. Never use dashes.
+Always use a `.py` filename extension. Never use dashes.  
+pythonコードのファイルの拡張子は常に`.py`とし，ダッシュは使わないでください．
 
 <a id="s3.16.1-names-to-avoid"></a>
 <a id="3161-names-to-avoid"></a>
@@ -3291,27 +3294,39 @@ Always use a `.py` filename extension. Never use dashes.
 <a id="names-to-avoid"></a>
 #### 3.16.1 Names to Avoid (割けるべき名前)
 
--   single character names, except for specifically allowed cases:
+-   single character names, except for specifically allowed cases:  
+以下の特殊ケースを除く1文字の名前
 
-    -   counters or iterators (e.g. `i`, `j`, `k`, `v`, et al.)
-    -   `e` as an exception identifier in `try/except` statements.
-    -   `f` as a file handle in `with` statements
-    -   private [`TypeVar`s](#typing-type-var) with no constraints (e.g. `_T`,
+    - counters or iterators (e.g. `i`, `j`, `k`, `v`, et al.)
+    - カウンターやイテレータ(例 `i`, `j`, `k`, `v` など) 
+    - `e` as an exception identifier in `try/except` statements.
+    - `try/except`文で使う例外識別子としての`e`
+    - `f` as a file handle in `with` statements
+    - `with`文中でファイルを表す`f`
+    - private [`TypeVar`s](#typing-type-var) with no constraints (e.g. `_T`,
         `_U`, `_V`)
+    - 制約を持たないprivateな[`TypeVar`s](#typing-type-var) (例 `_T`, `_U`, `_V`)
 
     Please be mindful not to abuse single-character naming. Generally speaking,
     descriptiveness should be proportional to the name's scope of visibility.
     For example, `i` might be a fine name for 5-line code block but within
-    multiple nested scopes, it is likely too vague.
+    multiple nested scopes, it is likely too vague.  
+    1文字の名前を乱用しないでください．
+    一般的に言うと，説明性は名前の可視性に比例するべきです．
+    例えば，5行のコードブロックのために`i`という名前を使うのは問題ないように思うかもしれませんが，複数のネスト内では何を指しているか曖昧すぎるように見えます．
 
 -   dashes (`-`) in any package/module name
+-   パッケージ・モジュール名のダッシュ(`-`)
 
 -   `__double_leading_and_trailing_underscore__` names (reserved by Python)
+-   pythonで予約されている前後を2つのアンダースコア(`__`)で囲んだ名前 (例: `__double_leading_and_trailing_underscore__`)
 
 -   offensive terms
+-   不快な言葉offensive terms
 
 -   names that needlessly include the type of the variable (for example:
     `id_to_name_dict`)
+-   変数の型を不必要に含んだ名前 (例; `id_to_name_dict`)
 
 <a id="s3.16.2-naming-conventions"></a>
 <a id="3162-naming-convention"></a>
@@ -3321,30 +3336,44 @@ Always use a `.py` filename extension. Never use dashes.
 
 -   "Internal" means internal to a module, or protected or private within a
     class.
+-   "Internal"とはモジュールの内部やクラス内のprotect/privateな要素を指します．
 
 -   Prepending a single underscore (`_`) has some support for protecting module
     variables and functions (linters will flag protected member access).
+-   アンダースコア(`_`)を一つ接頭語としてつけるとモジュール変数と関数を保護するサポートが幾つかあります (linterはprotectされたメンバへのアクセスにフラグを立てます)．
 
 -   Prepending a double underscore (`__` aka "dunder") to an instance variable
     or method effectively makes the variable or method private to its class
     (using name mangling); we discourage its use as it impacts readability and
     testability, and isn't *really* private. Prefer a single underscore.
+-   接頭語としてアンダースコアを二つ(`__` "dunder"とも呼ばれる)接頭語としてつけるとそのクラスのprivateな変数・関数になります．
+    可読性とテスト容易性に影響を与えること，*実際には*privateではないことを考慮して非推奨です．
+    単一のアンダースコアを優先します．
 
 -   Place related classes and top-level functions together in a
     module.
     Unlike Java, there is no need to limit yourself to one class per module.
+-   関連するクラスとトップレベルの関数をモジュール内に一緒に配置します．
+    Javaと異なり，一つのモジュールに一つのクラスしか書けないといった制約はありません．
 
 -   Use CapWords for class names, but lower\_with\_under.py for module names.
     Although there are some old modules named CapWords.py, this is now
     discouraged because it's confusing when the module happens to be named after
     a class. ("wait -- did I write `import StringIO` or `from StringIO import
     StringIO`?")
+-   クラス名にはCapWords(各単語の最初の一文字を大文字にし，スペースなしで連結)を使い，モジュール名はlower\_with\_under.py(スネークケース)を使います．
+    古いモジュールはCapWordsを使ってありますが，モジュールがクラス名にちなんでつけられたときに混乱するため現在は非推奨です．
+    例えば `import StringIO` と `from StringIO import StringIO`のどちらなのか．
 
 -   Underscores may appear in *unittest* method names starting with `test` to
     separate logical components of the name, even if those components use
     CapWords. One possible pattern is `test<MethodUnderTest>_<state>`; for
     example `testPop_EmptyStack` is okay. There is no One Correct Way to name
     test methods.
+-   ユニットテストの名前は接頭語に `test`をつけ，名前の論理的な要素をアンダースコアで連結することがあります．
+    例えば `test<MethodUnderTest>_<state>`といった具合です．
+    `testPop_EmptyStack`という名前も問題ありません．
+    テストの命名規則に正しい唯一の方法はありません．
 
 <a id="s3.16.3-file-naming"></a>
 <a id="3163-file-naming"></a>
@@ -3355,7 +3384,10 @@ Always use a `.py` filename extension. Never use dashes.
 Python filenames must have a `.py` extension and must not contain dashes (`-`).
 This allows them to be imported and unittested. If you want an executable to be
 accessible without the extension, use a symbolic link or a simple bash wrapper
-containing `exec "$0.py" "$@"`.
+containing `exec "$0.py" "$@"`.  
+Pythonファイルの拡張子は`.py`とし，ダッシュ(`-`)を含んではいけません．
+importとユニットテストを可能にするためです．
+拡張子なしで実行ファイルにアクセスするためにはシンボリックリンクを使うか，`exec "$0.py" "$@"`を含むシンプルなbash wapperを使ってください．
 
 <a id="s3.16.4-guidelines-derived-from-guidos-recommendations"></a>
 <a id="3164-guidelines-derived-from-guidos-recommendations"></a>
@@ -3453,7 +3485,10 @@ reference paper or algorithm. When doing so, reference the source of all naming
 conventions in a comment or docstring or, if the source is not accessible,
 clearly document the naming conventions. Prefer PEP8-compliant
 `descriptive_names` for public APIs, which are much more likely to be
-encountered out of context.
+encountered out of context.  
+数学的に重いコードの場合，参照する論文やアルゴリズムで確立された表記と一致させるために，上記の命名規則に従わない短い変数名が好ましいこともあります．
+そのようなときは，全ての命名規則が書いてある参照情報についてコメントやdocstringに書くか，参照情報がアクセス不可能であればドキュメントに明確に記載するべきです．
+コンテキスト外で生じる可能性が高いpublic APIについてはPEP9に順キュオした説明性を持つ名前を推奨します．
 
 <a id="main"></a>
 ### 3.17 Main (main文)
