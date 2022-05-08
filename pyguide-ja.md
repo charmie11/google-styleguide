@@ -2036,11 +2036,14 @@ the notes above when it is sensible.
 <a id="parentheses"></a>
 ### 3.3 Parentheses (丸括弧)
 
-Use parentheses sparingly.
+Use parentheses sparingly.  
+丸括弧は慎重に使ってください．
 
 It is fine, though not required, to use parentheses around tuples. Do not use
 them in return statements or conditional statements unless using parentheses for
-implied line continuation or to indicate a tuple.
+implied line continuation or to indicate a tuple.  
+丸括弧をtupleの前後に使うことは必須ではありませんが問題でもありません．
+ただし，return文や条件文での使用は，暗黙の行の継続やtupleを視差する場合を除いて避けてください．
 
 ```python
 Yes: if foo:
@@ -2073,13 +2076,17 @@ No:  if (x):
 <a id="indentation"></a>
 ### 3.4 Indentation (インデント)
 
-Indent your code blocks with *4 spaces*.
+Indent your code blocks with *4 spaces*.  
+インデントは半角スペース4個．
 
 Never use tabs or mix tabs and spaces. In cases of implied line continuation,
 you should align wrapped elements either vertically, as per the examples in the
 [line length](#s3.2-line-length) section; or using a hanging indent of 4 spaces,
 in which case there should be nothing after the open parenthesis or bracket on
-the first line.
+the first line.  
+インデントのためにタブやタブとスペースを混合して使わないでください．
+暗黙の行連結であれば，[line length](#s3.2-line-length)の例で示したように折り返した文を立てに揃えるか，スペースを4個使うインデントを使ってください．
+後者の場合，最初の行の括弧の後には何も書かないようにしてください．
 
 ```python
 Yes:   # Aligned with opening delimiter
@@ -2147,7 +2154,9 @@ Trailing commas in sequences of items are recommended only when the closing
 container token `]`, `)`, or `}` does not appear on the same line as the final
 element. The presence of a trailing comma is also used as a hint to our Python
 code auto-formatter [YAPF](https://pypi.org/project/yapf/) to direct it to auto-format the container
-of items to one item per line when the `,` after the final element is present.
+of items to one item per line when the `,` after the final element is present.  
+シーケンス中の末尾のカンマは，コンテナを閉じる`]`, `)`, `}`の記号とシーケンスの最後の要素が別の行に書いてあるときのみに推奨されます．
+末尾のカンマは[yapf](https://pypi.org/project/yapf/) が自動整形をする際のヒントになります．
 
 ```python
 Yes:   golomb3 = [0, 1, 3]
