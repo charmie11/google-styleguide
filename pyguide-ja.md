@@ -3581,22 +3581,37 @@ the function into smaller and more manageable pieces.
 
 *   Familiarize yourself with
     [PEP-484](https://www.python.org/dev/peps/pep-0484/).
+*   [PEP-484](https://www.python.org/dev/peps/pep-0484/)に慣れてください．
 *   In methods, only annotate `self`, or `cls` if it is necessary for proper
     type information. e.g., `@classmethod def create(cls: Type[T]) -> T: return
     cls()`
+*   メソッド内では適切な型情報が必要な場合のみ`self` か `cls`をつけてください．
+    例えば `@classmethod def create(cls: Type[T]) -> T: return cls()` です．
 *   Similarly, don't feel compelled to annotate the return value of `__init__`
     (where `None` is the only valid option).
+*   同様に， `__init__` の返戻値に型ヒントをつけると矯正されているとは感じないでください．
+    (`None`のいが有効な選択肢です)．
 *   If any other variable or a returned type should not be expressed, use `Any`.
+*   他の変数や返戻値の型を表現する必要がない場合は`Any`を使ってください．
 *   You are not required to annotate all the functions in a module.
+*   モジュール内の全ての関数に注釈をつける必要はありません．
     -   At least annotate your public APIs.
+    -   少なくとも公開APIには注釈をつけてください．
     -   Use judgment to get to a good balance between safety and clarity on the
         one hand, and flexibility on the other.
+    -   Use judgment to get to a good balance between safety and clarity on the
+        one hand, and flexibility on the other.
+    -   安全性と明快さ，さらに柔軟性のバランスをうまくとるよう判断してください．
     -   Annotate code that is prone to type-related errors (previous bugs or
         complexity).
+    -   型に関係するエラーが発生しやすいコードに注釈をつけます．
     -   Annotate code that is hard to understand.
+    -   理解が難しいコードに型ヒントをつけてください
     -   Annotate code as it becomes stable from a types perspective. In many
         cases, you can annotate all the functions in mature code without losing
         too much flexibility.
+    -   型の観点から安定したコードに注釈をつけてください．
+        大半のケースでは柔軟性をほとんど損なうことなく成熟したコードの全ての関数に注釈をつけられます．
 
 <a id="s3.19.2-line-breaking"></a>
 <a id="3192-line-breaking"></a>
@@ -3604,9 +3619,11 @@ the function into smaller and more manageable pieces.
 <a id="typing-line-breaking"></a>
 #### 3.19.2 Line Breaking (改行)
 
-Try to follow the existing [indentation](#indentation) rules.
+Try to follow the existing [indentation](#indentation) rules.  
+既存のコードの[インデント](#indentation)の規則に従ってください．
 
-After annotating, many function signatures will become "one parameter per line".
+After annotating, many function signatures will become "one parameter per line".  
+注釈をつけると，多くの関数の署名は1行に1つのパラメータが書かれるようになります．
 
 ```python
 def my_method(self,
@@ -3618,7 +3635,9 @@ def my_method(self,
 
 Always prefer breaking between variables, and not, for example, between variable
 names and type annotations. However, if everything fits on the same line, go for
-it.
+it.  
+この改行は変数名と型ヒントの間ではなく変数間に入れるべきです．
+ただし，1行に全てが収まるのであれば，1行に全てを書いても問題ありません．
 
 ```python
 def my_method(self, first_var: int) -> int:
@@ -3626,7 +3645,8 @@ def my_method(self, first_var: int) -> int:
 ```
 
 If the combination of the function name, the last parameter, and the return type
-is too long, indent by 4 in a new line.
+is too long, indent by 4 in a new line.  
+関数名，最後の引数及び返戻値の型が長すぎる場合は改行してインデントを下げてください．
 
 ```python
 def my_method(
@@ -3636,7 +3656,8 @@ def my_method(
 
 When the return type does not fit on the same line as the last parameter, the
 preferred way is to indent the parameters by 4 on a new line and align the
-closing parenthesis with the `def`.
+closing parenthesis with the `def`.  
+返戻値の型が最後の引数と同じ行に収まらない場合は右丸括弧と共に改行して，`def`と同じインデントに揃えます．
 
 ```python
 Yes:
@@ -3648,7 +3669,8 @@ def my_method(
 
 `pylint`
 allows you to move the closing parenthesis to a new line and align with the
-opening one, but this is less readable.
+opening one, but this is less readable.  
+`pylint`は次の行に書いた右丸括弧を左丸括弧と同じ位置に揃えることも許容しますが，可読性が低くなります．
 
 ```python
 No:
@@ -3659,7 +3681,9 @@ def my_method(self,
 ```
 
 As in the examples above, prefer not to break types. However, sometimes they are
-too long to be on a single line (try to keep sub-types unbroken).
+too long to be on a single line (try to keep sub-types unbroken).  
+上記の例では一つの型の途中で改行することを避けるようにしています．
+ただし，1行に収まらないこともありますが，サブの型が改行で分割されないようにします．
 
 ```python
 def my_method(
@@ -3673,7 +3697,9 @@ def my_method(
 
 If a single name and type is too long, consider using an
 [alias](#typing-aliases) for the type. The last resort is to break after the
-colon and indent by 4.
+colon and indent by 4.  
+単一の引数名や型名が長すぎる場合は[alias](#typing-aliases)の使用を検討してください．
+最後の手段はコロンの後で改行してインデントを下げる方法です．
 
 ```python
 Yes:
@@ -3702,7 +3728,9 @@ def my_function(
 If you need to use a class name from the same module that is not yet defined --
 for example, if you need the class inside the class declaration, or if you use a
 class that is defined below -- either use `from __future__ import annotations`
-for simple cases or use a string for the class name.
+for simple cases or use a string for the class name.  
+あるクラスを定義する前に同一モジュール中でそのクラスを使いたいときは`from __future__ import annotations`を使うか，そのクラス名のための文字列を使ってください．
+例えば，クラス宣言の中でそのクラスを使うときやコードの下部で定義されるクラスをつかうときなどです．
 
 ```python
 from __future__ import annotations
@@ -3721,7 +3749,8 @@ class MyClass:
 As per
 [PEP-008](https://www.python.org/dev/peps/pep-0008/#other-recommendations), use
 spaces around the `=` *only* for arguments that have both a type annotation and
-a default value.
+a default value.  
+[PEP-008](https://www.python.org/dev/peps/pep-0008/#other-recommendations)に従い，型ヒントとデフォルト値の療法を持つ引数にのみ `=` の前後にスペースを入れてください．
 
 ```python
 Yes:
@@ -3745,11 +3774,16 @@ def func(a:int=0) -> int:
 In the Python type system, `NoneType` is a "first class" type, and for typing
 purposes, `None` is an alias for `NoneType`. If an argument can be `None`, it
 has to be declared! You can use `Union`, but if there is only one other type,
-use `Optional`.
+use `Optional`.  
+Pythonでは `NoneType`は"first class"型であり，`None`は`NoneType`のエイリアス(alias)です．
+引数が`None`でもよいときはそのように宣言する必要があります．
+`Union`を使っても構いませんが，その他の型が一つしかない場合は`Optional`を使ってください．
 
 Use explicit `Optional` instead of implicit `Optional`. Earlier versions of PEP
 484 allowed `a: str = None` to be interpreted as `a: Optional[str] = None`, but
-that is no longer the preferred behavior.
+that is no longer the preferred behavior.  
+明示的な`Optional`を使うようにしてください．
+以前のPEP-484では `a: str = None`と書くと`a: Optional[str] = None`と解釈されていましたが，現在は推奨される動作ではありません．
 
 ```python
 Yes:
@@ -3776,10 +3810,14 @@ def implicit_optional(a: str = None) -> str:
 #### 3.19.6 Type Aliases (型エイリアス)
 
 You can declare aliases of complex types. The name of an alias should be
-CapWorded. If the alias is used only in this module, it should be \_Private.
+CapWorded. If the alias is used only in this module, it should be \_Private.  
+複雑な型であればエイリアスを宣言してください．
+エイリアスはCapWorded形式にするべきです．
+あるモジュール内でのみエイリアスを使うのであれば，接頭語としてアンダースコアを一つつけてprivateにするべきです．
 
 For example, if the name of the module together with the name of the type is too
-long:
+long:  
+例えば，モジュールの名前と型の名前が長すぎる以下のような場合で型エイリアスを使います．
 
 ```python
 _ShortName = module_with_long_name.TypeWithLongName
@@ -3787,7 +3825,8 @@ ComplexMap = Mapping[str, list[tuple[int, int]]]
 ```
 
 Other examples are complex nested types and multiple return variables from a
-function (as a tuple).
+function (as a tuple).  
+もう一つの例として，複雑にネストされた型や関数の複数の返戻値(tupleとして)に対して型エイリアスを使うことがあります．
 
 <a id="s3.19.7-ignoring-types"></a>
 <a id="s3.19.7-ignore"></a>
@@ -3797,9 +3836,11 @@ function (as a tuple).
 #### 3.19.7 Ignoring Types (型の無視)
 
 You can disable type checking on a line with the special comment `# type:
-ignore`.
+ignore`.  
+`# type: ignore`という特殊なコメントを使うことで，ある行の型チェックを無効化できます．
 
-`pytype` has a disable option for specific errors (similar to lint):
+`pytype` has a disable option for specific errors (similar to lint):  
+`pytype`は，lint同様，特別なエラーに対する無効化オプションを持っています．
 
 ```python
 # pytype: disable=attribute-error
@@ -3818,6 +3859,7 @@ ignore`.
     specify its type with an annotated assignment - use a colon and type between
     the variable name and value (the same as is done with function arguments
     that have a default value):
+    内部変数の型の推測が難しい，もしくは不可能なときは注釈付けによってその型を指定してください．
 
     ```python
     a: Foo = SomeUndecoratedFunction()
@@ -3828,6 +3870,8 @@ ignore`.
 :   Though you may see them remaining in the codebase (they were necessary
     before Python 3.6), do not add any more uses of a `# type: <type name>`
     comment on the end of the line:
+    行末尾に `# type: <type name>`とコメントする書き方は，コードベース内に残っていたとしても非推奨です．
+    python 3.6以前では必須でした．
 
     ```python
     a = SomeUndecoratedFunction()  # type: Foo
@@ -3842,7 +3886,8 @@ ignore`.
 
 Typed lists can only contain objects of a single type. Typed tuples can either
 have a single repeated type or a set number of elements with different types.
-The latter is commonly used as the return type from a function.
+The latter is commonly used as the return type from a function.  
+Typed listsは単一の型のオブジェクトのみ含めますが，Typed tuplesは単一の型のオブジェクトを複数含めることも異なる型のオブジェクトを含めることもできます．
 
 ```python
 a: list[int] = [1, 2, 3]
@@ -3860,7 +3905,9 @@ c: tuple[int, str, float] = (1, "2", 3.5)
 
 The Python type system has
 [generics](https://www.python.org/dev/peps/pep-0484/#generics). The factory
-function `TypeVar` is a common way to use them.
+function `TypeVar` is a common way to use them.  
+Pythonの型システムは[generics](https://www.python.org/dev/peps/pep-0484/#generics)を提供しています．
+`TypeVar`関数はgenericsの使用方法としては一般的です．
 
 Example:
 
@@ -3872,7 +3919,7 @@ def next(l: list[_T]) -> _T:
   return l.pop()
 ```
 
-A TypeVar can be constrained:
+A TypeVar can be constrained:  
 
 ```python
 AddableType = TypeVar("AddableType", int, float, str)
@@ -3882,7 +3929,9 @@ def add(a: AddableType, b: AddableType) -> AddableType:
 
 A common predefined type variable in the `typing` module is `AnyStr`. Use it for
 multiple annotations that can be `bytes` or `unicode` and must all be the same
-type.
+type.  
+`AnyStr`は`typing`モジュールであらかじめ定義された型変数の中で一般的なものの一つです．
+`bytes`と`unicode`のどちらでもありえる文字列を同じ型として扱うときに使ってください．
 
 ```python
 from typing import AnyStr
@@ -3893,10 +3942,11 @@ def check_length(x: AnyStr) -> AnyStr:
 ```
 
 A TypeVar must have a descriptive name, unless it meets all of the following
-criteria:
+criteria:  
+以下の全ての条件を満たさないのであれば，TypeVarは説明的な名前にするべきです．
 
-*   not externally visible
-*   not constrained
+*   not externally visible (外部から見えない)
+*   not constrained (成約されていない)
 
 ```python
 Yes:
@@ -3920,12 +3970,17 @@ No:
 #### 3.19.11 String types (文字列型)
 
 The proper type for annotating strings depends on what versions of Python the
-code is intended for.
+code is intended for.  
+文字列に対して注釈する適切な型は，対象とするpythonのバージョンによって異なります．
 
 Prefer to use `str`, though `Text` is also acceptable. Be consistent in using
 one or the other. For code that deals with binary data, use `bytes`. For Python
 2 compatible code that processes text data (`str` or `unicode` in Python 2,
-`str` in Python 3), use `Text`.
+`str` in Python 3), use `Text`.  
+`str`の使用を推奨しますが，`Text`の使用も許容されます．
+一貫してどちらか一方を使うようにしてください．
+バイナリデータを扱う場合は`bytes`を使ってください．
+テキストデータを扱うコードにPython 2と互換性を持たせる場合は`Text`を使ってください．
 
 ```python
 def deals_with_text_data_in_py3(x: str) -> str:
@@ -3940,7 +3995,10 @@ In some uncommon Python 2 compatibility cases, `str` may make sense instead of
 `Text`, typically to aid compatibility when the return types aren't the same
 between Python 2 and Python 3. Never use `unicode` as it doesn't exist in Python
 3. The reason this discrepancy exists is because `str` means something different
-in Python 2 than in Python 3.
+in Python 2 than in Python 3.  
+一般的ではないpython 2の互換性として`Text`の代わりに`str`でも動作するというものがあります．
+Python 3で存在しない`unicode`は絶対に使わないでください．
+Python 2と3で`str`の良いが異なるためにこのような不一致が存在します．
 
 No:
 
@@ -3950,7 +4008,8 @@ def py2_code(x: str) -> unicode:
 ```
 
 If the type can be either bytes or text, use `Union`, with the appropriate text
-type.
+type.  
+型がbytesかtextのどちらかであれば，適切なtextの型を含んだ`Union`を使ってください．
 
 ```python
 from typing import Text, Union
@@ -3963,7 +4022,8 @@ def py2_compatible(x: Union[bytes, Text]) -> Union[bytes, Text]:
 
 If all the string types of a function are always the same, for example if the
 return type is the same as the argument type in the code above, use
-[AnyStr](#typing-type-var).
+[AnyStr](#typing-type-var).  
+ある関数の全ての文字列の型が常に同じであれば，[AnyStr](#typing-type-var)を使ってください．
 
 <a id="s3.19.12-imports-for-typing"></a>
 <a id="s3.19.12-imports"></a>
@@ -3976,7 +4036,10 @@ For classes from the `typing` and `collections.abc` modules for use in
 annotations, always import the class itself. This keeps common annotations more
 concise and matches typing practices used around the world. You are explicitly
 allowed to import multiple specific classes on one line from the `typing` and
-`collections.abc` modules. Ex:
+`collections.abc` modules. Ex:  
+注釈のために`typing`と`collections.abc`のクラスを使うときは，常にそのクラスをimportしてください．
+一般的な注釈がより簡潔になり，世界中で使われている型と合致します．
+`typing`と`collections.abc`モジュールに関しては，1行で複数のクラスをimportしてもよいことが明示的に許可されています．
 
 ```python
 from collections.abc import Mapping, Sequence
@@ -3986,7 +4049,10 @@ from typing import Any, Union
 Given that this way of importing adds items to the local namespace, names in
 `typing` or `collections.abc` should be treated similarly to keywords, and not
 be defined in your Python code, typed or not. If there is a collision between a
-type and an existing name in a module, import it using `import x as y`.
+type and an existing name in a module, import it using `import x as y`.  
+このimportの仕方でローカルな名前空間にアイテムが追加されることを考えると，`typing`や`collections.abc`内の名前はキーワードと同じように扱うべきです．
+つまり，自身が書くコード内で同じ名前の型や変数，関数を定義してはいけません．
+型とモジュール内の何かしらの名前が衝突した場合，`import x as y`とimportしてください．
 
 ```python
 from typing import Any as AnyType
@@ -4001,20 +4067,33 @@ from typing import Any as AnyType
 Use conditional imports only in exceptional cases where the additional imports
 needed for type checking must be avoided at runtime. This pattern is
 discouraged; alternatives such as refactoring the code to allow top level
-imports should be preferred.
+imports should be preferred.  
+条件付きimportは実行時に避けなければいけない型チェックのために追加でimportが必要なときのみ使うようにしてください．
+このパターンは非推奨です．
+最上位でimportするようにコードをリファクタリングするような代替案が好ましいです．
 
 Imports that are needed only for type annotations can be placed within an `if
-TYPE_CHECKING:` block.
+TYPE_CHECKING:` block.  
+型注釈のためだけに必要なimportは`if TYPE_CHECKING:`ブロック内に配置します．
 
 -   Conditionally imported types need to be referenced as strings, to be forward
     compatible with Python 3.6 where the annotation expressions are actually
     evaluated.
+-   条件付きでimportした型は文字列として参照する必要があります．
+    型について実際に評価していたPython 3.6に対する互換性を保つためです．
 -   Only entities that are used solely for typing should be defined here; this
     includes aliases. Otherwise it will be a runtime error, as the module will
     not be imported at runtime.
+-   ここでは型のためだけに使用されるエンティティのみを定義する必要があります．
+    これには型エイリアスも含みます．
+    このようにしないと，実行時にモジュールがimportされないため，実行時エラーになります．
 -   The block should be right after all the normal imports.
+-   全ての普通のimport文の直後に配置してください．
 -   There should be no empty lines in the typing imports list.
+-   typingのimportリストに空白行はいれないでください．
 -   Sort this list as if it were a regular imports list.
+-   このリストは通常のimportリストと同じようにソートしてください．
+
 ```python
 import typing
 if typing.TYPE_CHECKING:
@@ -4032,12 +4111,18 @@ def f(x: "sketch.Sketch"): ...
 Circular dependencies that are caused by typing are code smells. Such code is a
 good candidate for refactoring. Although technically it is possible to keep
 circular dependencies, various build systems will not let you do so
-because each module has to depend on the other.
+because each module has to depend on the other.  
+型によって引き起こされる循環依存は危険です．
+そのようなコードはリファクタリングの対象としてふさわしいです．
+循環依存は技術的には可能ではありますが，各モジュールが別のモジュールに依存する必要があるため，様々なビルドシステムで認められていません．
 
 Replace modules that create circular dependency imports with `Any`. Set an
 [alias](#typing-aliases) with a meaningful name, and use the real type name from
 this module (any attribute of Any is Any). Alias definitions should be separated
-from the last import by one line.
+from the last import by one line.  
+循環依存の原因となるモジュールは`Any`に置き換えてください．
+意味のある[alias](#typing-aliases)を設定し，このモジュールから実際の型名を使うようにしてください．
+エイリアスの定義は最後のimportから1行で区切る必要があります．
 
 ```python
 from typing import Any
@@ -4057,7 +4142,9 @@ def my_method(self, var: "some_mod.SomeType") -> None:
 #### 3.19.15 Generics (ジェネリクス？)
 
 When annotating, prefer to specify type parameters for generic types; otherwise,
-[the generics' parameters will be assumed to be `Any`](https://www.python.org/dev/peps/pep-0484/#the-any-type).
+[the generics' parameters will be assumed to be `Any`](https://www.python.org/dev/peps/pep-0484/#the-any-type).  
+注釈をつけるときはジェネリックな型の型パラメータを指定することを推奨します．
+それ以外の場合は[ジェネリックな引数は`Any`と推測](https://www.python.org/dev/peps/pep-0484/#the-any-type)されます．
 
 ```python
 def get_names(employee_ids: list[int]) -> dict[int, Any]:
@@ -4075,7 +4162,8 @@ def get_names(employee_ids: List) -> Dict:
 
 If the best type parameter for a generic is `Any`, make it explicit, but
 remember that in many cases [`TypeVar`](#typing-type-var) might be more
-appropriate:
+appropriate:  
+ジェネリックとして最高の型パラメータは`Any`ですが，多くのケースで[`TypeVar`](#typing-type-var)の方が適切です．
 
 ```python
 def get_names(employee_ids: list[Any]) -> dict[Any, str]:
@@ -4094,16 +4182,25 @@ def get_names(employee_ids: list[_T]) -> dict[_T, str]:
 <a id="consistency"></a>
 ## 4 おわりに
 
-*BE CONSISTENT*.
+*BE CONSISTENT*.  
+*一貫性を持て*.
 
 If you're editing code, take a few minutes to look at the code around you and
 determine its style. If they use spaces around all their arithmetic operators,
 you should too. If their comments have little boxes of hash marks around them,
-make your comments have little boxes of hash marks around them too.
+make your comments have little boxes of hash marks around them too.  
+コードを編集するのであれば，自分が編集するコードの周辺を数分眺めてそのスタイルを知りましょう．
+全ての算術演算子の前後にスペースを使っているのであれば，あなたもその書き方に従うべきです．
+コメントがハッシュマーク(`#`)で箱のように囲まれているのであれば，あなたもそうするべきです．
 
 The point of having style guidelines is to have a common vocabulary of coding so
 people can concentrate on what you're saying rather than on how you're saying
 it. We present global style rules here so people know the vocabulary, but local
 style is also important. If code you add to a file looks drastically different
 from the existing code around it, it throws readers out of their rhythm when
-they go to read it. Avoid this.
+they go to read it. Avoid this.  
+書き方の規則を設けるポイントは，コーディングに関する共通の語彙を持つことにあります．
+つまり，どのように話すかではなく何を話すかに集中できるようにするためです．
+この文書でグローバルな規則を紹介したので皆さんは語彙を知ったことになりますが，ローカルな規則も重要である点に留意してください．
+あなたが書き足したコードが既存のコードと大きく異る場合，他の人がコードを読むときにリズムが狂ってしまいます．
+それは避けるようにしましょう．
