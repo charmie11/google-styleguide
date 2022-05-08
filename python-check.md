@@ -12,6 +12,7 @@
 - decorator
 - パッケージとモジュールの違い
 - functionとmethodの違い
+- io.StringIOで文字列を連結
 - 例外
 - グローバル変数
 - class attribute

@@ -2721,7 +2721,9 @@ Use an
 [f-string](https://docs.python.org/3/reference/lexical_analysis.html#f-strings),
 the `%` operator, or the `format` method for formatting strings, even when the
 parameters are all strings. Use your best judgment to decide between `+` and
-string formatting.
+string formatting.  
+仮に全てのパラメータが文字列であったとしても，整形した文字列を書くときは
+[f文字列](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)(フォーマット済み文字列リテラル)，`%`オペレータ，`format`メソッドを使ってください．
 
 ```python
 Yes: x = f'name: {name}; score: {n}'
@@ -2744,7 +2746,14 @@ be optimized on CPython, that is an implementation detail. The conditions under
 which an optimization applies are not easy to predict and may change. Instead,
 add each substring to a list and `''.join` the list after the loop terminates,
 or write each substring to an `io.StringIO` buffer. These techniques
-consistently have amortized-linear run time complexity.
+consistently have amortized-linear run time complexity.  
+ループ内で文字列を連結するために `+` や `+=` を使わないでください．
+文字列を連結するときに実行時間が線形ではなく二乗オーダーになる環境が存在します．
+この類の通常の連結はCPython丈では最適化されますが，実装の詳細に関する話になります．
+最適化が適用される環境を予測することは難しいですし，環境が変わる可能性もあります．
+代わりの方法として，各部分文字列を含むlistを作成し，ループの後に` ''.join` を使って連結するか
+`io.StringIO`バッファに各文字列を書き込むようにしてください．
+上記のテクニックは一貫して実行時間が処理の複雑さに対して線形です．
 
 ```python
 Yes: items = ['<table>']
@@ -2763,7 +2772,10 @@ No: employee_table = '<table>'
 
 Be consistent with your choice of string quote character within a file. Pick `'`
 or `"` and stick with it. It is okay to use the other quote character on a
-string to avoid the need to backslash-escape quote characters within the string.
+string to avoid the need to backslash-escape quote characters within the string.  
+一つのファイル内で文字列を囲む記号に統一をとってください．
+`'` か `"`のどちらかです．
+文字列内でバックスラッシュの使用を避けるために別の記号を使っても構いません．
 
 ```python
 Yes:
@@ -2781,13 +2793,19 @@ No:
 
 Prefer `"""` for multi-line strings rather than `'''`. Projects may choose to
 use `'''` for all non-docstring multi-line strings if and only if they also use
-`'` for regular strings. Docstrings must use `"""` regardless.
+`'` for regular strings. Docstrings must use `"""` regardless.  
+複数行にまたがる文字列であれば `'''` より `"""` を使ってください．
+プロジェクトによっては，通常の文字列に`'` を使い，docstring以外の全ての文字列に対して`'''` を使うこともありえます．
+docstringは`"""` を使ってください．
 
 Multi-line strings do not flow with the indentation of the rest of the program.
 If you need to avoid embedding extra space in the string, use either
 concatenated single-line strings or a multi-line string with
 [`textwrap.dedent()`](https://docs.python.org/3/library/textwrap.html#textwrap.dedent)
-to remove the initial space on each line:
+to remove the initial space on each line:  
+複数行にまたがるm時列はプログラムの他の部分のインデントと同じようにはなりません．
+文字列にスペースを追加する場合は複数の1行文字列を連結するか
+[`textwrap.dedent()`](https://docs.python.org/3/library/textwrap.html#textwrap.dedent)を使って1つの複数行文字列の各行の最初のスペースを削除する方法が考えられます．
 
 ```python
   No:
@@ -2835,7 +2853,11 @@ their first argument: Always call them with a string literal (not an f-string!)
 as their first argument with pattern-parameters as subsequent arguments. Some
 logging implementations collect the unexpanded pattern-string as a queryable
 field. It also prevents spending time rendering a message that no logger is
-configured to output.
+configured to output.  
+最初の引数にパターン文字列を想定しているロギング関数に対して
+文字列リテラルをパターン文字列を使った第1引数として関数を使ってください．
+ロギング関数の実装によってはパターン文字列を展開せずにクエリ可能なフィールドとして回収します．
+ロガーが出力しないメッセージをレンダリングするために時間を浪費することを防いでくれます．
 
 ```python
   Yes:
@@ -2877,13 +2899,17 @@ configured to output.
 #### 3.10.2 Error Messages (エラーメッセージ)
 
 Error messages (such as: message strings on exceptions like `ValueError`, or
-messages shown to the user) should follow three guidelines:
+messages shown to the user) should follow three guidelines:  
+メッセージ文字列や `ValueError`のような例外などのエラーメッセージは以下の3つのガイドラインに従うようにしてください．
 
 1.  The message needs to precisely match the actual error condition.
+1.  メッセージは実際に生じたエラーの条件に正確に一致する
 
 2.  Interpolated pieces need to always be clearly identifiable as such.
+2.  補間されたことが常に明確に識別できるようにする必要がある
 
 3.  They should allow simple automated processing (e.g. grepping).
+4.  シンプルで自動処理できる方法(例: grep)を提供する必要がある
 
 ```python
   Yes:
