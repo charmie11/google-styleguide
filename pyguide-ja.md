@@ -3194,12 +3194,16 @@ from otherproject.ai import soul
 <a id="statements"></a>
 ### 3.14 Statements (ブロックを構成する最小単位)
 
-Generally only one statement per line.
+Generally only one statement per line.  
+通常，1行に1つのステートメントを書くようにしてください．
 
 However, you may put the result of a test on the same line as the test only if
 the entire statement fits on one line. In particular, you can never do so with
 `try`/`except` since the `try` and `except` can't both fit on the same line, and
-you can only do so with an `if` if there is no `else`.
+you can only do so with an `if` if there is no `else`.  
+ステートメントと同じ行にテスト結果を書くことがあるかもしれませんが，1行に収まるときだけにしてください．
+具体的には`try`/`except`は`try`と`except`を1行に収まらないため複数行に分けるべきですし，
+`if`文であれば`else`がないときのみ可能です．
 
 ```python
 Yes:
