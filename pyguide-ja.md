@@ -2328,9 +2328,14 @@ No:
 Most `.py` files do not need to start with a `#!` line. Start the main file of a
 program with
 `#!/usr/bin/env python3` (to support virtualenvs) or `#!/usr/bin/python3` per
-[PEP-394](https://www.python.org/dev/peps/pep-0394/).
+[PEP-394](https://www.python.org/dev/peps/pep-0394/).  
+大半のpyファイルは，最初の1行を `#!`で始める必要はありません．
 
-This line is used by the kernel to find the Python interpreter, but is ignored by Python when importing modules. It is only necessary on a file intended to be executed directly.
+[PEP-394](https://www.python.org/dev/peps/pep-0394/)に従って，mainファイルの1行目は`#!/usr/bin/env python3` (仮想環境向け) か `#!/usr/bin/python3` としてください．
+
+This line is used by the kernel to find the Python interpreter, but is ignored by Python when importing modules. It is only necessary on a file intended to be executed directly.  
+この1文はカーネルがpythonのインタプリタを探すときに使われますが，pythonがモジュールをimportするときには無視されます．
+直接実行することを目的としたファイルにのみ必要です．
 
 <a id="s3.8-comments-and-docstrings"></a>
 <a id="s3.8-comments"></a>
