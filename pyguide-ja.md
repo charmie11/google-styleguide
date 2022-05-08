@@ -3080,7 +3080,9 @@ event ("Remove this code when all clients can handle XML responses.").
 ### 3.13 Imports formatting (import文の書き方)
 
 Imports should be on separate lines; there are
-[exceptions for `typing` and `collections.abc` imports](#typing-imports).
+[exceptions for `typing` and `collections.abc` imports](#typing-imports).  
+import文はそれぞれ別々の行に書くようにしてください．
+ただし[`typing` と `collections.abc` のimportは例外](#typing-imports)です．
 
 E.g.:
 
@@ -3094,12 +3096,14 @@ Yes: import os
 No:  import os, sys
 ```
 
-
 Imports are always put at the top of the file, just after any module comments
 and docstrings and before module globals and constants. Imports should be
-grouped from most generic to least generic:
+grouped from most generic to least generic:  
+import分は常にファイルの最上位に，モジュールコメント・docstringの後でモジュールのグローバル変数・定数の前に書きます．
+import文は一般的なものから順番にグループに分けて書きます．
 
-1.  Python future import statements. For example:
+1.  Python future import statements. For example:  
+    Pythonのfuture機能のimport
 
     ```python
     from __future__ import absolute_import
@@ -3109,31 +3113,35 @@ grouped from most generic to least generic:
 
     See [above](#from-future-imports) for more information about those.
 
-2.  Python standard library imports. For example:
+3.  Python standard library imports. For example:  
+    Pythonの標準ライブラリのimport
 
     ```python
     import sys
     ```
 
-3.  [third-party](https://pypi.org/) module
-    or package imports. For example:
+4.  [third-party](https://pypi.org/) module
+    or package imports. For example:  
+    [third-party](https://pypi.org/)モジュール・パッケージのimport
 
     
     ```python
     import tensorflow as tf
     ```
 
-4.  Code repository
-    sub-package imports. For example:
+5.  Code repository
+    sub-package imports. For example:  
+    レポジトリのサブパッケージのimport
 
     
     ```python
     from otherproject.ai import mind
     ```
 
-5.  **Deprecated:** application-specific imports that are part of the same
+6.  **Deprecated:** application-specific imports that are part of the same
     top level
-    sub-package as this file. For example:
+    sub-package as this file. For example:  
+    **非推奨:** そのファイルと同じ階層にあるサブパッケージの一部となるアプリケーション特有のimport
 
     
     ```python
@@ -3143,12 +3151,17 @@ grouped from most generic to least generic:
     You may find older Google Python Style code doing this, but it is no longer
     required. **New code is encouraged not to bother with this.** Simply treat
     application-specific sub-package imports the same as other sub-package
-    imports.
+    imports.  
+    古いGoogle Python Styleでこのようなコードが見つかるかもしれませんが，必須ではなくなりました．
+    **新しいコードではこれを気にしないように推奨されています**．
+    アプリケーション特有のサブパッケージのimportは他のサブパッケージのimportと同じように行ってください．
 
     
 Within each grouping, imports should be sorted lexicographically, ignoring case,
 according to each module's full package path (the `path` in `from path import
-...`). Code may optionally place a blank line between import sections.
+...`). Code may optionally place a blank line between import sections.  
+各importグループでは，モジュールのフルネームを大文字・小文字の区別をせずに辞書順にソートします．
+importグループの間に1行の空行を入れてもいいでしょう．
 
 ```python
 import collections
