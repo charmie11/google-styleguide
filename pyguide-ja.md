@@ -2205,9 +2205,11 @@ docstringの一部としてコメントがより有用か考えてみてくだ�
 <a id="whitespace"></a>
 ### 3.6 Whitespace (スペース)
 
-Follow standard typographic rules for the use of spaces around punctuation.
+Follow standard typographic rules for the use of spaces around punctuation.  
+句読点の前後のスペースについては，文章を書く際の一般的な規則に従ってください．
 
-No whitespace inside parentheses, brackets or braces.
+No whitespace inside parentheses, brackets or braces.  
+丸括弧，角括弧，中括弧内でスペースは不要です．
 
 ```python
 Yes: spam(ham[1], {'eggs': 2}, [])
@@ -2218,7 +2220,9 @@ No:  spam( ham[ 1 ], { 'eggs': 2 }, [ ] )
 ```
 
 No whitespace before a comma, semicolon, or colon. Do use whitespace after a
-comma, semicolon, or colon, except at the end of the line.
+comma, semicolon, or colon, except at the end of the line.  
+カンマ，セミコロン，コロンの前にスペースは入れないでください．
+行の最後でなければカンマ，セミコロン，コロンの後にスペースを入れてください．
 
 ```python
 Yes: if x == 4:
@@ -2233,7 +2237,8 @@ No:  if x == 4 :
 ```
 
 No whitespace before the open paren/bracket that starts an argument list,
-indexing or slicing.
+indexing or slicing.  
+引数リスト，インデックス，スライスの開始を意味する丸括弧，角括弧の前にスペースは入れないでください．
 
 ```python
 Yes: spam(1)
@@ -2251,12 +2256,14 @@ Yes: dict['key'] = list[index]
 No:  dict ['key'] = list [index]
 ```
 
-No trailing whitespace.
+No trailing whitespace.  
+末尾のスペースは不要です．
 
 Surround binary operators with a single space on either side for assignment
 (`=`), comparisons (`==, <, >, !=, <>, <=, >=, in, not in, is, is not`), and
 Booleans (`and, or, not`). Use your better judgment for the insertion of spaces
-around arithmetic operators (`+`, `-`, `*`, `/`, `//`, `%`, `**`, `@`).
+around arithmetic operators (`+`, `-`, `*`, `/`, `//`, `%`, `**`, `@`).  
+代入(`=`), 比較 (`==, <, >, !=, <>, <=, >=, in, not in, is, is not`), そして論理演算 (`and, or, not`)といった二項演算子の前後にスペースを1つ入れてください．
 
 ```python
 Yes: x == 1
@@ -2269,7 +2276,9 @@ No:  x<1
 Never use spaces around `=` when passing keyword arguments or defining a default
 parameter value, with one exception:
 [when a type annotation is present](#typing-default-values), *do* use spaces
-around the `=` for the default parameter value.
+around the `=` for the default parameter value.  
+キーワード引数を指定するときやデフォルト値を設定するときの`=`の前後にはスペースを入れないでください．
+ただし，例外として[型ヒント](#typing-default-values)のデフォルト値を指定するときは`=`の前後にスペースを入れてください．
 
 ```python
 Yes: def complex(real, imag=0.0): return Magic(r=real, i=imag)
@@ -2282,7 +2291,9 @@ No:  def complex(real, imag: float=0.0): return Magic(r = real, i = imag)
 ```
 
 Don't use spaces to vertically align tokens on consecutive lines, since it
-becomes a maintenance burden (applies to `:`, `#`, `=`, etc.):
+becomes a maintenance burden (applies to `:`, `#`, `=`, etc.):  
+連続する行のトークン(`:`, `#`, `=`など)を縦方向に揃えるためにスペースを使わないでください．
+メンテナンスの負担になるためです．
 
 ```python
 Yes:
