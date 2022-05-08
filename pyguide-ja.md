@@ -3539,23 +3539,32 @@ should not be executed when the file is being `pydoc`ed.
 <a id="function-length"></a>
 ### 3.18 Function length (関数の長さ)
 
-Prefer small and focused functions.
+Prefer small and focused functions.  
+小さく焦点を絞った関数が好まれます．
 
 We recognize that long functions are sometimes appropriate, so no hard limit is
 placed on function length. If a function exceeds about 40 lines, think about
-whether it can be broken up without harming the structure of the program.
+whether it can be broken up without harming the structure of the program.  
+ときには長い関数が適切であることは認識しており，関数の長さに関して厳密な上限はありません．
+40行を超えた場合は，プログラムの構造を損なうことなく関数を分割できないか検討してください．
 
 Even if your long function works perfectly now, someone modifying it in a few
 months may add new behavior. This could result in bugs that are hard to find.
 Keeping your functions short and simple makes it easier for other people to read
-and modify your code.
+and modify your code.  
+長い関数は，仮に完璧に動作したとしても，いつか誰かが何かしらの変更を加えるときに発見しにくいバグの原因になる可能性があります．
+そのため，関数は短くシンプルにして他の人に対する可読性・修正の容易さを実現してください．
 
 You could find long and complicated functions when working with
 some
 code. Do not be intimidated by modifying existing code: if working with such a
 function proves to be difficult, you find that errors are hard to debug, or you
 want to use a piece of it in several different contexts, consider breaking up
-the function into smaller and more manageable pieces.
+the function into smaller and more manageable pieces.  
+ときには長く複雑な関数を含むコードに出会うかもしれません．
+そのようなコードを修正することを恐れないでください．
+そのような関数を使うことが難しいのであればエラーのデバッグも難しいでしょうし，
+そのような関数の一部を様々な文脈で何度も使うことがあれば関数をより小さで管理可能な複数の関数に分割した方が良いでしょう．
 
 <a id="s3.19-type-annotations"></a>
 <a id="319-type-annotations"></a>
