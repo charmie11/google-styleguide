@@ -125,7 +125,7 @@ See README.md for details.
     - [3.6 Whitespace (スペース)](#36-whitespace-スペース)
     - [3.7 Shebang Line (先頭行のシバン)](#37-shebang-line-先頭行のシバン)
     - [3.8 Comments and Docstrings (コメントとDocstring)](#38-comments-and-docstrings-コメントとdocstring)
-      - [3.8.1 Docstrings](#381-docstrings)
+      - [3.8.1 Docstrings (ドキュメンテーション文字列)](#381-docstrings-ドキュメンテーション文字列)
       - [3.8.2 Modules (モジュール)](#382-modules-モジュール)
       - [3.8.3 Functions and Methods (関数とメソッド)](#383-functions-and-methods-関数とメソッド)
       - [3.8.4 Classes (クラス)](#384-classes-クラス)
@@ -2345,14 +2345,15 @@ This line is used by the kernel to find the Python interpreter, but is ignored b
 ### 3.8 Comments and Docstrings (コメントとDocstring)
 
 Be sure to use the right style for module, function, method docstrings and
-inline comments.
+inline comments.  
+モジュール，関数，メソッドのdocstringとインラインのコメントについては正しい書き方に従うことを意識してください．
 
 <a id="s3.8.1-comments-in-doc-strings"></a>
 <a id="381-docstrings"></a>
 <a id="comments-in-doc-strings"></a>
 
 <a id="docstrings"></a>
-#### 3.8.1 Docstrings
+#### 3.8.1 Docstrings (ドキュメンテーション文字列)
 
 Python uses *docstrings* to document code. A docstring is a string that is the
 first statement in a package, module, class or function. These strings can be
@@ -2366,7 +2367,16 @@ exceeding 80 characters) terminated by a period, question mark, or exclamation
 point. When writing more (encouraged), this must be followed by a blank line,
 followed by the rest of the docstring starting at the same cursor position as
 the first quote of the first line. There are more formatting guidelines for
-docstrings below.
+docstrings below.  
+Pythonは*docstring*を使用してコードのドキュメントを作成します．
+docstring(ドキュメンテーション文字列)はパッケージ，おmジュール，クラス，関数の最初の命令の前に書いてある文字列です．
+これらの文字列は，`pydoc`を使うときにオブジェクトのメンバ `__doc__` を介して自動的に抽出されます
+(試しに自分が書いたモジュール丈で`pydoc`を走らせてみるとよいでしょう)．
+docstringについては[PEP 257](https://www.google.com/url?sa=D&q=http://www.python.org/dev/peps/pep-0257/)に従い，3つのダブルクォーテーション `"""`で囲むようにしてください．
+docstringは
+80文字以内に収まる1行で概要を説明する概要行(文末に`.`, `?`, `!`)として書いてください．
+更に詳細な情報を書く場合は，1行の空行の後にdocstringのダブルクォーテーションの記号と同じインデントで書き続けてください．
+docstringに関するフォーマットの規則については以下に書く通りです．
 
 <a id="s3.8.2-comments-in-modules"></a>
 <a id="382-modules"></a>
@@ -2375,10 +2385,14 @@ docstrings below.
 <a id="module-docs"></a>
 #### 3.8.2 Modules (モジュール)
 
-Every file should contain license boilerplate. Choose the appropriate boilerplate for the license used by the project (for example, Apache 2.0, BSD, LGPL, GPL)
+Every file should contain license boilerplate. Choose the appropriate boilerplate for the license used by the project (for example, Apache 2.0, BSD, LGPL, GPL)  
+全てのファイルにライセンスの定型文を含める必要があります．
+そのプロジェクトに適切なライセンス (Apache 2.0, BSD, LGPL, GPLなど)の定型文を追加してください．
 
 Files should start with a docstring describing the contents and usage of the
 module.
+ファイルの先頭にはそのファイルの中身やモジュールの使用方法を記述したdocstringを書く必要があります．
+
 ```python
 """A one line summary of the module or program, terminated by a period.
 
@@ -2402,13 +2416,15 @@ examples.
 <a id="function-docs"></a>
 #### 3.8.3 Functions and Methods (関数とメソッド)
 
-In this section, "function" means a method, function, or generator.
+In this section, "function" means a method, function, or generator.  
+ここでは"関数"とはメソッド，関数，ジェネレータを意味します．
 
-A function must have a docstring, unless it meets all of the following criteria:
+A function must have a docstring, unless it meets all of the following criteria:  
+以下の全ての条件を満たす場合を除いて，関数にはdocstringを必ずつけてください．
 
--   not externally visible
--   very short
--   obvious
+-   not externally visible (外部から見えない)
+-   very short (とても短い)
+-   obvious (明確)
 
 A docstring should give enough information to write a call to the function
 without reading the function's code. The docstring should describe the
@@ -2418,14 +2434,23 @@ to be used. For example, a function that mutates one of its arguments as a side
 effect should note that in its docstring. Otherwise, subtle but important
 details of a function's implementation that are not relevant to the caller are
 better expressed as comments alongside the code than within the function's
-docstring.
+docstring.  
+docstringは関数の実装を読まなくてもその関数を呼ぶために十分な情報を含んでいる必要があります．
+docstringは関数の呼び出しについて書きますが，関数の使い方と実装が密接に関係している場合を除いて一般的には実装の詳細については書きません．
+例えば，関数の内部で副作用として引数の一つに変更が加えられるのであれば，それはdocstringに書くべきです．
+そのような場合を除き，関数の実装に関する重要な詳細は関数を呼ぶ側からすれば重要ではないため，実装の内部のコメントとして記述するべきです．
 
 The docstring should be descriptive-style (`"""Fetches rows from a
 Bigtable."""`) rather than imperative-style (`"""Fetch rows from a
 Bigtable."""`). The docstring for a `@property` data descriptor should use the
 same style as the docstring for an attribute or a
 <a href="#doc-function-args">function argument</a> (`"""The Bigtable path."""`,
-rather than `"""Returns the Bigtable path."""`).
+rather than `"""Returns the Bigtable path."""`).  
+docstringはimperative-style(`"""Fetch rows from a
+Bigtable."""`)よりdescripptive-style(`"""Fetches rows from a Bigtable."""`)にするべきです．
+`@property`に関するdocstringは属性や
+<a href="#doc-function-args">関数の引数</a>と同じ書き方にするべきです．
+具体的には， `"""Returns the Bigtable path."""` より `"""The Bigtable path."""` が好ましいです．
 
 A method that overrides a method from a base class may have a simple docstring
 sending the reader to its overridden method's docstring, such as `"""See base
@@ -2434,14 +2459,22 @@ documentation that is already present in the base method's docstring. However,
 if the overriding method's behavior is substantially different from the
 overridden method, or details need to be provided (e.g., documenting additional
 side effects), a docstring with at least those differences is required on the
-overriding method.
+overriding method.  
+基底クラスのメソッドをオーバーライドするメソッドであれば，基のメソッドのdocstringに誘導するようなシンプルなdocstringにすると良いでしょう．
+例えば `"""See base class."""` といったようにです．
+なぜなら，基底メソッドのdocstringに既に書いてあることを繰り返し書く必要がないからです．
+ただし，派生メソッドの挙動が基底メソッドの挙動と異なるような場合であれば少なくともこの違いについてdocstringに記載するべきです．
 
 Certain aspects of a function should be documented in special sections, listed
 below. Each section begins with a heading line, which ends with a colon. All
 sections other than the heading should maintain a hanging indent of two or four
 spaces (be consistent within a file). These sections can be omitted in cases
 where the function's name and signature are informative enough that it can be
-aptly described using a one-line docstring.
+aptly described using a one-line docstring.  
+以下に示す関数の特定の要素については特別なセクションに書きます．
+各セクションは見出し行(行末にコロン)で始まります．
+セクション内では見出しを除いて半角スペース2つか4つ分インデントを下げます(このスペースの数はファイル内で統一を取ってください)．
+これらのセクションは関数名や署名が1行の説明で事足りる場合は省略できます．
 
 <a id="doc-function-args"></a>
 [*Args:*](#doc-function-args)
@@ -2453,6 +2486,12 @@ aptly described using a one-line docstring.
     type(s) if the code does not contain a corresponding type annotation. If a
     function accepts `*foo` (variable length argument lists) and/or `**bar`
     (arbitrary keyword arguments), they should be listed as `*foo` and `**bar`.
+各引数の名前を列挙します．
+引数名の後にコロンを足し，その引数の詳細を書きます．
+詳細が80文字より長くなる場合はインデントを一つ下げて複数行に分けて書いてください．
+型ヒントが書いてない場合は，詳細に変数の型も記述してください．
+関数が可変長引数のリストとして`*foo`を受け取る場合や任意のキーワード引数として`**bar`を受け取る場合は，
+それぞれ`*foo`, `**bar`と書いてください．
 
 <a id="doc-function-returns"></a>
 [*Returns:* (or *Yields:* for generators)](#doc-function-returns)
@@ -2467,7 +2506,13 @@ aptly described using a one-line docstring.
     describe such a return value as: "Returns: A tuple (mat_a, mat_b), where
     mat_a is ..., and ...". The auxiliary names in the docstring need not
     necessarily correspond to any internal names used in the function body (as
-    those are not part of the API).
+    those are not part of the API).  
+返戻値の型と意味を書いてください．
+関数がNoneのみを返す場合はこのセクションは不要です．
+docstringがReturns, Yieldsで始まり，冒頭の文章が返戻値について十分説明している場合も書かなくてもいいかもしれません(例: `"""Returns row from Bigtable as a tuple of strings."""`)．
+[このような](http://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html) 'Numpy スタイル' (tuple型の返戻値についてあたかも複数の値を返すように記述する)を真似しないでください．
+その代わりに "Returns: A tuple (mat_a, mat_b), where mat_a is ..., and ..." と書くようにしてください．
+docstringで使う補助名は関数本体で使用される名前と対応づいている必要はありません．
 
 <a id="doc-function-raises"></a>
 [*Raises:*](#doc-function-raises)
@@ -2477,6 +2522,9 @@ aptly described using a one-line docstring.
     exceptions that get raised if the API specified in the docstring is violated
     (because this would paradoxically make behavior under violation of the API
     part of the API).
+インターフェースに関する全ての例外を列挙し，その後に説明を書いてください．
+*Args:*のセクションと同じように例外を列挙していきます．
+docstringで指定したAPIに違反した場合についての例外は文書化しないでください．
 
 ```python
 def fetch_smalltable_rows(table_handle: smalltable.Table,
@@ -2513,7 +2561,8 @@ def fetch_smalltable_rows(table_handle: smalltable.Table,
     """
 ```
 
-Similarly, this variation on `Args:` with a line break is also allowed:
+Similarly, this variation on `Args:` with a line break is also allowed:  
+同様に，`Args:`セクションを以下のように書いても問題ありません．
 
 ```python
 def fetch_smalltable_rows(table_handle: smalltable.Table,
@@ -2562,7 +2611,9 @@ def fetch_smalltable_rows(table_handle: smalltable.Table,
 Classes should have a docstring below the class definition describing the class.
 If your class has public attributes, they should be documented here in an
 `Attributes` section and follow the same formatting as a
-[function's `Args`](#doc-function-args) section.
+[function's `Args`](#doc-function-args) section.  
+クラスのdocstringは定義の前に書きます．
+publicな属性があれば`Attributes`セクションに[`Args`](#doc-function-args)と同じルールで書きます．
 
 ```python
 class SampleClass:
@@ -2597,7 +2648,11 @@ The final place to have comments is in tricky parts of the code. If you're going
 to have to explain it at the next [code review](http://en.wikipedia.org/wiki/Code_review),
 you should comment it now. Complicated operations get a few lines of comments
 before the operations commence. Non-obvious ones get comments at the end of the
-line.
+line.  
+ブロックやインラインのコメントはトリッキーに感じる部分です．
+次の[code review](http://en.wikipedia.org/wiki/Code_review)で説明する必要があるコードについては，今すぐコメントする必要があります．
+複雑な処理であれば，その処理の会えに数行のコメントを書きます．
+自明でない場合は行の末尾にコメントを書きます．
 
 ```python
 # We use a weighted dictionary search to find out where i is in
@@ -2611,9 +2666,13 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 To improve legibility, these comments should start at least 2 spaces away from
 the code with the comment character `#`, followed by at least one space before
 the text of the comment itself.
+コメントの読みやすさを向上させるため，`#`の後ろにスペースを1ついれます．
+行末尾のコメントであれば`#`の前に2つのスペースを入れてください．
 
 On the other hand, never describe the code. Assume the person reading the code
-knows Python (though not what you're trying to do) better than you do.
+knows Python (though not what you're trying to do) better than you do.  
+コメントでコードそのものを説明することがないようにしてください．
+プログラムを読む人はあなたよりpythonに詳しいかもしれません．
 
 ```python
 # BAD COMMENT: Now go through the b array and make sure whenever i occurs
@@ -2632,17 +2691,25 @@ knows Python (though not what you're trying to do) better than you do.
 #### 3.8.6 Punctuation, Spelling, and Grammar (カンマ，ピリオド，スペル，文法)
 
 Pay attention to punctuation, spelling, and grammar; it is easier to read
-well-written comments than badly written ones.
+well-written comments than badly written ones.  
+カンマ，ピリオド，スペリング，文法には注意を払ってください．
+よい文章で書かれたコメントは読みやすいです．
 
 Comments should be as readable as narrative text, with proper capitalization and
 punctuation. In many cases, complete sentences are more readable than sentence
 fragments. Shorter comments, such as comments at the end of a line of code, can
-sometimes be less formal, but you should be consistent with your style.
+sometimes be less formal, but you should be consistent with your style.  
+コメントは適切な大文字と句読点を使用し，説明文と同じ程度に読みやすい文章でなければいけません．
+多くの場合，文章の断片を書くだけより，完璧な文章を書いた方が読みやすいです．
+行末に書く短いコメントは形式的ではありませんが，自分のスタイルに一貫性をもたせてください．
 
 Although it can be frustrating to have a code reviewer point out that you are
 using a comma when you should be using a semicolon, it is very important that
 source code maintain a high level of clarity and readability. Proper
-punctuation, spelling, and grammar help with that goal.
+punctuation, spelling, and grammar help with that goal.  
+セミコロンを使うべきところでカンマを使っているとコードレビューワーに指摘されるのはストレスがたまるかもしれませんが，
+ソースコードの明瞭さと読みやすさを高いレベルで維持することはとても重要です．
+このような目的を実現するために，適切なカンマ，ピリオド，スペル，文法を使用してください．
 
 <a id="s3.10-strings"></a>
 <a id="310-strings"></a>

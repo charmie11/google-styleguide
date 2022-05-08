@@ -11,6 +11,7 @@
 - lexical scope
 - decorator
 - パッケージとモジュールの違い
+- functionとmethodの違い
 - 例外
 - グローバル変数
 - class attribute
