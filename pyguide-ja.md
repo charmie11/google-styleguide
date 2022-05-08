@@ -2961,40 +2961,59 @@ connections, and also other resources that need to be closed down in a similar
 fashion. To name only a few examples, this also includes
 [mmap](https://docs.python.org/3/library/mmap.html) mappings,
 [h5py File objects](https://docs.h5py.org/en/stable/high/file.html), and
-[matplotlib.pyplot figure windows](https://matplotlib.org/2.1.0/api/_as_gen/matplotlib.pyplot.close.html).
+[matplotlib.pyplot figure windows](https://matplotlib.org/2.1.0/api/_as_gen/matplotlib.pyplot.close.html).  
+ファイルやソケットは使用後に明示的にクローズしてください．
+この規則は内部でソケットを使うリソース全般(データベース接続)や似たような方法でクローズするべきリソースに適用されます．
+幾つか例として挙げると，[mmap](https://docs.python.org/3/library/mmap.html) mappings,
+[h5py File objects](https://docs.h5py.org/en/stable/high/file.html), 
+[matplotlib.pyplot figure windows](https://matplotlib.org/2.1.0/api/_as_gen/matplotlib.pyplot.close.html)です．
 
 Leaving files, sockets or other such stateful objects open unnecessarily has
-many downsides:
+many downsides:  
+ファイル・ソケットなどの状態オブジェクトを不必要にオープンした状態にすると様々な問題が発生します．
 
 -   They may consume limited system resources, such as file descriptors. Code
     that deals with many such objects may exhaust those resources unnecessarily
     if they're not returned to the system promptly after use.
+-   ファイル記述子などの限られたシステムリソースを消費します．
+    このようなオブジェクトを大量に扱うコードで使用後にリソースをクローズしないと，不必要にこれらのリソースを浪費するかもしれません．
 -   Holding files open may prevent other actions such as moving or deleting
     them, or unmounting a filesystem.
+-   ファイルをオープンにし続けるとファイルの移動・削除・ファイルシステムのマウントができなくなるかもしれません．
 -   Files and sockets that are shared throughout a program may inadvertently be
     read from or written to after logically being closed. If they are actually
     closed, attempts to read or write from them will raise exceptions, making
     the problem known sooner.
+-   プログラムを介して共有されているファイルとソケットは，論理的に閉じられた後に誤って読み取られたり書き込まれたりするかもしれません．
+    本当にクローズされている状況で読み書きを試みれば例外が発生してすぐに気付くはずです．
 
 Furthermore, while files and sockets (and some similarly behaving resources) are
 automatically closed when the object is destructed, coupling the lifetime of the
-object to the state of the resource is poor practice:
+object to the state of the resource is poor practice:  
+さらに，ファイルとソケットがオブジェクトが破棄されるときに自動的にクローズしながらオブジェクトの生存時間をリソースの状態に組み込むのは悪筋です．
 
 -   There are no guarantees as to when the runtime will actually invoke the
     `__del__` method. Different Python implementations use different memory
     management techniques, such as delayed garbage collection, which may
     increase the object's lifetime arbitrarily and indefinitely.
+-   実行時に実際に`__del__`が呼ばれるタイミングは保証されていません．
+    Pythonの実装が異なればメモリ管理の方法も異なります．
+    例えばガーベジコレクションはオブジェクトの生存期間を任意に無期限に増やすかもしれません．
 -   Unexpected references to the file, e.g. in globals or exception tracebacks,
     may keep it around longer than intended.
+-   グローバルや例外トレースバックといったファイルへの予期しない参照によって，意図したよりも長くファイルが保持されることがあります．
 
 Relying on finalizers to do automatic cleanup that has observable side effects
 has been rediscovered over and over again to lead to major problems, across many
 decades and multiple languages (see e.g.
 [this article](https://wiki.sei.cmu.edu/confluence/display/java/MET12-J.+Do+not+use+finalizers)
-for Java).
+for Java).  
+観測可能な副作用でもある自動クリーンアップのためにファイナライザーに依存することは，様々な言語で何十年もの間繰り返し発見されては大きな問題を引き起こしてきました．
+例えばJavaに関する議論については[この記事](https://wiki.sei.cmu.edu/confluence/display/java/MET12-J.+Do+not+use+finalizers)を参照してください．
 
 The preferred way to manage files and similar resources is using the
-[`with` statement](http://docs.python.org/reference/compound_stmts.html#the-with-statement):
+[`with` statement](http://docs.python.org/reference/compound_stmts.html#the-with-statement):  
+ファイルや類似リソースの管理に適した方法は[`with`ステートメント](http://docs.python.org/reference/compound_stmts.html#the-with-statement)を使うようにしてください．
 
 ```python
 with open("hello.txt") as hello_file:
@@ -3003,7 +3022,8 @@ with open("hello.txt") as hello_file:
 ```
 
 For file-like objects that do not support the `with` statement, use
-`contextlib.closing()`:
+`contextlib.closing()`:  
+`with`ステートメントをサポートしていないオブジェクトについては，`contextlib.closing()`を使ってください．
 
 ```python
 import contextlib
@@ -3014,7 +3034,8 @@ with contextlib.closing(urllib.urlopen("http://www.python.org/")) as front_page:
 ```
 
 In rare cases where context-based resource management is infeasible, code
-documentation must explain clearly how resource lifetime is managed.
+documentation must explain clearly how resource lifetime is managed.  
+文脈を基にしたリソース管理が実行不可能なレアケースでは，リソースの生存期間を管理する方法を明確に説明する必要があります．
 
 <a id="s3.12-todo-comments"></a>
 <a id="312-todo-comments"></a>
