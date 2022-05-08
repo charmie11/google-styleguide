@@ -3497,9 +3497,13 @@ In Python, `pydoc` as well as unit tests require modules to be importable. If a
 file is meant to be used as an executable, its main functionality should be in a
 `main()` function, and your code should always check `if __name__ == '__main__'`
 before executing your main program, so that it is not executed when the module
-is imported.
+is imported.  
+Pythonでは`pydoc`とユニットテストは対象とするモジュールに対してimoprt可能性を求めます．
+ファイルが実行ファイルとして使われるとき，そのmein文は`main()`関数として定義し，main関数を実行する前に常に `if __name__ == '__main__'`を確認する必要があります．
+そうすることでモジュールがimportされたときに実行されることを防げます．
 
-When using [absl](https://github.com/abseil/abseil-py), use `app.run`:
+When using [absl](https://github.com/abseil/abseil-py), use `app.run`:  
+[absl](https://github.com/abseil/abseil-py)を使うときは `app.run`としてください．
 
 ```python
 from absl import app
@@ -3513,7 +3517,7 @@ if __name__ == '__main__':
     app.run(main)
 ```
 
-Otherwise, use:
+それ以外の場合は次のようにします．
 
 ```python
 def main():
@@ -3525,7 +3529,9 @@ if __name__ == '__main__':
 
 All code at the top level will be executed when the module is imported. Be
 careful not to call functions, create objects, or perform other operations that
-should not be executed when the file is being `pydoc`ed.
+should not be executed when the file is being `pydoc`ed.  
+最上位の全てのコードはモジュールがimportされたときに実行されます．
+ファイルが`pydoc`されるときに，本来実行されるべきではない関数，オブジェクトの生成，その他の処理が実行されないように気をつけてください．
 
 <a id="s3.18-function-length"></a>
 <a id="318-function-length"></a>
