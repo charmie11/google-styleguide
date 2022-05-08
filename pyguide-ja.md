@@ -1924,7 +1924,9 @@ Pythonにとって静的解析は比較的新しい機能であるため，予�
 ### 3.1 Semicolons (セミコロン)
 
 Do not terminate your lines with semicolons, and do not use semicolons to put
-two statements on the same line.
+two statements on the same line.  
+行の最後をセミコロンで終わらせてはいけません．
+あた，2つの文を同じ行に書くためにセミコロンを使わないでください．
 
 <a id="s3.2-line-length"></a>
 <a id="32-line-length"></a>
@@ -1932,22 +1934,31 @@ two statements on the same line.
 <a id="line-length"></a>
 ### 3.2 Line length (1行の長さ)
 
-Maximum line length is *80 characters*.
+Maximum line length is *80 characters*.  
+1行の長さは最大で*80文字*．
 
-Explicit exceptions to the 80 character limit:
+Explicit exceptions to the 80 character limit:  
+80文字の制約の例外は以下のように限定されます．
 
 -   Long import statements.
+-   長いimport文
 -   URLs, pathnames, or long flags in comments.
+-   URL, ファイルパス，コメント中の長いフラグ
 -   Long string module level constants not containing whitespace that would be
     inconvenient to split across lines such as URLs or pathnames.
+-   URLやパスのようにスペースを含まない長い文字列で，複数行に分割して書くと不便なとき
     -   Pylint disable comments. (e.g.: `# pylint: disable=invalid-name`)
+    -   pylintのdisableコメント(例: `# pylint: disable=invalid-name`)
 
 Do not use backslash line continuation except for `with` statements requiring
-three or more context managers.
+three or more context managers.  
+3つ以上の要素を持つ`with`文以外では行の連続を示すためにバックスラッシュを使わないでください．
 
 Make use of Python's
 [implicit line joining inside parentheses, brackets and braces](http://docs.python.org/reference/lexical_analysis.html#implicit-line-joining).
-If necessary, you can add an extra pair of parentheses around an expression.
+If necessary, you can add an extra pair of parentheses around an expression.  
+pythonの[丸括弧，角括弧，中括弧内の暗黙の行連結](http://docs.python.org/reference/lexical_analysis.html#implicit-line-joining)を使ってください．
+必要であれば式の前後に余分な丸括弧を追加してもよいでしょう．
 
 ```python
 Yes: foo_bar(self, width, height, color='black', design=None, x='foo',
@@ -1958,14 +1969,16 @@ Yes: foo_bar(self, width, height, color='black', design=None, x='foo',
 ```
 
 When a literal string won't fit on a single line, use parentheses for implicit
-line joining.
+line joining.  
+リテラル文字列が1行に収まらないときは暗黙の行連結を示すために丸括弧を使ってください．
 
 ```python
 x = ('This will build a very long long '
      'long long long long long long string')
 ```
 
-Within comments, put long URLs on their own line if necessary.
+Within comments, put long URLs on their own line if necessary.  
+コメント内では必要に応じて長いurlを独自の行に書きます．
 
 ```python
 Yes:  # See details at
@@ -1980,7 +1993,9 @@ No:  # See details at
 
 It is permissible to use backslash continuation when defining a `with` statement
 whose expressions span three or more lines. For two lines of expressions, use a
-nested `with` statement:
+nested `with` statement:  
+`with`文が3行以上にまたがる場合は，バックスラッシュによる行連結を使っても構いません．
+2行であれば`with`をネストしてください．
 
 ```python
 Yes:  with very_long_first_expression_function() as spam, \
@@ -2002,13 +2017,18 @@ Yes:  with very_long_first_expression_function() as spam:
 ```
 
 Make note of the indentation of the elements in the line continuation examples
-above; see the [indentation](#s3.4-indentation) section for explanation.
+above; see the [indentation](#s3.4-indentation) section for explanation.  
+上記の例におけるインデントに注意してください．
+インデントに関する詳細は[ここ](#s3.4-indentation)を参照してください．
 
 In all other cases where a line exceeds 80 characters, and the
 [yapf](https://github.com/google/yapf/)
 auto-formatter does not help bring the line below the limit, the line is allowed
 to exceed this maximum. Authors are encouraged to manually break the line up per
-the notes above when it is sensible.
+the notes above when it is sensible.  
+これ以外で1行が80文字を超え，かつ[yapf](https://github.com/google/yapf/)の自動フォーマットが文の長さを調整できなかった場合は，
+その行が80文字を超えても構いません．
+上記の説明を参考に手動で行を分割することを推奨します．
 
 <a id="s3.3-parentheses"></a>
 <a id="33-parentheses"></a>
