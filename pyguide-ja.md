@@ -2186,11 +2186,18 @@ No:    golomb4 = [
 Two blank lines between top-level definitions, be they function or class
 definitions. One blank line between method definitions and between the `class`
 line and the first method. No blank line following a `def` line. Use single
-blank lines as you judge appropriate within functions or methods.
+blank lines as you judge appropriate within functions or methods.  
+最上位の定義間に2行の空行があれば，関数かクラスの定義であることを示します．
+1行の空行を入れるのはメソッドの定義間，`class`の最初のメソッドの1行目の直前です．
+`def`が書いてある行の前に空行は書きません．
+関数やメソッド内で適切と思えば，適宜1行の空行を追加しても構いません．
 
 Blank lines need not be anchored to the definition. For example, related
 comments immediately preceding function, class, and method definitions can make
-sense. Consider if your comment might be more useful as part of the docstring.
+sense. Consider if your comment might be more useful as part of the docstring.  
+空行は定義のアンカーにする必要はありません．
+例えば，関数，クラス，及びメソッドの定義の直前に書いてあるコメントには意味があります．
+docstringの一部としてコメントがより有用か考えてみてください．
 
 <a id="s3.6-whitespace"></a>
 <a id="36-whitespace"></a>
