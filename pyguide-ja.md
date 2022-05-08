@@ -3236,10 +3236,12 @@ No:
 
 Getter and setter functions (also called accessors and mutators) should be used
 when they provide a meaningful role or behavior for getting or setting a
-variable's value.
+variable's value.  
+getterとsetter(accessorとmutatorとも呼ぶ)は，意味のある役割・動作を提供できるときのみ使います．
 
 In particular, they should be used when getting or setting the variable is
-complex or the cost is significant, either currently or in a reasonable future.
+complex or the cost is significant, either currently or in a reasonable future.  
+具体的には，現時点もしくは将来に渡って変数の取得・変更が複雑であるときや，コストが大きいときです．
 
 If, for example, a pair of getters/setters simply read and write an internal
 attribute, the internal attribute should be made public instead. By comparison,
@@ -3247,15 +3249,22 @@ if setting a variable means some state is invalidated or rebuilt, it should be a
 setter function. The function invocation hints that a potentially non-trivial
 operation is occurring. Alternatively, [properties](#properties) may be an
 option when simple logic is needed, or refactoring to no longer need getters and
-setters.
+setters.  
+例えば，単に内部の属性を読み書きするだけであれば，getter/setterではなくその属性をpublicにしてください．
+逆に，ある変数をセットすることが何かしらの状態を無効化もしくは再構築することに繋がる場合はsetter関数を提供するべきです．
+関数の呼び出しは重要な操作が発生していること可能性を示唆します．
+単純なロジックが必要なときやgetter/setterが必要なくなったときであれば，[properties](#properties)を使う方法も考えられます．
 
 Getters and setters should follow the [Naming](#s3.16-naming) guidelines, such
-as `get_foo()` and `set_foo()`.
+as `get_foo()` and `set_foo()`.  
+getter/setterは[命名規則](#s3.16-naming)に従わなければいけません(例えば `get_foo()` や `set_foo()`)．
 
 If the past behavior allowed access through a property, do not bind the new
 getter/setter functions to the property. Any code still attempting to access the
 variable by the old method should break visibly so they are made aware of the
-change in complexity.
+change in complexity.  
+propertyを介してアクセス可能な場合，そのpropertyに新しくgetter/setterをバインドしないでください．
+古い方法で変数にアクセスを試みるコードは可読性を低下させ，複雑さの変化に気付くはずです．
 
 <a id="s3.16-naming"></a>
 <a id="316-naming"></a>
